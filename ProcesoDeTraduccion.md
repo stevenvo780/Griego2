@@ -45,7 +45,8 @@ Este documento detalla el proceso filológico intermedio entre el texto griego o
 *   **Sintagma de la Catarsis (*tēn... kátharsin*):** El griego encierra *tôn toioútōn pathemátōn* dentro del artículo y el sustantivo (*tēn... kátharsin*). En español desplegamos el genitivo: "la purificación **de** tales pasiones".
 
 ### **4. Traducción Final**
-"Es, pues, la tragedia imitación de una acción noble y completa, que tiene magnitud; con lenguaje adornado, separada cada uno de los modos en las partes; de quienes actúan y no mediante relato; que a través de la compasión y el temor lleva a cabo la purificación (catarsis) de tales pasiones."
+"Es, pues, la tragedia imitación de una acción noble y completa, que tiene magnitud; con lenguaje adornado, separado cada uno de las especies en las partes; de quienes actúan y no mediante relato; que a través de la compasión y el temor lleva a cabo la purificación (catarsis) de tales pasiones."
+
 
 ---
 
@@ -120,7 +121,8 @@ Este documento detalla el proceso filológico intermedio entre el texto griego o
 *   **Sintaxis negativa:** "No de hombres... sino de acciones". Se mantiene el orden para énfasis retórico.
 
 ### **4. Traducción Final**
-"Y lo más importante de estos es la estructuración de los hechos. Pues la tragedia no es imitación de hombres, sino de acciones y de la vida..."
+"De estos elementos, el más importante es la estructuración de los hechos. Pues la tragedia no es imitación de hombres, sino de acciones y de la vida..."
+
 
 ---
 

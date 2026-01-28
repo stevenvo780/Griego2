@@ -20,7 +20,7 @@
 
 **\[2.1\]** Ἔστιν οὖν τραγῳδία μίμησις πράξεως σπουδαίας καὶ τελείας μέγεθος ἐχούσης, ἡδυσμένῳ λόγῳ χωρὶς ἑκάστῳ τῶν εἰδῶν ἐν τοῖς μορίοις, δρώντων καὶ οὐ δι ̓ ἀπαγγελίας, δι ̓ ἐλέου καὶ φόβου περαίνουσα τὴν τῶν τοιούτων παθημάτων κάθαρσιν.
 
-"Es, pues, la tragedia imitación de una acción noble y completa, que tiene magnitud; con lenguaje adornado, separada cada uno de los modos en las partes; de quienes actúan y no mediante relato; que a través de la compasión y el temor lleva a cabo la purificación (catarsis) de tales pasiones."
+"Es, pues, la tragedia imitación de una acción noble y completa, que tiene magnitud; con lenguaje adornado, usando por separado cada una de las especies en las partes; de quienes actúan y no mediante relato; que a través de la compasión y el temor lleva a cabo la purificación (catarsis) de tales pasiones."
 
 **\[2.2\]** Λέγω δὲ ἡδυσμένον μὲν λόγον τὸν ἔχοντα ῥυθμὸν καὶ ἁρμονίαν \[καὶ μέλος\], τὸ δὲ χωρὶς τοῖς εἴδεσι τὸ διὰ μέτρων ἔνια μόνον περαίνεσθαι καὶ πάλιν ἕτερα διὰ μέλους.
 
@@ -61,8 +61,8 @@
 "De estas especies, pues, se han servido no pocos de ellos, por así decirlo; pues toda \[obra\] tiene espectáculo, carácter, mito, elocución, canto y pensamiento de igual modo."
 
 **\[5.2\]** Μέγιστον δὲ τούτων ἐστὶν ἡ τῶν πραγμάτων σύστασις. Ἡ γὰρ τραγῳδία μίμησίς ἐστιν οὐκ ἀνθρώπων ἀλλὰ πράξεων καὶ βίου \[καὶ εὐδαιμονία καὶ κακοδαιμονία ἐν πράξει ἐστίν, καὶ τὸ τέλος πρᾶξίς τις ἐστίν, οὐ ποιότης· εἰσὶν δὲ κατὰ μὲν τὰ ἤθη ποιοί τινες, κατὰ δὲ τὰς πράξεις εὐδαίμονες ἢ τοὐναντίον\]·
-
-"Y lo más importante de estos es la estructuración de los hechos. Pues la tragedia no es imitación de hombres, sino de acciones y de la vida \[y la felicidad y la infelicidad están en la acción, y el fin es una acción, no una cualidad; y son de cierta cualidad según los caracteres, pero felices o lo contrario según las acciones\];"
+ 
+ "De estos elementos, el más importante es la estructuración de los hechos. Pues la tragedia no es imitación de hombres, sino de acciones y de la vida \[y la felicidad y la infelicidad están en la acción, y el fin es una acción, no una cualidad; y son de cierta cualidad según los caracteres, pero felices o lo contrario según las acciones\];"
 
 **\[5.3\]** οὔκουν ὅπως τὰ ἤθη μιμήσωνται πράττουσιν, ἀλλὰ τὰ ἤθη συμπεριλαμβάνουσιν διὰ τὰς πράξεις· ὥστε τὰ πράγματα καὶ ὁ μῦθος τέλος τῆς τραγῳδίας, τὸ δὲ τέλος μέγιστον ἁπάντων.
 
