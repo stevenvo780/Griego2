@@ -13,7 +13,8 @@ from aiohttp import web, WSMsgType
 
 PORT = 8888
 BASE_DIR = Path(__file__).parent.parent
-STATIC_DIR = Path(__file__).parent
+STATIC_DIR = Path(__file__).parent / 'public'
+PASSWORD = os.getenv('PASSWORD', 'admin')
 
 # Estado global
 clients = {}
@@ -40,10 +41,25 @@ async def handle_static(request):
     return web.Response(status=404, text='Not found')
 
 
+async def handle_login(request):
+    """Maneja el login devolviendo un token simple"""
+    try:
+        data = await request.json()
+        password = data.get('password')
+        
+        if password == PASSWORD:
+            # En un entorno real, generar un JWT firmado
+            return web.json_response({'success': True, 'token': 'authorized-user'})
+        else:
+            return web.json_response({'success': False, 'error': 'Password incorrecto'}, status=401)
+    except Exception:
+        return web.json_response({'error': 'Error de proceso'}, status=400)
+
+
 async def handle_api_files(request):
     """Lista archivos del usuario"""
     user_files = []
-    allowed_exts = {'.md', '.txt', '.pdf', '.html', '.css', '.js', '.py'}
+    allowed_exts = {'.md', '.txt', '.pdf', '.html', '.css', '.js', '.py', '.doc', '.docx', '.odt', '.png', '.jpg', '.jpeg', '.gif', '.svg'}
 
     for root, dirs, files in os.walk(BASE_DIR):
         dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'visor_markdown']
@@ -237,6 +253,7 @@ def create_app():
     # Rutas
     app.router.add_get('/', handle_index)
     app.router.add_get('/ws', handle_websocket)
+    app.router.add_post('/api/login', handle_login)
     app.router.add_get('/api/files', handle_api_files)
     app.router.add_get('/api/file', handle_api_file)
     app.router.add_post('/api/save', handle_api_save)

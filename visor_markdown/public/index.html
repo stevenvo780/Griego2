@@ -246,6 +246,41 @@
             align-items: center;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        .top-toolbar.collapsed {
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            border-bottom: none;
+        }
+
+        .toolbar-toggle {
+            position: fixed;
+            right: 20px;
+            top: 8px;
+            width: 36px;
+            height: 36px;
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+
+        .toolbar-toggle:hover {
+            background: var(--primary);
+        }
+
+        .toolbar-toggle.collapsed {
+            top: 8px;
         }
 
         .toolbar-section {
@@ -391,17 +426,12 @@
         .panel-close:hover { background: var(--danger); color: white; }
 
         .panel-search-bar {
-            position: absolute;
-            top: 42px; /* Just below header */
-            left: 0;
-            width: 100%;
             background: var(--dark);
             padding: 8px 12px;
             display: none;
             align-items: center;
             gap: 8px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            z-index: 10;
         }
 
         .panel-search-bar.visible { display: flex; }
@@ -839,7 +869,8 @@
         </div>
     </div>
 
-    <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar/Expandir"><i class="fas fa-chevron-left"></i></button>
+    <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" title="Mostrar/Ocultar panel de archivos"><i class="fas fa-chevron-left"></i></button>
+    <button class="toolbar-toggle" id="toolbar-toggle" onclick="toggleToolbar()" title="Mostrar/Ocultar barra de herramientas"><i class="fas fa-chevron-up"></i></button>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <span><i class="fas fa-book"></i></span> Griego Clásico
@@ -1137,7 +1168,7 @@
                     div.innerHTML = `
                         <div class="panel-header">
                             <span class="panel-title" title="${panel.file}"><i class="fas fa-file-alt"></i> ${panel.file.split('/').pop().replace('.md', '')}</span>
-                            
+
                             <div class="panel-actions">
                                 <button class="panel-btn" onclick="savePanel(${i})" title="Guardar (Ctrl+S)"><i class="fas fa-save"></i></button>
                                 <button class="panel-btn" onclick="refreshPanel(${i})" title="Recargar contenido"><i class="fas fa-sync-alt"></i></button>
@@ -1148,24 +1179,22 @@
                                 <button class="panel-btn ${panel.mode === 'edit' ? 'active' : ''}" onclick="setPanelMode(${i}, 'edit')" title="Editar"><i class="fas fa-pen"></i></button>
                                 <button class="panel-btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')" title="Dividir"><i class="fas fa-columns"></i></button>
                                 <button class="panel-btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')" title="Vista previa"><i class="fas fa-eye"></i></button>
-                            </div>
-                            
-                            <!-- Search Bar -->
-                            <div class="panel-search-bar" id="search-bar-${i}">
-                                <input type="text" 
-                                    class="search-input" 
-                                    id="search-input-${i}" 
-                                    placeholder="Buscar..." 
-                                    onkeydown="if(event.key === 'Enter') { event.shiftKey ? findPrev(${i}) : findNext(${i}) }"
-                                    oninput="performSearch(${i})">
-                                <span class="search-count" id="search-count-${i}">0/0</span>
-                                <button class="panel-btn" onclick="findPrev(${i})" title="Anterior (Shift+Enter)"><i class="fas fa-chevron-up"></i></button>
-                                <button class="panel-btn" onclick="findNext(${i})" title="Siguiente (Enter)"><i class="fas fa-chevron-down"></i></button>
-                                <button class="panel-btn" onclick="toggleSearch(${i})" title="Cerrar"><i class="fas fa-times"></i></button>
+                                <div class="separator"></div>
+                                <button class="panel-btn" onclick="closePanel(${i})" title="Cerrar documento" style="color: var(--danger);"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
-                            
-                            <button class="panel-close" onclick="closePanel(${i})" title="Cerrar"><i class="fas fa-times"></i></button>
+                        <!-- Search Bar - debajo del header -->
+                        <div class="panel-search-bar" id="search-bar-${i}">
+                            <input type="text"
+                                class="search-input"
+                                id="search-input-${i}"
+                                placeholder="Buscar..."
+                                onkeydown="if(event.key === 'Enter') { event.shiftKey ? findPrev(${i}) : findNext(${i}) }"
+                                oninput="performSearch(${i})">
+                            <span class="search-count" id="search-count-${i}">0/0</span>
+                            <button class="panel-btn" onclick="findPrev(${i})" title="Anterior (Shift+Enter)"><i class="fas fa-chevron-up"></i></button>
+                            <button class="panel-btn" onclick="findNext(${i})" title="Siguiente (Enter)"><i class="fas fa-chevron-down"></i></button>
+                            <button class="panel-btn" onclick="toggleSearch(${i})" title="Cerrar búsqueda"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="panel-content">
                             <div class="editor-pane ${panel.mode === 'preview' ? 'hidden' : ''}" id="editor-${i}">

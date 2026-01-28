@@ -478,6 +478,41 @@ Traducción secuencial de cada palabra griega en orden de aparición.
 | ἠθῶν | ēthōn | caracteres |
 | γένοιτ' | génoit' | podría haberla |
 | ἄν | án | (modal) |
+| αἱ | hai | las |
+| γὰρ | gàr | pues |
+| τῶν | tōn | de los |
+| νέων | néōn | modernos |
+| τῶν | tōn | de los |
+| πλείστων | pleístōn | mayoría |
+| ἀήθεις | aḗtheis | sin carácter |
+| τραγῳδίαι | tragōidíai | tragedias |
+| εἰσίν | eisín | son |
+| καὶ | kaì | y |
+| ὅλως | hólōs | en general |
+| ποιηταὶ | poiētaì | poetas |
+| πολλοὶ | polloì | muchos |
+| τοιοῦτοι | toioûtoi | tales |
+| οἷον | hoîon | como |
+| καὶ | kaì | también |
+| τῶν | tōn | de los |
+| γραφέων | graphéōn | pintores |
+| Ζεῦξις | Zeûxis | Zeuxis |
+| πρὸς | pròs | frente a |
+| Πολύγνωτον | Polýgnōton | Polignoto |
+| πέπονθεν | pépōnthen | le ha pasado |
+| ὁ | ho | (artículo) |
+| μὲν | mèn | (partícula) |
+| γὰρ | gàr | pues |
+| Πολύγνωτος | Polýgnōtos | Polignoto |
+| ἀγαθὸς | agathòs | buen |
+| ἠθογράφος | ēthográphos | pintor de caracteres |
+| ἡ | hē | la |
+| δὲ | dè | mientras que |
+| Ζεύξιδος | Zeúxidos | de Zeuxis |
+| γραφὴ | graphḕ | pintura |
+| οὐδὲν | oudèn | ningún |
+| ἔχει | échei | tiene |
+| ἦθος | êthos | carácter |
 
 ---
 
@@ -505,6 +540,20 @@ Traducción secuencial de cada palabra griega en orden de aparición.
 | τῆς | tês | de la |
 | τραγῳδίας | tragōidías | tragedia |
 | ἔργον | érgon | función |
+| ἀλλὰ | allà | sino |
+| πολὺ | polỳ | mucho |
+| μᾶλλον | mâllon | más |
+| ἡ | hē | la |
+| καταδεεστέροις | katadeestérois | de modo inferior |
+| τούτοις | toútois | estos |
+| κεχρημένη | kechrēménē | que usa |
+| τραγῳδία | tragōidía | tragedia |
+| ἔχουσα | échousa | que tiene |
+| δὲ | dè | (conectiva) |
+| μῦθον | mŷthon | mito |
+| καὶ | kaì | y |
+| σύστασιν | sýstasin | estructuración |
+| πραγμάτων | pragmátōn | de hechos |
 
 ---
 
@@ -556,6 +605,13 @@ Traducción secuencial de cada palabra griega en orden de aparición.
 | τὰ | tà | los |
 | πράγματα | prágmata | hechos |
 | συνίστασθαι | synístasthai | estructurar |
+| οἷον | hoîon | como |
+| καὶ | kaì | también |
+| οἱ | hoi | los |
+| πρῶτοι | prōtoi | primeros |
+| ποιηταὶ | poiētaì | poetas |
+| σχεδὸν | schedòn | casi |
+| ἅπαντες | hápantes | todos |
 
 ---
 
@@ -577,6 +633,38 @@ Traducción secuencial de cada palabra griega en orden de aparición.
 | δὲ | dè | y |
 | τὰ | tà | los |
 | ἤθη | ḗthē | caracteres |
+| παραπλήσιον | paraplḗsion | parecido |
+| γάρ | gár | pues |
+| ἐστιν | estin | es |
+| καὶ | kaì | también |
+| ἐπὶ | epì | en |
+| τῆς | tês | la |
+| γραφικῆς | graphikês | pintura |
+| εἰ | ei | si |
+| γάρ | gár | pues |
+| τις | tis | alguien |
+| ἐναλείψειε | enaleípsie | untara |
+| τοῖς | toîs | los |
+| καλλίστοις | kallístois | más hermosos |
+| φαρμάκοις | pharmákois | colores |
+| χύδην | chýdēn | confusamente |
+| οὐκ | ouk | no |
+| ἂν | àn | (modal) |
+| ὁμοίως | homoíōs | de igual modo |
+| εὐφράνειεν | euphráneien | complacería |
+| καὶ | kaì | que |
+| λευκογραφήσας | leukographḗsas | habiendo dibujado en blanco |
+| εἰκόνα | eikóna | imagen |
+| ἔστιν | éstin | es |
+| τε | te | y |
+| μίμησις | mímēsis | imitación |
+| πράξεως | práxeōs | de una acción |
+| καὶ | kaì | y |
+| διὰ | dià | a causa de |
+| ταύτην | taútēn | esta |
+| μάλιστα | málista | sobre todo |
+| τῶν | tōn | de los que |
+| πραττόντων | prattóntōn | actúan |
 
 ---
 
