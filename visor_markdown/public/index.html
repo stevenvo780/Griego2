@@ -813,6 +813,8 @@
                         <div class="panel-header">
                             <span class="panel-title" title="${panel.file}">${panel.file.split('/').pop().replace('.md', '')}</span>
                             <div class="panel-mode-toggle">
+                                <button class="btn" onclick="refreshPanel(${i})" title="Recargar contenido">🔄</button>
+                                <div class="separator" style="width:1px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
                                 <button class="btn ${panel.mode === 'edit' ? 'active' : ''}" onclick="setPanelMode(${i}, 'edit')">✏️</button>
                                 <button class="btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')">📖</button>
                                 <button class="btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')">👁️</button>
@@ -1008,9 +1010,12 @@
         }
 
         // Load file to panel
-        async function loadFileToPanel(path, panelIndex) {
+        async function loadFileToPanel(path, panelIndex, forceRefresh = false) {
             try {
-                const response = await fetch('/api/file?path=' + encodeURIComponent(path), {
+                // Agregar timestamp para evitar cache si se fuerza recarga
+                const url = '/api/file?path=' + encodeURIComponent(path) + (forceRefresh ? '&t=' + Date.now() : '');
+                
+                const response = await fetch(url, {
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
                 
@@ -1021,20 +1026,31 @@
                 
                 const data = await response.json();
 
+                // Mantener cursor o estado si ya existía editor y es refresh
+                const existingMode = panels[panelIndex].mode || 'preview';
+
                 panels[panelIndex] = {
                     file: path,
                     content: data.content,
                     editor: null,
-                    mode: panels[panelIndex].mode || 'preview'
+                    mode: existingMode
                 };
 
                 renderPanels();
                 setActivePanel(panelIndex);
-                showToast('Archivo cargado: ' + path.split('/').pop());
+                if (forceRefresh) showToast('Contenido recargado');
 
             } catch (error) {
                 console.error('Error loading file:', error);
                 showToast('Error al cargar archivo');
+            }
+        }
+
+        // Refresh panel content
+        function refreshPanel(index) {
+            const panel = panels[index];
+            if (panel && panel.file) {
+                 loadFileToPanel(panel.file, index, true);
             }
         }
 
