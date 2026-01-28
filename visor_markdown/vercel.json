@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ],
+  "env": {
+    "FIREBASE_PROJECT_ID": "udea-filosofia",
+    "FIREBASE_STORAGE_BUCKET": "udea-filosofia.firebasestorage.app",
+    "APP_PASSWORD": "@SECRET_PASSWORD"
+  }
+}

@@ -562,197 +562,182 @@ Este documento presenta el análisis gramatical de **cada palabra** del texto gr
 
 ## **PÁRRAFO 8: Tercera, Cuarta y Quinta Partes**
 
-515. **Τρίτον (Tríton):** Adjetivo/Adverbio. "Tercero".  
-516. **δὲ (dè):** Partícula.  
-517. **ἡ (hē):** Artículo, Nom. Sg. Fem.  
-518. **διάνοια (diánoia):** Sustantivo, Nom. Sg. Fem. "El pensamiento".  
-519. **τοῦτο (toûto):** Pronombre demostrativo, Nom. Sg. Neut. "Esto".  
-520. **δέ (dé):** Partícula.  
-521. **ἐστιν (estin):** Verbo. "Es".  
-522. **τὸ (tò):** Artículo, Nom. Sg. Neut. (Sustantivador del infinitivo).  
-523. **λέγειν (légein):** Verbo, Infinitivo Pres. Act. "Decir/Hablar".  
-524. **δύνασθαι (dýnasthai):** Verbo, Infinitivo Pres. Med. "Poder".  
-525. **τὰ (tà):** Artículo, Ac. Pl. Neut.  
-526. **ἐνόντα (enónta):** Part. Pres. Act., Ac. Pl. Neut. (De *éneimi*). "Lo que está implícito".  
-527. **καὶ (kaì):** Conjunción. "Y".  
-528. **τὰ (tà):** Artículo, Ac. Pl. Neut.  
-529. **ἁρμόττοντα (harmóttonta):** Part. Pres. Act., Ac. Pl. Neut. (De *harmóttō*). "Lo conveniente".  
-530. **ὅπερ (hóper):** Pronombre relativo enfático, Nom. Sg. Neut. "Lo cual precisamente".  
-531. **ἐπὶ (epì):** Preposición. "En el caso de".  
-532. **τῶν (tôn):** Artículo, Gen. Pl. Masc.  
-533. **λόγων (lógōn):** Sustantivo, Gen. Pl. Masc. "De los discursos".  
-534. **τῆς (tês):** Artículo, Gen. Sg. Fem.  
-535. **πολιτικῆς (politikês):** Sustantivo/Adj., Gen. Sg. Fem. "De la política". (Implícito *téchnēs*).  
-536. **καὶ (kaì):** Conjunción. "Y".  
-537. **ῥητορικῆς (rhētorikês):** Sustantivo/Adj., Gen. Sg. Fem. "De la retórica".  
-538. **ἔργον (érgon):** Sustantivo, Nom. Sg. Neut. "Obra/Función".  
-539. **ἐστίν (estín):** Verbo. "Es".  
-540. **οἱ (hoi):** Artículo, Nom. Pl. Masc.  
-541. **μὲν (mèn):** Partícula.  
-542. **γὰρ (gàr):** Conjunción. "Pues".  
-543. **ἀρχαῖοι (archaîoi):** Adjetivo, Nom. Pl. Masc. "Antiguos".  
-544. **πολιτικῶς (politikôs):** Adverbio. "Políticamente/A la manera política".  
-545. **ἐποίουν (epoíoun):** Verbo, 3.ª Pl. Imperfecto Ind. Act. (De *poiéō*). "Hacían".  
-546. **λέγοντας (légontas):** Part. Pres. Act., Ac. Pl. Masc. "A los que hablan".  
-547. **οἱ (hoi):** Artículo, Nom. Pl. Masc.  
-548. **δὲ (dè):** Partícula.  
-549. **νῦν (nŷn):** Adverbio. "Ahora".  
-550. **ῥητορικῶς (rhētorikôs):** Adverbio. "Retóricamente".
+515. **Τρίτον (Tríton):** Adjetivo/Adverbio. **Traducción en Solución:** "En tercer lugar". **Otras opciones:** "Tercero".
+516. **δὲ (dè):** Partícula. **Traducción en Solución:** (Enlace). **Otras opciones:** "Y".
+517. **διάνοια (diánoia):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "el pensamiento". **Otras opciones:** -
+518. **τοῦτο (toûto):** Pronombre demostrativo, Nom. Sg. Neut. **Traducción en Solución:** "esto". **Otras opciones:** -
+519. **δέ (dé):** Partícula. **Traducción en Solución:** (Es, en referencia a *estin* implícito). **Otras opciones:** "Y".
+520. **ἐστιν (estin):** Verbo *eimí*. **Traducción en Solución:** "es". **Otras opciones:** -
+521. **τὸ (tò):** Artículo (Sustantivando el infinitivo). **Traducción en Solución:** "el". **Otras opciones:** -
+522. **λέγειν (légein):** Verbo, Infinitivo Pres. Act. **Traducción en Solución:** "decir". **Otras opciones:** "Hablar".
+523. **δύνασθαι (dýnasthai):** Verbo, Infinitivo Pres. Med. **Traducción en Solución:** "poder [decir]". **Otras opciones:** "Ser capaz".
+524. **τὰ (tà):** Artículo, Ac. Pl. Neut. **Traducción en Solución:** "lo". **Otras opciones:** -
+525. **ἐνόντα (enónta):** Part. Pres. Act., Ac. Pl. Neut. (De *éneimi*). **Traducción en Solución:** "implicado". **Otras opciones:** "Inherente", "Posible".
+526. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+527. **τὰ (tà):** Artículo. **Traducción en Solución:** "lo". **Otras opciones:** -
+528. **ἁρμόττοντα (harmóttonta):** Part. Pres. Act., Ac. Pl. Neut. (De *harmóttō*). **Traducción en Solución:** "adecuado". **Otras opciones:** "Conveniente".
+529. **ὅπερ (hóper):** Pronombre relativo. **Traducción en Solución:** "lo cual". **Otras opciones:** "Precisamente lo que".
+530. **ἐπὶ (epì):** Preposición. **Traducción en Solución:** "en". **Otras opciones:** "Sobre".
+531. **τῶν (tôn):** Artículo, Gen. Pl. Masc. **Traducción en Solución:** "los". **Otras opciones:** -
+532. **λόγων (lógōn):** Sustantivo, Gen. Pl. Masc. **Traducción en Solución:** "discursos". **Otras opciones:** "Argumentos".
+533. **τῆς (tῆς):** Artículo, Gen. Sg. Fem. **Traducción en Solución:** "de la". **Otras opciones:** -
+534. **πολιτικῆς (politikῆς):** Sustantivo/Adjetivo (substantivado). **Traducción en Solución:** "política". **Otras opciones:** -
+535. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+536. **ῥητορικῆς (rhētorikῆς):** Sustantivo/Adj. (substantivado). **Traducción en Solución:** "retórica". **Otras opciones:** -
+537. **ἔργον (érgon):** Sustantivo, Nom. Sg. Neut. **Traducción en Solución:** "obra/tarea". **Otras opciones:** "Función".
+538. **ἐστίν (estín):** Verbo. **Traducción en Solución:** "es". **Otras opciones:** -
+539. **οἱ (hoi):** Artículo. **Traducción en Solución:** "los". **Otras opciones:** -
+540. **μὲν (mèn):** Partícula. **Traducción en Solución:** "pues". **Otras opciones:** -
+541. **γὰρ (gàr):** Conjunción. **Traducción en Solución:** (Integrada). **Otras opciones:** "Porque".
+542. **ἀρχαῖοι (archaîoi):** Adjetivo, Nom. Pl. Masc. **Traducción en Solución:** "antiguos". **Otras opciones:** -
+543. **πολιτικῶς (politikôs):** Adverbio. **Traducción en Solución:** "políticamente". **Otras opciones:** "Como políticos".
+544. **ἐποίουν (epoíoun):** Verbo, 3.ª Pl. Imperfecto Act. (De *poiéō*). **Traducción en Solución:** "hacían hablar". **Otras opciones:** "Hacían".
+545. **λέγοντας (légontas):** Part. Pres. Act., Ac. Pl. Masc. **Traducción en Solución:** (Complemento del verbo *hacían*). **Otras opciones:** "Hablando".
+546. **οἱ (hoi):** Artículo. **Traducción en Solución:** "los". **Otras opciones:** -
+547. **δὲ (dè):** Partícula. **Traducción en Solución:** "mientras que". **Otras opciones:** "Pero".
+548. **νῦν (nûn):** Adverbio. **Traducción en Solución:** "de ahora". **Otras opciones:** "Actuales".
+549. **ῥητορικῶς (rhētorikôs):** Adverbio. **Traducción en Solución:** "retóricamente". **Otras opciones:** -
 
-## **PÁRRAFO 9: Definición de Carácter y Pensamiento**
+## **PÁRRAFO 9: Diferencia entre Carácter y Pensamiento**
 
-551. **Ἔστιν (Éstin):** Verbo *eimí*. "Es".  
-552. **δὲ (dè):** Partícula.  
-553. **ἦθος (êthos):** Sustantivo, Nom. Sg. Neut. "El carácter".  
-554. **μὲν (mèn):** Partícula.  
-555. **τὸ (tò):** Artículo, Nom. Sg. Neut.  
-556. **τοιοῦτον (toioûton):** Adjetivo demostrativo, Nom. Sg. Neut. "Tal cosa".  
-557. **ὃ (hò):** Pronombre relativo, Nom. Sg. Neut. "Lo que".  
-558. **δηλοῖ (dēloî):** Verbo, 3.ª Sg. Pres. Ind. Act. (De *dēlóō*). "Revela/Manifiesta".  
-559. **τὴν (tḕn):** Artículo, Ac. Sg. Fem.  
-560. **προαίρεσιν (proaíresin):** Sustantivo, Ac. Sg. Fem. (3.ª Decl.). "Elección deliberada". (Ref. Diapositiva 21).  
-561. **ὁποία (hopoía):** Pronombre relativo/interrogativo, Nom. Sg. Fem. "De qué clase".  
-562. **τις (tis):** Pronombre indefinido, Nom. Sg. Fem. "Cierta".  
-563. **ἐν (en):** Preposición. "En".  
-564. **οἷς (hoîs):** Pronombre relativo, Dat. Pl. Neut. "Los cuales".  
-565. **οὐκ (ouk):** Negación. "No".  
-566. **ἔστι (ésti):** Verbo. "Está/Es".  
-567. **δῆλον (dêlon):** Adjetivo, Nom. Sg. Neut. "Claro/Evidente".  
-568. **ἢ (ē):** Conjunción. "O".  
-569. **προαιρεῖται (proaireîtai):** Verbo, 3.ª Sg. Pres. Ind. Med. (De *proairéomai*). "Elige/Prefiere".  
-570. **ἢ (ē):** Conjunción. "O".  
-571. **φεύγει (pheúgei):** Verbo, 3.ª Sg. Pres. Ind. Act. (De *pheúgō*). "Evita/Huye".  
-572. **διόπερ (dióper):** Conjunción causal. "Por lo cual".  
-573. **οὐκ (ouk):** Negación. "No".  
-574. **ἔχουσιν (échousin):** Verbo, 3.ª Pl. Pres. Ind. Act. "Tienen".  
-575. **ἦθος (êthos):** Sustantivo. "Carácter".  
-576. **τῶν (tôn):** Artículo, Gen. Pl. Masc.  
-577. **λόγων (lógōn):** Sustantivo, Gen. Pl. Masc. "De los discursos".  
-578. **ἐν (en):** Preposición. "En".  
-579. **οἷς (hoîs):** Pronombre relativo, Dat. Pl. Neut. "Los cuales".  
-580. **μηδ᾽ (mēd'):** Adverbio negativo. "Ni siquiera".  
-581. **ὅλως (hólōs):** Adverbio. "En absoluto".  
-582. **ἔστιν (éstin):** Verbo. "Está/Hay".  
-583. **ὅ (hó):** Pronombre relativo, Nom. Sg. Neut.  
-584. **τι (ti):** Pronombre indefinido, Ac. Sg. Neut. "Algo".  
-585. **προαιρεῖται (proaireîtai):** Verbo. "Elige".  
-586. **ἢ (ē):** Conjunción. "O".  
-587. **φεύγει (pheúgei):** Verbo. "Evita".  
-588. **ὁ (ho):** Artículo, Nom. Sg. Masc.  
-589. **λέγων (légōn):** Part. Pres. Act., Nom. Sg. Masc. "El que habla".  
-590. **διάνοια (diánoia):** Sustantivo, Nom. Sg. Fem. "Pensamiento".  
-591. **δὲ (dè):** Partícula.  
-592. **ἐν (en):** Preposición. "En".  
-593. **οἷς (hoîs):** Pronombre relativo, Dat. Pl. Neut. "Los cuales".  
-594. **ἀποδεικνύουσί (apodeiknýousi):** Verbo, 3.ª Pl. Pres. Ind. Act. (De *apodeíknymi*). "Demuestran".  
-595. **τι (ti):** Pronombre, Ac. Sg. Neut. "Algo".  
-596. **ὡς (hōs):** Conjunción/Adverbio. "Que/Como".  
-597. **ἔστιν (éstin):** Verbo. "Es".  
-598. **ἢ (ē):** Conjunción. "O".  
-599. **ὡς (hōs):** Conjunción. "Que".  
-600. **οὐκ (ouk):** Negación. "No".  
-601. **ἔστιν (éstin):** Verbo. "Es".  
-602. **ἢ (ē):** Conjunción. "O".  
-603. **καθόλου (kathólou):** Adverbio. "En general/Universalmente".  
-604. **τι (ti):** Pronombre. "Algo".  
-605. **ἀποφαίνονται (apophaínontai):** Verbo, 3.ª Pl. Pres. Ind. Med. "Declaran/Manifiestan".
-
-## **PÁRRAFO 10: Cuarta Parte - La Elocución**
-
-606. **Τέταρτον (Tétarton):** Adjetivo/Adverbio. "Cuarto".  
-607. **δὲ (dè):** Partícula.  
-608. **τῶν (tôn):** Artículo, Gen. Pl. Masc.  
-609. **μὲν (mèn):** Partícula.  
-610. **λόγων (lógōn):** Sustantivo, Gen. Pl. Masc. "De los discursos".  
-611. **ἡ (hē):** Artículo, Nom. Sg. Fem.  
-612. **λέξις (léxis):** Sustantivo, Nom. Sg. Fem. "La elocución".  
-613. **λέγω (légō):** Verbo, 1.ª Sg. Pres. Ind. Act. "Digo".  
-614. **δέ (dé):** Partícula.  
-615. **ὥσπερ (hṓsper):** Adverbio. "Como".  
-616. **πρότερον (próteron):** Adverbio. "Antes".  
-617. **εἴρηται (eírētai):** Verbo, 3.ª Sg. Perf. Ind. Pas. (De *légō/eîpon*). "Se ha dicho".  
-618. **λέξιν (léxin):** Sustantivo, Ac. Sg. Fem. "Elocución".  
-619. **εἶναι (eînai):** Verbo *eimí*, Infinitivo. "Ser".  
-620. **τὴν (tḕn):** Artículo, Ac. Sg. Fem.  
-621. **διὰ (dià):** Preposición. "Por medio de".  
-622. **τῆς (tês):** Artículo, Gen. Sg. Fem.  
-623. **ὀνομασίας (onomasías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). "De la nominación/palabras". (Ref. Diapositiva 3).  
-624. **ἑρμηνείαν (hermēneían):** Sustantivo, Ac. Sg. Fem. (1.ª Decl.). "Interpretación/Expresión". (Ref. Diapositiva 3).  
-625. **ὃ (hò):** Pronombre relativo, Nom. Sg. Neut. "Lo cual".  
-626. **καὶ (kaì):** Conjunción. "También".  
-627. **ἐπὶ (epì):** Preposición. "En el caso de".  
-628. **τῶν (tôn):** Artículo, Gen. Pl. Neut.  
-629. **ἐμμέτρων (emmétrōn):** Adjetivo sustantivado, Gen. Pl. Neut. "Lo métrico/versos".  
-630. **καὶ (kaì):** Conjunción. "Y".  
-631. **ἐπὶ (epì):** Preposición. "En".  
-632. **τῶν (tôn):** Artículo, Gen. Pl. Masc.  
-633. **λόγων (lógōn):** Sustantivo, Gen. Pl. Masc. "De los discursos".  
-634. **ἔχει (échei):** Verbo. "Tiene".  
-635. **τὴν (tḕn):** Artículo, Ac. Sg. Fem.  
-636. **αὐτὴν (autḕn):** Pronombre/Adjetivo, Ac. Sg. Fem. "La misma".  
-637. **δύναμιν (dýnamin):** Sustantivo, Ac. Sg. Fem. "Potencia/Función".
+550. **Ἔστιν (Éstin):** Verbo *eimí*. **Traducción en Solución:** "Es". **Otras opciones:** "Hay".
+551. **δὲ (dè):** Partícula. **Traducción en Solución:** "pues". **Otras opciones:** "Y".
+552. **ἦθος (êthos):** Sustantivo, Nom. Sg. Neut. **Traducción en Solución:** "el carácter". **Otras opciones:** -
+553. **μὲν (mèn):** Partícula. **Traducción en Solución:** (Correlación). **Otras opciones:** -
+554. **τὸ (tò):** Artículo. **Traducción en Solución:** "aquello". **Otras opciones:** "Lo".
+555. **τοιοῦτον (toioûton):** Adjetivo demostrativo, Nom. Sg. Neut. **Traducción en Solución:** "tal". **Otras opciones:** "De tal clase".
+556. **ὃ (hò):** Pronombre relativo. **Traducción en Solución:** "que". **Otras opciones:** "Lo cual".
+557. **δηλοῖ (dēloî):** Verbo, 3.ª Sg. Pres. Ind. Act. (De *dēlóō*). **Traducción en Solución:** "manifiesta". **Otras opciones:** "Muestra", "Revela".
+558. **τὴν (tὴν):** Artículo, Ac. Sg. Fem. **Traducción en Solución:** "la". **Otras opciones:** -
+559. **προαίρεσιν (proaíresin):** Sustantivo, Ac. Sg. Fem. (3.ª Decl.). **Traducción en Solución:** "decisión". **Otras opciones:** "Elección moral", "Intención".
+560. **ὁποία (hopoía):** Pronombre relativo/interrogativo. **Traducción en Solución:** "cuál". **Otras opciones:** "De qué clase".
+561. **τις (tis):** Pronombre indefinido/enclítico. **Traducción en Solución:** "es". **Otras opciones:** "Alguna".
+562. **ἐστίν (estín):** Verbo. **Traducción en Solución:** (Integrado). **Otras opciones:** "Es".
+563. **διόπερ (dióper):** Conjunción. **Traducción en Solución:** "por lo cual". **Otras opciones:** "Por tanto".
+564. **οὐκ (ouk):** Adverbio de negación. **Traducción en Solución:** "no". **Otras opciones:** -
+565. **ἔχουσιν (échousin):** Verbo, 3.ª Pl. Pres. Ind. Act. (De *échō*). **Traducción en Solución:** "tienen". **Otras opciones:** "Poseen".
+566. **ἦθος (êthos):** Sustantivo, Ac. Sg. Neut. **Traducción en Solución:** "carácter". **Otras opciones:** -
+567. **τῶν (tôn):** Artículo, Gen. Pl. Masc. **Traducción en Solución:** "de los". **Otras opciones:** -
+568. **λόγων (lógōn):** Sustantivo, Gen. Pl. Masc. **Traducción en Solución:** "parlamentos". **Otras opciones:** "Discursos".
+569. **ἐν (en):** Preposición. **Traducción en Solución:** "en". **Otras opciones:** -
+570. **οἷς (hoîs):** Pronombre relativo. **Traducción en Solución:** "los que". **Otras opciones:** -
+571. **μή (mḗ):** Adverbio de negación. **Traducción en Solución:** "no". **Otras opciones:** -
+572. **ἐστι (esti):** Verbo. **Traducción en Solución:** "hay". **Otras opciones:** "Es".
+573. **δῆλον (dêlon):** Adjetivo, Nom. Sg. Neut. **Traducción en Solución:** "claro". **Otras opciones:** "Evidente".
+574. **ἢ (ē):** Conjunción. **Traducción en Solución:** "o". **Otras opciones:** -
+575. **προαιρεῖται (proaireîtai):** Verbo, 3.ª Sg. Pres. Ind. Med. (De *proairéō*). **Traducción en Solución:** "decide [qué]". **Otras opciones:** "Elige".
+576. **ἢ (ē):** Conjunción. **Traducción en Solución:** "o". **Otras opciones:** -
+577. **φεύγει (pheúgei):** Verbo, 3.ª Sg. Pres. Ind. Act. (De *pheúgō*). **Traducción en Solución:** "rechaza [qué]". **Otras opciones:** "Evita", "Huye".
+578. **ὁ (ho):** Artículo, Nom. Sg. Masc. **Traducción en Solución:** "el que". **Otras opciones:** -
+579. **λέγων (légōn):** Part. Pres. Act., Nom. Sg. Masc. **Traducción en Solución:** "habla". **Otras opciones:** "Hablante".
+580. **Διάνοια (Diánoia):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "El pensamiento". **Otras opciones:** -
+581. **δὲ (dè):** Partícula. **Traducción en Solución:** "en cambio". **Otras opciones:** "Por otra parte".
+582. **ἐν (en):** Preposición. **Traducción en Solución:** "en". **Otras opciones:** -
+583. **οἷς (hoîs):** Pronombre relativo, Dat. Pl. Masc. **Traducción en Solución:** "los que". **Otras opciones:** "Aquellos en que".
+584. **ἀποδεικνύουσί (apodeiknýousí):** Verbo, 3.ª Pl. Pres. Ind. Act. (De *apodeiknými*). **Traducción en Solución:** "se demuestra". **Otras opciones:** "Demuestran".
+585. **τι (ti):** Pronombre indefinido, Ac. Sg. Neut. **Traducción en Solución:** "algo". **Otras opciones:** -
+586. **ὡς (hōs):** Conjunción/Adv. **Traducción en Solución:** "que". **Otras opciones:** "Como".
+587. **ἔστιν (éstin):** Verbo. **Traducción en Solución:** "es". **Otras opciones:** "Existe".
+588. **ἢ (ē):** Conjunción. **Traducción en Solución:** "o". **Otras opciones:** -
+589. **ὡς (hōs):** Conjunción/Adv. **Traducción en Solución:** "que". **Otras opciones:** "Como".
+590. **οὐκ (ouk):** Adverbio. **Traducción en Solución:** "no". **Otras opciones:** -
+591. **ἔστιν (éstin):** Verbo. **Traducción en Solución:** "es". **Otras opciones:** "Existe".
+592. **ἢ (ē):** Conjunción. **Traducción en Solución:** "o". **Otras opciones:** -
+593. **καθόλου (kathólou):** Adverbio. **Traducción en Solución:** "general". **Otras opciones:** "En general", "Universal".
+594. **τι (ti):** Pronombre indefinido. **Traducción en Solución:** "algo". **Otras opciones:** -
+595. **ἀποφαίνονται (apophaínontai):** Verbo, 3.ª Pl. Pres. Ind. Med. (De *apophaínō*). **Traducción en Solución:** "enuncian". **Otras opciones:** "Declaran", "Manifiestan".
+596. **Τέταρτον (Tétarton):** Adjetivo/Adverbio. **Traducción en Solución:** "Cuarto". **Otras opciones:** "En cuarto lugar".
+597. **δὲ (dè):** Partícula. **Traducción en Solución:** (Enlace). **Otras opciones:** -
+598. **λέξις (léxis):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "la elocución". **Otras opciones:** "Dicción".
+599. **τῶν (tôn):** Artículo. **Traducción en Solución:** "de las". **Otras opciones:** "De los".
+600. **λόγων (lógōn):** Sustantivo. **Traducción en Solución:** "partes habladas". **Otras opciones:** "Palabras", "Discursos".
+601. **Λέγω (Légō):** Verbo, 1.ª Sg. Pres. Ind. Act. **Traducción en Solución:** "Digo". **Otras opciones:** "Llamo".
+602. **δὲ (dè):** Partícula. **Traducción en Solución:** (Enlace). **Otras opciones:** "Y".
+603. **ὥσπερ (hósper):** Adv/Conj. **Traducción en Solución:** "como". **Otras opciones:** "Tal como".
+604. **πρότερον (próteron):** Adverbio. **Traducción en Solución:** "antes". **Otras opciones:** "Anteriormente".
+605. **εἴρηται (eírētai):** Verbo, 3.ª Sg. Perf. Ind. Pas. (De *légō/erō*). **Traducción en Solución:** "se ha dicho". **Otras opciones:** "Fue dicho".
+606. **λέξιν (léxin):** Sustantivo, Ac. Sg. Fem. **Traducción en Solución:** "elocución". **Otras opciones:** -
+607. **εἶναι (eînai):** Verbo *eimí*, Infinitivo Pres. **Traducción en Solución:** "que es". **Otras opciones:** "Ser".
+608. **τὴν (tὴν):** Artículo. **Traducción en Solución:** "la". **Otras opciones:** -
+609. **διὰ (dià):** Preposición. **Traducción en Solución:** "mediante". **Otras opciones:** "A través de".
+610. **τῆς (tῆς):** Artículo. **Traducción en Solución:** "la". **Otras opciones:** -
+611. **ὀνομασίας (onomasías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "elección de palabras". **Otras opciones:** "Denominación", "Nomenclatura".
+612. **ἑρμηνείαν (hermēneían):** Sustantivo, Ac. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "expresión". **Otras opciones:** "Interpretación".
+613. **ὃ (hò):** Pronombre relativo. **Traducción en Solución:** "que". **Otras opciones:** "Lo cual".
+614. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "también". **Otras opciones:** "Incluso".
+615. **ἐπὶ (epì):** Preposición. **Traducción en Solución:** "en". **Otras opciones:** "Sobre".
+616. **τῶν (tôn):** Artículo. **Traducción en Solución:** "los". **Otras opciones:** -
+617. **ἐμμέτρων (emmétrōn):** Adjetivo, Gen. Pl. Masc. **Traducción en Solución:** "versos". **Otras opciones:** "Métricos".
+618. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+619. **ἐπὶ (epì):** Preposición. **Traducción en Solución:** "en". **Otras opciones:** -
+620. **τῶν (tôn):** Artículo. **Traducción en Solución:** "los". **Otras opciones:** -
+621. **λόγων (lógōn):** Sustantivo. **Traducción en Solución:** "discursos en prosa". **Otras opciones:** "Palabras".
+622. **ἔχει (échei):** Verbo, 3.ª Sg. Pres. Ind. Act. **Traducción en Solución:** "tiene". **Otras opciones:** "Posee".
+623. **τὴν (tὴν):** Artículo. **Traducción en Solución:** "el". **Otras opciones:** "La".
+624. **αὐτήν (autḗn):** Pronombre/Adj., Ac. Sg. Fem. **Traducción en Solución:** "mismo". **Otras opciones:** "Misma".
+625. **δύναμιν (dýnamin):** Sustantivo, Ac. Sg. Fem. (3.ª Decl.). **Traducción en Solución:** "valor". **Otras opciones:** "Potencia", "Fuerza".
 
 ## **PÁRRAFO 11: Quinta y Sexta Partes - Melopeya y Espectáculo**
 
-638. **Τῶν (Tôn):** Artículo, Gen. Pl. Neut.  
-639. **δὲ (dè):** Partícula.  
-640. **λοιπῶν (loipôn):** Adjetivo, Gen. Pl. Neut. "De las restantes".  
-641. **ἡ (hē):** Artículo, Nom. Sg. Fem.  
-642. **μελοποιία (melopoiía):** Sustantivo, Nom. Sg. Fem. "La melopeya".  
-643. **μέγιστον (mégiston):** Adjetivo superlativo, Nom. Sg. Neut. "Lo más importante".  
-644. **τῶν (tôn):** Artículo, Gen. Pl. Neut.  
-645. **ἡδυσμάτων (hēdysmátōn):** Sustantivo, Gen. Pl. Neut. (3.ª Decl.). "De los condimentos/ornamentos". (Ref. Diapositiva 8).  
-646. **ἡ (hē):** Artículo, Nom. Sg. Fem.  
-647. **δὲ (dè):** Partícula.  
-648. **ὄψις (ópsis):** Sustantivo, Nom. Sg. Fem. "El espectáculo".  
-649. **ψυχαγωγικὸν (psychagōgikòn):** Adjetivo, Nom. Sg. Neut. "Capaz de seducir el alma".  
-650. **μέν (mén):** Partícula. "Por una parte".  
-651. **ἀτεχνότατον (atechnótaton):** Adjetivo superlativo, Nom. Sg. Neut. "Lo más ajeno al arte".  
-652. **δὲ (dè):** Partícula. "Pero".  
-653. **καὶ (kaì):** Conjunción. "Y".  
-654. **ἥκιστα (hḗkista):** Adverbio superlativo. "Mínimamente/Lo menos".  
-655. **οἰκεῖον (oikeîon):** Adjetivo, Nom. Sg. Neut. "Propio/Perteneciente".  
-656. **τῆς (tês):** Artículo, Gen. Sg. Fem.  
-657. **ποιητικῆς (poiētikês):** Sustantivo/Adj., Gen. Sg. Fem. "De la poética". (Ref. Diapositiva 3).
+638. **Τῶν (Tôn):** Artículo, Gen. Pl. Neut. **Traducción en Solución:** "De las". **Otras opciones:** -
+639. **δὲ (dè):** Partícula. **Traducción en Solución:** (Enlace). **Otras opciones:** "Y".
+640. **λοιπῶν (loipôn):** Adjetivo, Gen. Pl. Neut. **Traducción en Solución:** "restantes". **Otras opciones:** "Las demás".
+641. **ἡ (hē):** Artículo, Nom. Sg. Fem. **Traducción en Solución:** "la". **Otras opciones:** -
+642. **μελοποιία (melopoiía):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "melopeya". **Otras opciones:** "Composición de cantos".
+643. **μέγιστον (mégiston):** Adjetivo superlativo, Nom. Sg. Neut. **Traducción en Solución:** "lo más importante". **Otras opciones:** "El mayor".
+644. **τῶν (tôn):** Artículo, Gen. Pl. Neut. **Traducción en Solución:** "de los". **Otras opciones:** -
+645. **ἡδυσμάτων (hēdysmátōn):** Sustantivo, Gen. Pl. Neut. (3.ª Decl.). **Traducción en Solución:** "adornos". **Otras opciones:** "Condimentos", "Placeres".
+646. **ἡ (hē):** Artículo, Nom. Sg. Fem. **Traducción en Solución:** "el". **Otras opciones:** "La".
+647. **δὲ (dè):** Partícula. **Traducción en Solución:** "y". **Otras opciones:** "Pero".
+648. **ὄψις (ópsis):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "espectáculo". **Otras opciones:** "Visión", "Puesta en escena".
+649. **ψυχαγωγικὸν (psychagōgikòn):** Adjetivo, Nom. Sg. Neut. **Traducción en Solución:** "atractivo". **Otras opciones:** "Seductor", "Que guía el alma".
+650. **μέν (mén):** Partícula. **Traducción en Solución:** "ciertamente". **Otras opciones:** "Por un lado".
+651. **ἀτεχνότατον (atechnótaton):** Adjetivo superlativo, Nom. Sg. Neut. **Traducción en Solución:** "lo menos propio del arte". **Otras opciones:** "Lo más ajeno al arte", "Muy inartístico".
+652. **δὲ (dè):** Partícula. **Traducción en Solución:** "pero". **Otras opciones:** "Y".
+653. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+654. **ἥκιστα (hḗkista):** Adverbio superlativo. **Traducción en Solución:** "lo que menos tiene que ver con". **Otras opciones:** "Mínimamente".
+655. **οἰκεῖον (oikeîon):** Adjetivo, Nom. Sg. Neut. **Traducción en Solución:** "propio". **Otras opciones:** "Pertinente", "Familiar".
+656. **τῆς (tês):** Artículo, Gen. Sg. Fem. **Traducción en Solución:** "de la". **Otras opciones:** -
+657. **ποιητικῆς (poiētikês):** Sustantivo/Adj., Gen. Sg. Fem. **Traducción en Solución:** "poética". **Otras opciones:** "Arte poético".
 
 ## **PÁRRAFO 12: Conclusión - El Arte del Escenógrafo**
 
-658. **ἡ (hē):** Artículo, Nom. Sg. Fem.  
-659. **γὰρ (gàr):** Conjunción causal. "Pues".  
-660. **τῆς (tês):** Artículo, Gen. Sg. Fem.  
-661. **τραγῳδίας (tragōidías):** Sustantivo, Gen. Sg. Fem. "De la tragedia".  
-662. **δύναμις (dýnamis):** Sustantivo, Nom. Sg. Fem. "Potencia/Fuerza".  
-663. **καὶ (kaì):** Conjunción. "Incluso".  
-664. **ἄνευ (áneu):** Preposición (con Gen.). "Sin".  
-665. **ἀγῶνος (agônos):** Sustantivo, Gen. Sg. Masc. (3.ª Decl.). "Representación/Certamen". (Ref. Diapositiva 7).  
-666. **καὶ (kaì):** Conjunción. "Y".  
-667. **ὑποκριτῶν (hypokritôn):** Sustantivo, Gen. Pl. Masc. (1.ª Decl.). "De actores". (Ref. Diapositiva 3).  
-668. **ἔστιν (éstin):** Verbo *eimí*. "Existe/Hay".  
-669. **ἔτι (éti):** Adverbio. "Además".  
-670. **δὲ (dè):** Partícula.  
-671. **κυριωτέρα (kyriōtéra):** Adjetivo comparativo, Nom. Sg. Fem. "Más importante/Más decisiva".  
-672. **περὶ (perì):** Preposición (con Ac.). "Respecto a".  
-673. **τὴν (tḕn):** Artículo, Ac. Sg. Fem.  
-674. **ἀπεργασίαν (apergasían):** Sustantivo, Ac. Sg. Fem. (1.ª Decl.). "Ejecución/Realización". (Ref. Diapositiva 3).  
-675. **τῶν (tôn):** Artículo, Gen. Pl. Fem.  
-676. **ὄψεων (ópseōn):** Sustantivo, Gen. Pl. Fem. (3.ª Decl.). "De los espectáculos". (Ref. Diapositiva 21).  
-677. **ἡ (hē):** Artículo, Nom. Sg. Fem.  
-678. **τοῦ (toû):** Artículo, Gen. Sg. Masc.  
-679. **σκευοποιοῦ (skeuopoioû):** Sustantivo, Gen. Sg. Masc. (2.ª Decl.). "Del escenógrafo/fabricante de decorados". (Ref. Diapositiva 4).  
-680. **τέχνη (téchnē):** Sustantivo, Nom. Sg. Fem. (1.ª Decl.). "Arte/Técnica". (Ref. Diapositiva 3).  
-681. **τῆς (tês):** Artículo, Gen. Sg. Fem.  
-682. **τῶν (tôn):** Artículo, Gen. Pl. Masc.  
-683. **ποιητῶν (poiētôn):** Sustantivo, Gen. Pl. Masc. (1.ª Decl.). "De los poetas". (Ref. Diapositiva 3).  
-684. **ἐστιν (estin):** Verbo *eimí*. "Es".
+658. **ἡ (hē):** Artículo, Nom. Sg. Fem. **Traducción en Solución:** "la". **Otras opciones:** -
+659. **γὰρ (gàr):** Conjunción causal. **Traducción en Solución:** "pues". **Otras opciones:** "Ya que".
+660. **τῆς (tês):** Artículo, Gen. Sg. Fem. **Traducción en Solución:** "de la". **Otras opciones:** -
+661. **τραγῳδίας (tragōidías):** Sustantivo, Gen. Sg. Fem. **Traducción en Solución:** "tragedia". **Otras opciones:** -
+662. **δύναμις (dýnamis):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "fuerza". **Otras opciones:** "Potencia", "Efecto".
+663. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "incluso". **Otras opciones:** "Y", "También".
+664. **ἄνευ (áneu):** Preposición (con Gen.). **Traducción en Solución:** "sin". **Otras opciones:** -
+665. **ἀγῶνος (agônos):** Sustantivo, Gen. Sg. Masc. (3.ª Decl.). **Traducción en Solución:** "representación". **Otras opciones:** "Certamen", "Competición".
+666. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+667. **ὑποκριτῶν (hypokritôn):** Sustantivo, Gen. Pl. Masc. (1.ª Decl.). **Traducción en Solución:** "actores". **Otras opciones:** -
+668. **ἔστιν (éstin):** Verbo *eimí*. **Traducción en Solución:** "existe". **Otras opciones:** "Hay", "Es".
+669. **ἔτι (éti):** Adverbio. **Traducción en Solución:** "además". **Otras opciones:** "Aún".
+670. **δὲ (dè):** Partícula. **Traducción en Solución:** (Enlace). **Otras opciones:** "Y".
+671. **κυριωτέρα (kyriōtéra):** Adjetivo comparativo, Nom. Sg. Fem. **Traducción en Solución:** "más decisiva". **Otras opciones:** "Más importante", "Más soberana".
+672. **περὶ (perì):** Preposición (con Ac.). **Traducción en Solución:** "respecto a". **Otras opciones:** "Acerca de".
+673. **τὴν (tḕn):** Artículo, Ac. Sg. Fem. **Traducción en Solución:** "la". **Otras opciones:** -
+674. **ἀπεργασίαν (apergasían):** Sustantivo, Ac. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "realización". **Otras opciones:** "Ejecución", "Acabado".
+675. **τῶν (tôn):** Artículo, Gen. Pl. Fem. **Traducción en Solución:** "de los". **Otras opciones:** -
+676. **ὄψεων (ópseōn):** Sustantivo, Gen. Pl. Fem. (3.ª Decl.). **Traducción en Solución:** "espectáculos". **Otras opciones:** "Visiones".
+677. **ἡ (hē):** Artículo, Nom. Sg. Fem. **Traducción en Solución:** "el". **Otras opciones:** "La".
+678. **τοῦ (toû):** Artículo, Gen. Sg. Masc. **Traducción en Solución:** "del". **Otras opciones:** -
+679. **σκευοποιοῦ (skeuopoioû):** Sustantivo, Gen. Sg. Masc. (2.ª Decl.). **Traducción en Solución:** "escenógrafo". **Otras opciones:** "Fabricante de máscaras/decorados", "Tramoyista".
+680. **τέχνη (téchnē):** Sustantivo, Nom. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "arte". **Otras opciones:** "Técnica".
+681. **τῆς (tês):** Artículo, Gen. Sg. Fem. **Traducción en Solución:** "que". **Otras opciones:** "Del".
+682. **τῶν (tôn):** Artículo, Gen. Pl. Masc. **Traducción en Solución:** "el de los". **Otras opciones:** "De los".
+683. **ποιητῶν (poiētôn):** Sustantivo, Gen. Pl. Masc. (1.ª Decl.). **Traducción en Solución:** "poetas". **Otras opciones:** -
+684. **ἐστιν (estin):** Verbo *eimí*. **Traducción en Solución:** "es". **Otras opciones:** -
 
 ---
 
 ## **APÉNDICE A: Título del Capítulo**
 
-685. **Περὶ (Perì):** Preposición. "Acerca de".  
-686. **ποιητικῆς (poiētikês):** Sustantivo/Adj., Gen. Sg. Fem. "De la poética".  
-687. **Κεφάλαιον (Kephálaion):** Sustantivo, Nom. Sg. Neut. "Capítulo".  
-688. **6 (héx):** Numeral. "Seis".
+685. **Περὶ (Perì):** Preposición. **Traducción en Solución:** "Acerca de". **Otras opciones:** "Sobre".
+686. **ποιητικῆς (poiētikês):** Sustantivo/Adj., Gen. Sg. Fem. **Traducción en Solución:** "la poética". **Otras opciones:** -
+687. **Κεφάλαιον (Kephálaion):** Sustantivo, Nom. Sg. Neut. **Traducción en Solución:** "Capítulo". **Otras opciones:** -
+688. **6 (héx):** Numeral. **Traducción en Solución:** "6". **Otras opciones:** "Seis".
 
 ---
 
@@ -760,65 +745,65 @@ Este documento presenta el análisis gramatical de **cada palabra** del texto gr
 
 ### **B.1: [καὶ μέλος] - Tras ἁρμονίαν**
 
-689. **καὶ (kaì):** Conjunción. "Y".  
-690. **μέλος (mélos):** Sustantivo, Ac. Sg. Neut. (3.ª Decl.). "Canto/Melodía". (Ref. Diapositiva 13).
+689. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+690. **μέλος (mélos):** Sustantivo, Ac. Sg. Neut. (3.ª Decl.). **Traducción en Solución:** "canto". **Otras opciones:** "Melodía".
 
 ### **B.2: [πέφυκεν αἴτια δύο τῶν πράξεων εἶναι, διάνοια καὶ ἦθος]**
 
-691. **πέφυκεν (péphyken):** Verbo, 3.ª Sg. Perf. Ind. Act. (De *phýō*). "Son por naturaleza".  
-692. **αἴτια (aítia):** Sustantivo, Nom. Pl. Neut. "Causas".  
-693. **δύο (dýo):** Numeral. "Dos".  
-694. **τῶν (tôn):** Artículo, Gen. Pl. Fem.  
-695. **πράξεων (práxeōn):** Sustantivo, Gen. Pl. Fem. "De las acciones".  
-696. **εἶναι (eînai):** Verbo, Infinitivo. "Ser".  
-697. **διάνοια (diánoia):** Sustantivo, Nom. Sg. Fem. "Pensamiento".  
-698. **καὶ (kaì):** Conjunción. "Y".  
-699. **ἦθος (êthos):** Sustantivo, Nom. Sg. Neut. "Carácter".
+691. **πέφυκεν (péphyken):** Verbo, 3.ª Sg. Perf. Ind. Act. (De *phýō*). **Traducción en Solución:** "son por naturaleza". **Otras opciones:** "Nacen", "Son naturalmente".
+692. **αἴτια (aítia):** Sustantivo, Nom. Pl. Neut. **Traducción en Solución:** "causas". **Otras opciones:** -
+693. **δύο (dýo):** Numeral. **Traducción en Solución:** "dos". **Otras opciones:** -
+694. **τῶν (tôn):** Artículo, Gen. Pl. Fem. **Traducción en Solución:** "de las". **Otras opciones:** -
+695. **πράξεων (práxeōn):** Sustantivo, Gen. Pl. Fem. **Traducción en Solución:** "acciones". **Otras opciones:** -
+696. **εἶναι (eînai):** Verbo, Infinitivo. **Traducción en Solución:** "que sean". **Otras opciones:** "Ser".
+697. **διάνοια (diánoia):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "pensamiento". **Otras opciones:** -
+698. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+699. **ἦθος (êthos):** Sustantivo, Nom. Sg. Neut. **Traducción en Solución:** "carácter". **Otras opciones:** -
 
 ### **B.3: [καὶ εὐδαιμονία καὶ κακοδαιμονία ἐν πράξει ἐστίν, καὶ τὸ τέλος πρᾶξίς τις ἐστίν, οὐ ποιότης· εἰσὶν δὲ κατὰ μὲν τὰ ἤθη ποιοί τινες, κατὰ δὲ τὰς πράξεις εὐδαίμονες ἢ τοὐναντίον]**
 
-700. **καὶ (kaì):** Conjunción. "Y".  
-701. **εὐδαιμονία (eudaimonía):** Sustantivo, Nom. Sg. Fem. (1.ª Decl.). "Felicidad". (Ref. Diapositiva 3).  
-702. **καὶ (kaì):** Conjunción. "Y".  
-703. **κακοδαιμονία (kakodaimonía):** Sustantivo, Nom. Sg. Fem. "Infelicidad/Desgracia".  
-704. **ἐν (en):** Preposición. "En".  
-705. **πράξει (práxei):** Sustantivo, Dat. Sg. Fem. "Acción".  
-706. **ἐστίν (estín):** Verbo *eimí*. "Están/Son".  
-707. **καὶ (kaì):** Conjunción. "Y".  
-708. **τὸ (tò):** Artículo, Nom. Sg. Neut.  
-709. **τέλος (télos):** Sustantivo, Nom. Sg. Neut. "Fin".  
-710. **πρᾶξίς (prâxís):** Sustantivo, Nom. Sg. Fem. "Acción".  
-711. **τις (tis):** Pronombre indefinido, Nom. Sg. Fem. "Cierta".  
-712. **ἐστίν (estín):** Verbo. "Es".  
-713. **οὐ (ou):** Negación. "No".  
-714. **ποιότης (poiótēs):** Sustantivo, Nom. Sg. Fem. (3.ª Decl.). "Cualidad". (Ref. Diapositiva 21).  
-715. **εἰσὶν (eisìn):** Verbo *eimí*, 3.ª Pl. "Son".  
-716. **δὲ (dè):** Partícula.  
-717. **κατὰ (katà):** Preposición. "Según".  
-718. **μὲν (mèn):** Partícula.  
-719. **τὰ (tà):** Artículo, Ac. Pl. Neut.  
-720. **ἤθη (éthē):** Sustantivo. "Caracteres".  
-721. **ποιοί (poioí):** Adjetivo, Nom. Pl. Masc. "Cualificados/De cierto tipo".  
-722. **τινες (tines):** Pronombre indefinido, Nom. Pl. Masc. "Algunos".  
-723. **κατὰ (katà):** Preposición. "Según".  
-724. **δὲ (dè):** Partícula.  
-725. **τὰς (tàs):** Artículo, Ac. Pl. Fem.  
-726. **πράξεις (práxeis):** Sustantivo, Ac. Pl. Fem. "Las acciones".  
-727. **εὐδαίμονες (eudaímones):** Adjetivo, Nom. Pl. Masc. (3.ª Decl.). "Felices". (Ref. Diapositiva 9).  
-728. **ἢ (ē):** Conjunción. "O".  
-729. **τοὐναντίον (tounantíon):** Adverbio (Crasis de τὸ ἐναντίον). "Lo contrario".
+700. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+701. **εὐδαιμονία (eudaimonía):** Sustantivo, Nom. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "[la] felicidad". **Otras opciones:** -
+702. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+703. **κακοδαιμονία (kakodaimonía):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "[la] infelicidad". **Otras opciones:** "Desgracia".
+704. **ἐν (en):** Preposición. **Traducción en Solución:** "en". **Otras opciones:** -
+705. **πράξει (práxei):** Sustantivo, Dat. Sg. Fem. **Traducción en Solución:** "la acción". **Otras opciones:** -
+706. **ἐστίν (estín):** Verbo *eimí*. **Traducción en Solución:** "están". **Otras opciones:** "Son".
+707. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+708. **τὸ (tò):** Artículo, Nom. Sg. Neut. **Traducción en Solución:** "el". **Otras opciones:** -
+709. **τέλος (télos):** Sustantivo, Nom. Sg. Neut. **Traducción en Solución:** "fin". **Otras opciones:** -
+710. **πρᾶξίς (prâxís):** Sustantivo, Nom. Sg. Fem. **Traducción en Solución:** "acción". **Otras opciones:** -
+711. **τις (tis):** Pronombre indefinido, Nom. Sg. Fem. **Traducción en Solución:** "una cierta". **Otras opciones:** "Alguna".
+712. **ἐστίν (estín):** Verbo. **Traducción en Solución:** "es". **Otras opciones:** -
+713. **οὐ (ou):** Negación. **Traducción en Solución:** "no". **Otras opciones:** -
+714. **ποιότης (poiótēs):** Sustantivo, Nom. Sg. Fem. (3.ª Decl.). **Traducción en Solución:** "cualidad". **Otras opciones:** -
+715. **εἰσὶν (eisìn):** Verbo *eimí*, 3.ª Pl. **Traducción en Solución:** "son". **Otras opciones:** -
+716. **δὲ (dè):** Partícula. **Traducción en Solución:** "pero". **Otras opciones:** "Y".
+717. **κατὰ (katà):** Preposición. **Traducción en Solución:** "según". **Otras opciones:** "Por".
+718. **μὲν (mèn):** Partícula. **Traducción en Solución:** (Correlación). **Otras opciones:** -
+719. **τὰ (tà):** Artículo, Ac. Pl. Neut. **Traducción en Solución:** "los". **Otras opciones:** -
+720. **ἤθη (éthē):** Sustantivo. **Traducción en Solución:** "caracteres". **Otras opciones:** -
+721. **ποιοί (poioí):** Adjetivo, Nom. Pl. Masc. **Traducción en Solución:** "de cierta cualidad". **Otras opciones:** "Cualificados".
+722. **τινες (tines):** Pronombre indefinido, Nom. Pl. Masc. **Traducción en Solución:** "algunos". **Otras opciones:** -
+723. **κατὰ (katà):** Preposición. **Traducción en Solución:** "según". **Otras opciones:** -
+724. **δὲ (dè):** Partícula. **Traducción en Solución:** "pero". **Otras opciones:** "Y".
+725. **τὰς (tàs):** Artículo, Ac. Pl. Fem. **Traducción en Solución:** "las". **Otras opciones:** -
+726. **πράξεις (práxeis):** Sustantivo, Ac. Pl. Fem. **Traducción en Solución:** "acciones". **Otras opciones:** -
+727. **εὐδαίμονες (eudaímones):** Adjetivo, Nom. Pl. Masc. (3.ª Decl.). **Traducción en Solución:** "felices". **Otras opciones:** -
+728. **ἢ (ē):** Conjunción. **Traducción en Solución:** "o". **Otras opciones:** -
+729. **τοὐναντίον (tounantíon):** Adverbio (Crasis de τὸ ἐναντίον). **Traducción en Solución:** "lo contrario". **Otras opciones:** "Al revés".
 
 ### **B.4: [ἐν οἷς οὐκ ἔστι δῆλον ἢ προαιρεῖται ἢ φεύγει]**
 
-730. **ἐν (en):** Preposición. "En".  
-731. **οἷς (hoîs):** Pronombre relativo, Dat. Pl. Neut. "Los cuales".  
-732. **οὐκ (ouk):** Negación. "No".  
-733. **ἔστι (ésti):** Verbo. "Está/Es".  
-734. **δῆλον (dêlon):** Adjetivo, Nom. Sg. Neut. "Claro".  
-735. **ἢ (ē):** Conjunción. "O".  
-736. **προαιρεῖται (proaireîtai):** Verbo. "Elige".  
-737. **ἢ (ē):** Conjunción. "O".  
-738. **φεύγει (pheúgei):** Verbo. "Evita".
+730. **ἐν (en):** Preposición. **Traducción en Solución:** "en". **Otras opciones:** -
+731. **οἷς (hoîs):** Pronombre relativo, Dat. Pl. Neut. **Traducción en Solución:** "los que". **Otras opciones:** -
+732. **οὐκ (ouk):** Negación. **Traducción en Solución:** "no". **Otras opciones:** -
+733. **ἔστι (ésti):** Verbo. **Traducción en Solución:** "está". **Otras opciones:** "Es".
+734. **δῆλον (dêlon):** Adjetivo, Nom. Sg. Neut. **Traducción en Solución:** "claro". **Otras opciones:** "Evidente".
+735. **ἢ (ē):** Conjunción. **Traducción en Solución:** "o". **Otras opciones:** -
+736. **προαιρεῖται (proaireîtai):** Verbo. **Traducción en Solución:** "decide [qué]". **Otras opciones:** "Elige".
+737. **ἢ (ē):** Conjunción. **Traducción en Solución:** "o". **Otras opciones:** -
+738. **φεύγει (pheúgei):** Verbo. **Traducción en Solución:** "evita [qué]". **Otras opciones:** "Rechaza".
 
 ---
 

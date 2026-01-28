@@ -46,6 +46,65 @@
             overflow: hidden;
         }
 
+        /* Login Overlay */
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .login-box {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 320px;
+            width: 90%;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+        }
+
         /* Sidebar */
         .sidebar {
             width: var(--sidebar-width);
@@ -97,10 +156,6 @@
             font-size: 1.2em;
             transition: all 0.3s ease;
             z-index: 200;
-        }
-
-        .sidebar-toggle:hover {
-            background: var(--primary);
         }
 
         .sidebar-toggle:hover {
@@ -575,6 +630,14 @@
     </style>
 </head>
 <body>
+    <div id="login-overlay">
+        <div class="login-box">
+            <h2>🔐 Acceso Requerido</h2>
+            <input type="password" id="password-input" class="login-input" placeholder="Contraseña de acceso">
+            <button class="login-btn" onclick="login()">Entrar</button>
+        </div>
+    </div>
+
     <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar/Expandir">◀</button>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -634,7 +697,7 @@
         <div class="status-bar">
             <div class="status-item">
                 <div class="status-dot"></div>
-                <span>Conectado</span>
+                <span>Conectado a Firebase</span>
             </div>
             <div class="status-item" id="active-panel-info">Panel activo: 1</div>
         </div>
@@ -650,9 +713,7 @@
         let activePanel = 0;
         let gridSize = 1;
         let files = [];
-        let ws;
-        let clientId = Math.random().toString(36).substr(2, 9);
-        let isRemoteUpdate = false;
+        let authToken = localStorage.getItem('authToken');
         let saveTimeouts = {};
 
         // Initialize
@@ -663,77 +724,35 @@
                 gfm: true
             });
 
-            loadFileList();
+            if (authToken) {
+                document.getElementById('login-overlay').style.display = 'none';
+                loadFileList();
+            }
+
             setupKeyboardShortcuts();
-            connectWebSocket();
         });
 
-        // WebSocket Connection (mismo puerto que HTTP)
-        function connectWebSocket() {
-            const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            ws = new WebSocket(`${protocol}//${location.host}/ws`);
-
-            ws.onopen = () => {
-                console.log('WS Connected');
-                document.querySelector('.status-bar .status-item span').textContent = 'Conectado';
-                document.querySelector('.status-dot').style.background = 'var(--success)';
-                
-                // Re-join active files
-                panels.forEach(p => {
-                    if (p.file) {
-                        ws.send(JSON.stringify({ 
-                            type: 'join', 
-                            file: p.file,
-                            clientId: clientId
-                        }));
-                    }
+        async function login() {
+            const password = document.getElementById('password-input').value;
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
                 });
-            };
 
-            ws.onclose = () => {
-                console.log('WS Disconnected');
-                document.querySelector('.status-bar .status-item span').textContent = 'Desconectado';
-                document.querySelector('.status-dot').style.background = 'var(--danger)';
-                setTimeout(connectWebSocket, 3000);
-            };
-
-            ws.onmessage = (event) => {
-                try {
-                    const data = JSON.parse(event.data);
-                    if (data.type === 'update') {
-                        if (data.clientId !== clientId) { // Ignore own updates if echoed
-                             handleRemoteUpdate(data);
-                        }
-                    } else if (data.type === 'users') {
-                        // Could update user count/list
-                    }
-                } catch (e) {
-                    console.error(e);
+                if (response.ok) {
+                    const data = await response.json();
+                    authToken = data.token;
+                    localStorage.setItem('authToken', authToken);
+                    document.getElementById('login-overlay').style.display = 'none';
+                    loadFileList();
+                } else {
+                    alert('Contraseña incorrecta');
                 }
-            };
-        }
-
-        function handleRemoteUpdate(data) {
-            panels.forEach((panel, index) => {
-                if (panel.file === data.file) {
-                    // Prevent overwriting if content is identical (e.g. from own save loop)
-                    if (panel.content === data.content) return;
-
-                    isRemoteUpdate = true;
-                    panel.content = data.content;
-                    
-                    if (panel.editor) {
-                        const cursor = panel.editor.getCursor();
-                        panel.editor.setValue(data.content);
-                        panel.editor.setCursor(cursor);
-                    }
-                    
-                    updatePanelPreview(index);
-                    isRemoteUpdate = false;
-                    
-                    showToast('Actualizado desde ' + (data.source === 'server' ? 'disco' : 'remoto'));
-                }
-            });
+            } catch (e) {
+                alert('Error de conexión');
+            }
         }
         
         function triggerAutoSave(index) {
@@ -742,7 +761,6 @@
                 savePanel(index);
             }, 2000);
         }
-
 
         // Sidebar toggle
         function toggleSidebar() {
@@ -848,20 +866,8 @@
 
             editor.setValue(panels[index].content);
             editor.on('change', () => {
-                if (isRemoteUpdate) return;
-                
                 panels[index].content = editor.getValue();
                 updatePanelPreview(index);
-
-                if (ws && ws.readyState === WebSocket.OPEN && panels[index].file) {
-                    ws.send(JSON.stringify({
-                        type: 'update',
-                        file: panels[index].file,
-                        content: panels[index].content,
-                        clientId: clientId
-                    }));
-                }
-                
                 triggerAutoSave(index);
             });
 
@@ -930,7 +936,16 @@
         // Load file list
         async function loadFileList() {
             try {
-                const response = await fetch('/api/files');
+                const response = await fetch('/api/files', {
+                    headers: { 'Authorization': 'Bearer ' + authToken }
+                });
+                
+                if (response.status === 401) {
+                    document.getElementById('login-overlay').style.display = 'flex';
+                    localStorage.removeItem('authToken');
+                    return;
+                }
+                
                 files = await response.json();
                 renderFileTree(files);
             } catch (error) {
@@ -995,7 +1010,15 @@
         // Load file to panel
         async function loadFileToPanel(path, panelIndex) {
             try {
-                const response = await fetch('/api/file?path=' + encodeURIComponent(path));
+                const response = await fetch('/api/file?path=' + encodeURIComponent(path), {
+                    headers: { 'Authorization': 'Bearer ' + authToken }
+                });
+                
+                if (response.status === 401) {
+                    showToast('Sesión expirada');
+                    return;
+                }
+                
                 const data = await response.json();
 
                 panels[panelIndex] = {
@@ -1004,14 +1027,6 @@
                     editor: null,
                     mode: panels[panelIndex].mode || 'preview'
                 };
-
-                if (ws && ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({ 
-                        type: 'join', 
-                        file: path,
-                        clientId: clientId
-                    }));
-                }
 
                 renderPanels();
                 setActivePanel(panelIndex);
@@ -1031,12 +1046,17 @@
             try {
                 const response = await fetch('/api/save', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + authToken
+                    },
                     body: JSON.stringify({ path: panel.file, content: panel.content })
                 });
 
                 if (response.ok) {
                     showToast('Guardado: ' + panel.file.split('/').pop());
+                } else {
+                    showToast('Error: ' + response.statusText);
                 }
             } catch (error) {
                 showToast('Error al guardar');

@@ -6,13 +6,16 @@ Este anexo justifica las decisiones de traducción contrastando cada término cl
 
 **Concepto Clave:** La definición de tragedia depende de términos abstractos verbales en *\-sis*.
 
-* **Términos:** *Μίμησις* (Mímesis), *Πράξεως* (Práxeōs), *Κάθαρσιν* (Kátharsin), *Σύστασις* (Sýstasis), *Ὄψεως* (Ópseōs).  
+* **Términos:** *Μίμησις* (Mímesis), *Πράξεως* (Práxeōs), *Κάθαρσιν* (Kátharsin), *Σύστασις* (Sýstasis), *Ὄψεως* (Ópseōs), *Λέξις* (Léxis), *Σύνθεσις* (Sýnthesis), *Δύναμις* (Dýnamis).  
 * **Correspondencia con Tablas:** **Diapositiva 21: Tercera declinación (tema en ι υ variable)**.  
 * **Análisis Aplicado:**  
   * *Μίμησις* (Nom. Sg.): Se traduce como "Imitación" (Sujeto). Sigue el modelo de *pólis*. En \[3.1\] se mantiene "imitación" y se evita "representación" para preservar la coherencia terminológica.  
   * *Πράξεως* (Gen. Sg.): Sigue la alternancia vocálica (ι en el tema, ε en los casos oblicuos \+ ωσ del genitivo ático). Se traduce obligatoriamente con el genitivo objetivo: "**de** una acción".  
   * *Κάθαρσιν* (Ac. Sg.): La desinencia *\-n* (ni) es propia de estos temas en acusativo. Se traduce como Objeto Directo de *peraínousa*: "purificación".
   * *Ὄψεως* (Gen. Sg.): Genitivo de relación con *κόσμος* en hipérbaton; por eso se vierte "adorno del espectáculo" (ὄψις como término técnico de "espectáculo").
+  * *Λέξιν* (Ac. Sg.): Acusativo de predicación con *λέγω*; se traduce "elocución" como término técnico.  
+  * *Σύνθεσιν* (Ac. Sg.): "Composición"; en \[3.2\] se vierte "composición de los metros" por el genitivo *τῶν μέτρων*.  
+  * *Δύναμιν* (Ac. Sg.): "Potencia"; con *φανερὰν πᾶσαν* se expresa "toda la potencia manifiesta".
 
 ## **2\. Sustantivos de la Tercera Declinación (Temas en Silbante Neutros)**
 
@@ -45,15 +48,26 @@ Este anexo justifica las decisiones de traducción contrastando cada término cl
   * *Pathemátōn* (Gen. Pl.): "De las afecciones". Se vincula gramaticalmente a *Kátharsin*.  
   * *Pragmátōn* (Gen. Pl.): "De los hechos". Materia de la trama (*mûthos*).
 
-## **5\. Adjetivos de Primera y Segunda Declinación**
+## **5\. Sustantivos de la Primera Declinación (Temas en -α/-η)**
 
-* **Términos:** *Σπουδαίας* (Spoudaías), *Τελείας* (Teleías).  
+**Concepto Clave:** Nombres técnicos del arte poética.
+
+* **Término:** *Μελοποιίαν* (Melopoiían).  
+* **Correspondencia con Tablas:** **Diapositiva 3: Primera declinación**.  
+* **Análisis Aplicado:**  
+  * Ac. Sg. Fem. de *μελοποιία*: se mantiene "melopeya" y funciona como acusativo de predicación con *λέγω*.
+
+## **6. Adjetivos de Primera y Segunda Declinación**
+
+* **Términos:** *Σπουδαίας* (Spoudaías), *Τελείας* (Teleías), *Φανερὰν* (Phaneràn), *Πᾶσαν* (Pâsan).  
 * **Correspondencia con Tablas:** **Diapositiva 3: Primera declinación**.  
 * **Análisis Aplicado:**  
   * *Spoudaías* (Gen. Sg. Fem.): Adjetivo de tres terminaciones. Concuerda con *Práxeōs*. Según el diccionario (Vox), su campo semántico abarca "serio", "bueno", "virtuoso", "digno". Seleccionamos "noble" para capturar la elevación moral y ontológica requerida por la tragedia.
   * *Teleías* (Gen. Sg. Fem.): "Completa". Indica la perfección estructural, no solo el final cronológico.
+  * *Phaneràn* (Ac. Sg. Fem.): Adjetivo de 1.ª declinación; modifica *δύναμιν* y se traduce "manifiesta".  
+  * *Πᾶσαν* (Ac. Sg. Fem.): Femenino de *πᾶς/πᾶσα/πᾶν*; refuerza la totalidad: "toda" la potencia.
 
-## **6. La Voz Media (El interés del sujeto)**
+## **7. La Voz Media (El interés del sujeto)**
 
 **Concepto Clave:** La implicación de los agentes en la acción.
 
@@ -63,7 +77,7 @@ Este anexo justifica las decisiones de traducción contrastando cada término cl
   * Verbo *poiéō* en Presente Indicativo Medio (3.ª Pl.).
   * No es un simple "hacen" (*poioûsin*), sino "hacen para sí" o "construyen". Aristotelianamente, implica que los poetas o actores realizan la imitación como un proceso interno y constructivo. La traducción "realizan" busca mantener este matiz activo-reflexivo.
 
-## **7. Adverbios de Orden**
+## **8. Adverbios de Orden**
 
 **Concepto Clave:** Jerarquía en la enumeración de partes.
 
@@ -71,18 +85,25 @@ Este anexo justifica las decisiones de traducción contrastando cada término cl
 * **Correspondencia con Tablas:** (No aplica: adverbio léxico).  
 * **Análisis Aplicado:** Marca la primera posición de la serie; se traduce "en primer lugar" y guía el reordenamiento de *πρῶτον μὲν ἐξ ἀνάγκης ἂν εἴη*.
 
-## **8. Partículas Modales y Modo Optativo (Valor Potencial)**
+## **9. Partículas Correlativas (μὲν...δὲ)**
+
+**Concepto Clave:** Articulación binaria en definiciones.
+
+* **Términos:** *μὲν* (mèn), *δὲ* (dè).  
+* **Correspondencia con Tablas:** (No aplica: partículas).  
+* **Análisis Aplicado:** Señalan la distribución "por un lado... por otro" en \[3.2\], separando *λέξις* y *μελοποιία*.
+
+## **10. Partículas Modales y Modo Optativo (Valor Potencial)**
 
 **Concepto Clave:** Matiz potencial en una formulación no asertiva.
 
-* **Términos:** *μὲν* (mèn), *ἄν* (an), *εἴη* (eíē).  
+* **Términos:** *ἄν* (an), *εἴη* (eíē).  
 * **Correspondencia con Tablas:** **Clase 3: Verbo εἰμί (optativo)**.  
 * **Análisis Aplicado:**  
-  * *μὲν* introduce la primera etapa del esquema ("en primer lugar").  
   * *ἄν* activa el valor potencial.  
   * *εἴη* (Optativo de *εἰμί*): con *ἄν* se traduce por condicional: "sería".
 
-## **9. Construcciones Preposicionales con Genitivo (Valor de Necesidad)**
+## **11. Construcciones Preposicionales con Genitivo (Valor de Necesidad)**
 
 **Concepto Clave:** Preposición \+ genitivo como adverbial de causa/condición.
 
@@ -90,15 +111,17 @@ Este anexo justifica las decisiones de traducción contrastando cada término cl
 * **Correspondencia con Tablas:** **Diapositiva 3: Primera declinación**.  
 * **Análisis Aplicado:** Funciona adverbialmente como "por necesidad" y se integra en el orden "en primer lugar, por necesidad, sería".
 
-## **10. Sustantivos de la Segunda Declinación (Temas en -ο)**
+## **12. Sustantivos de la Segunda Declinación (Temas en -ο)**
 
 **Concepto Clave:** Nombres concretos con valor técnico en la poética.
 
-* **Término:** *Κόσμος* (Kósmos).  
+* **Términos:** *Κόσμος* (Kósmos), *Μέτρων* (Métrōn).  
 * **Correspondencia con Tablas:** **Diapositiva 4: Segunda declinación**.  
-* **Análisis Aplicado:** Nom. Sg. Masc. con sentido de "adorno/ornato/orden". Con *ὄψεως* forma el sintagma "adorno del espectáculo".
+* **Análisis Aplicado:**  
+  * *Κόσμος* (Kósmos): Nom. Sg. Masc. con sentido de "adorno/ornato/orden". Con *ὄψεως* forma el sintagma "adorno del espectáculo".  
+  * *Μέτρων* (Gen. Pl. Neut. de *μέτρον*): introduce la relación "de los metros" en *τὴν τῶν μέτρων σύνθεσιν*.
 
-## **11. Matriz de Validación de la Traducción (Herramienta de Control)**
+## **13. Matriz de Validación de la Traducción (Herramienta de Control)**
 
 Esta herramienta se ha utilizado para validar cada línea de la traducción final.
 
