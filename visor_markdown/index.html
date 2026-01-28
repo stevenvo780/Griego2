@@ -51,8 +51,13 @@
         .sidebar.collapsed {
             width: 0;
             min-width: 0;
-            overflow: hidden;
+            overflow: visible;
             border-right: none;
+        }
+
+        .sidebar.collapsed .sidebar-header,
+        .sidebar.collapsed .file-tree {
+            display: none;
         }
 
         .sidebar-header {
@@ -66,8 +71,8 @@
         }
 
         .sidebar-toggle {
-            position: absolute;
-            right: -40px;
+            position: fixed;
+            left: calc(var(--sidebar-width) - 4px);
             top: 8px;
             width: 36px;
             height: 36px;
@@ -80,12 +85,12 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2em;
-            transition: all 0.2s;
-            z-index: 101;
+            transition: all 0.3s ease;
+            z-index: 200;
         }
 
-        .sidebar.collapsed .sidebar-toggle {
-            right: -40px;
+        .sidebar-toggle:hover {
+            background: var(--primary);
         }
 
         .sidebar-toggle:hover {
@@ -168,7 +173,7 @@
         /* Top toolbar */
         .top-toolbar {
             background: var(--dark);
-            padding: 10px 20px;
+            padding: 10px 20px 10px 50px;
             display: flex;
             gap: 10px;
             align-items: center;
@@ -525,11 +530,11 @@
     </style>
 </head>
 <body>
+    <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar/Expandir">◀</button>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <span>📚</span> Griego Clásico
         </div>
-        <button class="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar/Expandir">◀</button>
         <div class="file-tree" id="file-tree"></div>
     </div>
 
@@ -602,9 +607,11 @@
         // Sidebar toggle
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
+            const btn = document.getElementById('sidebar-toggle');
             sidebar.classList.toggle('collapsed');
-            const btn = sidebar.querySelector('.sidebar-toggle');
-            btn.textContent = sidebar.classList.contains('collapsed') ? '▶' : '◀';
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            btn.textContent = isCollapsed ? '▶' : '◀';
+            btn.style.left = isCollapsed ? '0' : 'calc(var(--sidebar-width) - 4px)';
         }
 
         // Grid management
