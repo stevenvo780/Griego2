@@ -782,6 +782,33 @@ Traducción secuencial de cada palabra griega en orden de aparición.
 | οἰκεῖον | oikeîon | propio |
 | τῆς | tês | de la |
 | ποιητικῆς | poiētikês | poética |
+| ἡ | hē | la |
+| γὰρ | gàr | pues |
+| τῆς | tês | de la |
+| τραγῳδίας | tragōidías | tragedia |
+| δύναμις | dýnamis | fuerza |
+| καὶ | kaì | también |
+| ἄνευ | áneu | sin |
+| ἀγῶνος | agōnos | certamen |
+| καὶ | kaì | y |
+| ὑποκριτῶν | hypokritōn | actores |
+| ἔστιν | éstin | existe |
+| ἔτι | éti | además |
+| δὲ | dè | (conectiva) |
+| κυριωτέρα | kyriōtéra | más decisiva |
+| περὶ | perì | para |
+| τὴν | tḕn | la |
+| ἀπεργασίαν | apergasían | elaboración |
+| τῶν | tōn | de los |
+| ὄψεων | ópseōn | espectáculos |
+| ἡ | hē | la |
+| τοῦ | toû | del |
+| σκευοποιοῦ | skeuopoioû | utilero |
+| τέχνη | téchnē | técnica |
+| τῆς | tês | de la |
+| τῶν | tōn | de los |
+| ποιητῶν | poiētōn | poetas |
+| ἐστιν | estin | es |
 
 ---
 

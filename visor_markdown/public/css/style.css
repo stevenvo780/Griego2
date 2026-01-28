@@ -97,7 +97,7 @@ body {
 .sidebar.collapsed {
     width: 0;
     min-width: 0;
-    overflow: visible;
+    overflow: hidden; /* Changed from visible to hidden to prevent white bar issue */
     border-right: none;
 }
 

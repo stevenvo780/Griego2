@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Griego MD">
+    <meta name="description" content="Sistema colaborativo para estudio de griego clásico">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="apple-touch-icon" href="/icon.svg">
+
+    <title>Visor Markdown - Griego Clásico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/search/searchcursor.min.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #0ea5e9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --sidebar-width: 280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            height: 100vh;
+            background: var(--darker);
+            color: var(--light);
+            overflow: hidden;
+        }
+
+        /* Login Overlay */
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .login-box {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 320px;
+            width: 90%;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 100;
+        }
+
+        .sidebar.collapsed {
+            width: 0;
+            min-width: 0;
+            overflow: visible;
+            border-right: none;
+        }
+
+        .sidebar.collapsed .sidebar-header,
+        .sidebar.collapsed .file-tree {
+            display: none;
+        }
+
+        .sidebar-header {
+            padding: 15px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 56px;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            left: calc(var(--sidebar-width) - 4px);
+            top: 8px;
+            width: 36px;
+            height: 36px;
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0 8px 8px 0;
+            color: var(--light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--primary);
+        }
+
+        .file-tree {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .folder { margin-bottom: 2px; }
+
+        .folder-name {
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .folder-name:hover {
+            color: var(--light);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .folder-name .icon { transition: transform 0.2s; }
+        .folder.open .folder-name .icon { transform: rotate(90deg); }
+
+        .folder-contents {
+            display: none;
+            padding-left: 10px;
+        }
+
+        .folder.open .folder-contents { display: block; }
+
+        .file-item {
+            padding: 8px 15px 8px 25px;
+            cursor: pointer;
+            font-size: 0.85em;
+            border-left: 3px solid transparent;
+            color: #94a3b8;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--light);
+            border-left-color: var(--primary);
+        }
+
+        .file-item.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--light);
+            border-left-color: var(--primary);
+        }
+
+        /* Main area */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        /* Top toolbar */
+        .top-toolbar {
+            background: var(--dark);
+            padding: 10px 20px 10px 50px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        .top-toolbar.collapsed {
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            border-bottom: none;
+        }
+
+        .toolbar-toggle {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            width: 80px;
+            height: 28px;
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            color: var(--light);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            gap: 6px;
+            z-index: 200;
+        }
+
+        .toolbar-toggle.visible {
+            display: flex;
+        }
+
+        .toolbar-toggle:hover {
+            background: var(--primary);
+        }
+
+        .btn-collapse-toolbar {
+            padding: 6px 10px;
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-right: 10px;
+        }
+
+        .btn-collapse-toolbar:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--light);
+        }
+
+        .toolbar-section {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .toolbar-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 8px;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-sm { padding: 6px 10px; font-size: 0.75em; }
+
+        .btn-icon {
+            padding: 8px;
+            min-width: 34px;
+            justify-content: center;
+        }
+
+        .btn-default {
+            background: rgba(255,255,255,0.1);
+            color: var(--light);
+        }
+
+        .btn-default:hover { background: rgba(255,255,255,0.2); }
+        .btn-default.active { background: var(--primary); }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+
+        .btn-success { background: var(--success); color: white; }
+        .btn-success:hover { background: #059669; }
+
+        .grid-selector {
+            display: flex;
+            gap: 4px;
+            background: rgba(0,0,0,0.3);
+            padding: 4px;
+            border-radius: 6px;
+        }
+
+        .grid-selector .btn {
+            padding: 6px 10px;
+            background: transparent;
+        }
+
+        .grid-selector .btn.active { background: var(--primary); }
+
+        /* Panels container */
+        .panels-container {
+            flex: 1;
+            display: grid;
+            gap: 2px;
+            background: rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .panels-container.grid-1 { grid-template-columns: 1fr; }
+        .panels-container.grid-2 { grid-template-columns: 1fr 1fr; }
+        .panels-container.grid-3 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+        .panels-container.grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+
+        /* Panel */
+        .panel {
+            background: var(--darker);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .panel.empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.9em;
+        }
+
+        .panel-header {
+            padding: 8px 12px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            min-height: 42px;
+        }
+
+        .panel-title {
+            flex: 1;
+            font-size: 0.85em;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .panel-mode-toggle {
+            display: flex;
+            gap: 2px;
+            background: rgba(0,0,0,0.3);
+            padding: 2px;
+            border-radius: 4px;
+        }
+
+        .panel-mode-toggle .btn {
+            padding: 4px 8px;
+            font-size: 0.7em;
+            background: transparent;
+        }
+
+        .panel-mode-toggle .btn.active { background: var(--primary); }
+
+        .panel-btn.close-btn {
+            color: var(--danger);
+        }
+
+        .panel-btn.close-btn:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .panel-search-bar {
+            background: var(--dark);
+            padding: 8px 12px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .panel-search-bar.visible { display: flex; }
+
+        .search-input {
+            flex: 1;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .search-count {
+            font-size: 12px;
+            color: var(--gray);
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* Highlight classes */
+        .highlight-match {
+            background-color: rgba(255, 165, 0, 0.5);
+            border-radius: 2px;
+        }
+        
+        .highlight-current {
+            background-color: rgba(255, 69, 0, 0.8);
+            color: white;
+        }
+
+        .panel-actions {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-right: 4px;
+        }
+
+        .panel-actions .separator {
+            width: 1px;
+            height: 16px;
+            background: rgba(255,255,255,0.1);
+            margin: 0 4px;
+        }
+
+        .panel-btn {
+            padding: 4px 6px;
+            font-size: 14px;
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel-btn:hover {
+            color: var(--light);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .panel-btn.active {
+            color: white;
+            background: var(--primary);
+        }
+
+        .panel.drag-over {
+            border: 2px dashed var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .panel.drag-over::after {
+            content: 'Soltar aquí';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            color: var(--primary);
+            pointer-events: none;
+        }
+
+        .panel-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Editor pane */
+        .editor-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1a1a2e;
+            overflow: hidden;
+        }
+
+        .editor-pane.hidden { display: none; }
+
+        .CodeMirror {
+            flex: 1;
+            height: 100% !important;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Preview pane */
+        .preview-pane {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px 40px;
+            background: var(--light);
+        }
+
+        .preview-pane.hidden { display: none; }
+
+        .markdown-content {
+            max-width: none;
+            margin: 0;
+            padding-bottom: 50px;
+            line-height: 1.6;
+            font-size: 16px;
+            color: #1e293b;
+            font-family: 'Georgia', serif;
+            overflow-wrap: break-word;
+        }
+
+        .markdown-content h1 {
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            margin: 1.2em 0 0.6em;
+            font-size: 1.9em;
+            font-weight: 800;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.3em;
+        }
+
+        .markdown-content h2 {
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            margin: 1.2em 0 0.5em;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .markdown-content h3 {
+            font-family: 'Inter', sans-serif;
+            color: #334155;
+            margin: 1em 0 0.4em;
+            font-size: 1.25em;
+            font-weight: 600;
+        }
+
+        .markdown-content h1:first-child { margin-top: 0; }
+
+        .markdown-content p { margin: 0 0 1em; text-align: left; line-height: 1.7; }
+
+        .markdown-content ul, .markdown-content ol {
+            margin: 1em 0;
+            padding-left: 1.8em;
+        }
+
+        .markdown-content li { margin: 0.4em 0; }
+
+        .markdown-content code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            color: #be185d;
+        }
+
+        .markdown-content pre {
+            background: var(--darker);
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+        }
+
+        .markdown-content pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .markdown-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+            font-size: 0.9em;
+        }
+
+        .markdown-content th, .markdown-content td {
+            border: 1px solid #e2e8f0;
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        .markdown-content th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .markdown-content tr:nth-child(even) { background: #f8fafc; }
+
+        .markdown-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding: 15px 25px;
+            margin: 1.5em 0;
+            background: #f8fafc;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .markdown-content hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 2em 0;
+        }
+
+        .markdown-content a { color: var(--primary); text-decoration: none; }
+        .markdown-content a:hover { text-decoration: underline; }
+
+        .markdown-content strong, .markdown-content b {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .markdown-content em, .markdown-content i {
+            font-style: italic;
+            color: #334155;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* Empty state */
+        .empty-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--gray);
+            gap: 10px;
+        }
+
+        .empty-panel-icon { font-size: 3em; opacity: 0.5; }
+        .empty-panel-text { font-size: 0.9em; }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+        .preview-pane::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal {
+            background: var(--dark);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.2s ease;
+        }
+
+        .modal.open {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        
+        .modal-close:hover { color: white; }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .download-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .download-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--light);
+            text-align: left;
+            width: 100%;
+        }
+
+        .download-option:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .download-option i {
+            font-size: 1.5em;
+            width: 30px;
+            text-align: center;
+        }
+
+        .download-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .download-label { font-weight: 600; }
+        .download-desc { font-size: 0.8em; opacity: 0.7; }
+
+        /* Status bar */
+        .status-bar {
+            background: var(--dark);
+            padding: 4px 15px;
+            font-size: 0.75em;
+            color: var(--gray);
+            display: flex;
+            gap: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .status-item { display: flex; align-items: center; gap: 5px; }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 768px) {
+            .preview-pane {
+                padding: 15px 20px;
+            }
+            .markdown-content {
+                font-size: 16px;
+            }
+            .sidebar {
+                position: absolute;
+                height: 100%;
+                box-shadow: 10px 0 20px rgba(0,0,0,0.5);
+            }
+            .sidebar.collapsed {
+                transform: translateX(-100%);
+                width: var(--sidebar-width);
+            }
+            .top-toolbar {
+                padding: 10px 15px 10px 50px;
+                overflow-x: auto;
+            }
+            .toolbar-toggle {
+                right: 10px;
+                width: 32px;
+                height: 32px;
+            }
+            .panel-header {
+                flex-wrap: wrap;
+                padding: 6px 8px;
+            }
+            .panel-actions {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+            .panel-search-bar {
+                padding: 6px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="login-overlay">
+        <div class="login-box">
+            <h2><i class="fas fa-lock"></i> Acceso Requerido</h2>
+            <input type="password" id="password-input" class="login-input" placeholder="Contraseña de acceso">
+            <button class="login-btn" onclick="login()">Entrar</button>
+        </div>
+    </div>
+
+    <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" title="Mostrar/Ocultar panel de archivos"><i class="fas fa-chevron-left"></i></button>
+    <button class="toolbar-toggle" id="toolbar-toggle" onclick="toggleToolbar()" title="Mostrar barra de herramientas"><i class="fas fa-bars"></i> Barra</button>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span><i class="fas fa-book"></i></span> Griego Clásico
+        </div>
+        <div class="file-tree" id="file-tree"></div>
+    </div>
+
+    <div class="main">
+        <div class="top-toolbar" id="top-toolbar">
+            <button class="btn-collapse-toolbar" onclick="toggleToolbar()" title="Ocultar barra">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+            <div class="toolbar-section">
+                <span style="color: var(--gray); font-size: 0.8em;">Grid:</span>
+                <div class="grid-selector">
+                    <button class="btn btn-sm active" onclick="setGrid(1)" data-grid="1" title="1 panel">▢</button>
+                    <button class="btn btn-sm" onclick="setGrid(2)" data-grid="2" title="2 paneles">▢▢</button>
+                    <button class="btn btn-sm" onclick="setGrid(4)" data-grid="4" title="4 paneles">⊞</button>
+                </div>
+            </div>
+
+            <div style="flex: 1"></div>
+
+            <div class="toolbar-section">
+                <button class="btn btn-default btn-sm" onclick="toggleFullscreen()" title="Pantalla completa (F11)">
+                    <i class="fas fa-expand"></i> Fullscreen
+                </button>
+            </div>
+        </div>
+
+        <div class="panels-container grid-1" id="panels-container">
+            <div class="panel" id="panel-0" data-index="0">
+                <div class="empty-panel">
+                    <div class="empty-panel-icon">📄</div>
+                    <div class="empty-panel-text">Selecciona un archivo del panel izquierdo</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-dot"></div>
+                <span>Conectado a Firebase</span>
+            </div>
+            <div class="status-item" id="active-panel-info">Panel activo: 1</div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Download Modal -->
+    <div id="download-modal-overlay" class="modal-overlay" onclick="closeDownloadModal(event)">
+        <div class="modal" id="download-modal">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-download"></i> Descargar Documento</div>
+                <button class="modal-close" onclick="closeDownloadModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="download-options">
+                    <button class="download-option" onclick="executeDownload('md')">
+                        <i class="fab fa-markdown"></i>
+                        <div class="download-info">
+                            <span class="download-label">Markdown</span>
+                            <span class="download-desc">Archivo fuente original (.md)</span>
+                        </div>
+                    </button>
+                    <button class="download-option" onclick="executeDownload('pdf')">
+                        <i class="fas fa-file-pdf"></i>
+                        <div class="download-info">
+                            <span class="download-label">PDF Document</span>
+                            <span class="download-desc">Formato portable listo para imprimir</span>
+                        </div>
+                    </button>
+                    <button class="download-option" onclick="executeDownload('copy')">
+                        <i class="fas fa-copy"></i>
+                        <div class="download-info">
+                            <span class="download-label">Copiar al Portapapeles</span>
+                            <span class="download-desc">Para pegar en Word o Google Docs</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let panels = [
+            { file: null, content: '', editor: null, mode: 'preview' }
+        ];
+        let activePanel = 0;
+        let gridSize = 1;
+        let files = [];
+        let authToken = localStorage.getItem('authToken');
+        let saveTimeouts = {};
+        let panelForDownload = null;
+
+        // Modal Functions
+        function openDownloadModal(index) {
+            panelForDownload = index;
+            const overlay = document.getElementById('download-modal-overlay');
+            const modal = document.getElementById('download-modal');
+            overlay.style.display = 'flex';
+            setTimeout(() => modal.classList.add('open'), 10);
+        }
+
+        function closeDownloadModal(e) {
+            if (e && e.target.id !== 'download-modal-overlay' && !e.target.closest('.modal-close')) return;
+            
+            const overlay = document.getElementById('download-modal-overlay');
+            const modal = document.getElementById('download-modal');
+            
+            modal.classList.remove('open');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                panelForDownload = null;
+            }, 200);
+        }
+
+        function executeDownload(type) {
+            if (panelForDownload === null) return;
+            
+            switch(type) {
+                case 'md':
+                    downloadMD(panelForDownload);
+                    break;
+                case 'pdf':
+                    exportPDF(panelForDownload);
+                    break;
+                case 'copy':
+                    copyForDocs(panelForDownload);
+                    break;
+            }
+            closeDownloadModal({ target: { id: 'download-modal-overlay' } });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configurar marked para mejor parsing
+            marked.use({
+                breaks: true,
+                gfm: true
+            });
+
+            if (authToken) {
+                document.getElementById('login-overlay').style.display = 'none';
+                loadFileList().then(() => {
+                    restoreSession();
+                });
+            }
+
+            setupKeyboardShortcuts();
+        });
+
+        // Save session state
+        function saveSession() {
+            const session = {
+                gridSize,
+                activePanel,
+                panels: panels.map(p => ({
+                    file: p.file,
+                    mode: p.mode
+                }))
+            };
+            localStorage.setItem('editorSession', JSON.stringify(session));
+        }
+
+        // Restore session state
+        async function restoreSession() {
+            const saved = localStorage.getItem('editorSession');
+            if (!saved) return;
+
+            try {
+                const session = JSON.parse(saved);
+                
+                // Restore grid size
+                if (session.gridSize) {
+                    setGrid(session.gridSize);
+                }
+
+                // Restore panels
+                if (session.panels && Array.isArray(session.panels)) {
+                    for (let i = 0; i < session.panels.length; i++) {
+                        const p = session.panels[i];
+                        if (p.file) {
+                            // Load file content
+                            await loadFileToPanel(p.file, i);
+                            // Set mode after loading (as loadFile resets it mostly)
+                            if (p.mode) {
+                                setPanelMode(i, p.mode);
+                            }
+                        }
+                    }
+                }
+
+                // Restore active panel
+                if (typeof session.activePanel === 'number') {
+                    setActivePanel(session.activePanel);
+                }
+
+            } catch (e) {
+                console.error('Error restoring session:', e);
+            }
+        }
+
+        async function login() {
+            const password = document.getElementById('password-input').value;
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    authToken = data.token;
+                    localStorage.setItem('authToken', authToken);
+                    document.getElementById('login-overlay').style.display = 'none';
+                    loadFileList();
+                } else {
+                    alert('Contraseña incorrecta');
+                }
+            } catch (e) {
+                alert('Error de conexión');
+            }
+        }
+        
+        function triggerAutoSave(index) {
+            if (saveTimeouts[index]) clearTimeout(saveTimeouts[index]);
+            saveTimeouts[index] = setTimeout(() => {
+                savePanel(index);
+            }, 2000);
+        }
+
+        // Sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const btn = document.getElementById('sidebar-toggle');
+            sidebar.classList.toggle('collapsed');
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            btn.innerHTML = isCollapsed ? '<i class="fas fa-chevron-right"></i>' : '<i class="fas fa-chevron-left"></i>';
+            btn.style.left = isCollapsed ? '0' : 'calc(var(--sidebar-width) - 4px)';
+        }
+
+        // Toolbar toggle
+        function toggleToolbar() {
+            const toolbar = document.getElementById('top-toolbar');
+            const floatingBtn = document.getElementById('toolbar-toggle');
+            toolbar.classList.toggle('collapsed');
+            const isCollapsed = toolbar.classList.contains('collapsed');
+            floatingBtn.classList.toggle('visible', isCollapsed);
+        }
+
+        // Grid management
+        function setGrid(size) {
+            gridSize = size;
+            const container = document.getElementById('panels-container');
+            container.className = 'panels-container grid-' + size;
+
+            // Update buttons
+            document.querySelectorAll('.grid-selector .btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.grid) === size);
+            });
+
+            // Ensure we have enough panels
+            while (panels.length < size) {
+                panels.push({ file: null, content: '', editor: null, mode: 'preview' });
+            }
+
+            renderPanels();
+            saveSession();
+        }
+
+        // Render all panels
+        function renderPanels() {
+            const container = document.getElementById('panels-container');
+            container.innerHTML = '';
+
+            for (let i = 0; i < gridSize; i++) {
+                const panel = panels[i];
+                const div = document.createElement('div');
+                div.className = 'panel' + (i === activePanel ? ' active' : '');
+                div.id = 'panel-' + i;
+                div.dataset.index = i;
+                
+                // Drag and Drop events
+                div.ondragover = (e) => {
+                    e.preventDefault();
+                    div.classList.add('drag-over');
+                };
+                div.ondragleave = (e) => {
+                    div.classList.remove('drag-over');
+                };
+                div.ondrop = (e) => {
+                    e.preventDefault();
+                    div.classList.remove('drag-over');
+                    const path = e.dataTransfer.getData('text');
+                    if (path) loadFileToPanel(path, i);
+                };
+                
+                div.onclick = (e) => {
+                    if (!e.target.closest('.panel-header button')) {
+                        setActivePanel(i);
+                    }
+                };
+
+                if (panel.file) {
+                    div.innerHTML = `
+                        <div class="panel-header">
+                            <span class="panel-title" title="${panel.file}"><i class="fas fa-file-alt"></i> ${panel.file.split('/').pop().replace('.md', '')}</span>
+
+                            <div class="panel-actions">
+                                <button class="panel-btn" onclick="savePanel(${i})" title="Guardar (Ctrl+S)"><i class="fas fa-save"></i></button>
+                                <button class="panel-btn" onclick="refreshPanel(${i})" title="Recargar contenido"><i class="fas fa-sync-alt"></i></button>
+                                <button class="panel-btn" onclick="toggleSearch(${i})" title="Buscar en documento"><i class="fas fa-search"></i></button>
+                                <div class="separator"></div>
+                                <button class="panel-btn" onclick="openDownloadModal(${i})" title="Descargar / Exportar"><i class="fas fa-download"></i></button>
+                                <div class="separator"></div>
+                                <button class="panel-btn ${panel.mode === 'edit' ? 'active' : ''}" onclick="setPanelMode(${i}, 'edit')" title="Editar"><i class="fas fa-pen"></i></button>
+                                <button class="panel-btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')" title="Dividir"><i class="fas fa-columns"></i></button>
+                                <button class="panel-btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')" title="Vista previa"><i class="fas fa-eye"></i></button>
+                                <div class="separator"></div>
+                                <button class="panel-btn close-btn" onclick="closePanel(${i})" title="Cerrar documento"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <!-- Search Bar - debajo del header -->
+                        <div class="panel-search-bar" id="search-bar-${i}">
+                            <input type="text"
+                                class="search-input"
+                                id="search-input-${i}"
+                                placeholder="Buscar..."
+                                onkeydown="if(event.key === 'Enter') { event.shiftKey ? findPrev(${i}) : findNext(${i}) }"
+                                oninput="performSearch(${i})">
+                            <span class="search-count" id="search-count-${i}">0/0</span>
+                            <button class="panel-btn" onclick="findPrev(${i})" title="Anterior (Shift+Enter)"><i class="fas fa-chevron-up"></i></button>
+                            <button class="panel-btn" onclick="findNext(${i})" title="Siguiente (Enter)"><i class="fas fa-chevron-down"></i></button>
+                            <button class="panel-btn" onclick="toggleSearch(${i})" title="Cerrar búsqueda"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="panel-content">
+                            <div class="editor-pane ${panel.mode === 'preview' ? 'hidden' : ''}" id="editor-${i}">
+                                <textarea id="textarea-${i}"></textarea>
+                            </div>
+                            <div class="preview-pane ${panel.mode === 'edit' ? 'hidden' : ''}" id="preview-${i}">
+                                <div class="markdown-content" id="content-${i}"></div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    div.innerHTML = `
+                        <div class="empty-panel">
+                            <div class="empty-panel-icon"><i class="far fa-file-alt"></i></div>
+                            <div class="empty-panel-text">Arrastra un archivo aquí</div>
+                        </div>
+                    `;
+                }
+
+                container.appendChild(div);
+
+                // Initialize editor if file is loaded
+                if (panel.file) {
+                    initPanelEditor(i);
+                }
+            }
+
+            updateActivePanelInfo();
+        }
+
+        // Search functionality
+        const searchState = {};
+
+        function toggleSearch(index) {
+            const searchBar = document.getElementById(`search-bar-${index}`);
+            const isVisible = searchBar.classList.contains('visible');
+            
+            if (isVisible) {
+                searchBar.classList.remove('visible');
+                clearSearch(index);
+                // Return focus to editor
+                if (panels[index].editor) panels[index].editor.focus();
+            } else {
+                searchBar.classList.add('visible');
+                setTimeout(() => {
+                    const input = document.getElementById(`search-input-${index}`);
+                    input.focus();
+                    input.select();
+                    if (input.value) performSearch(index);
+                }, 10);
+            }
+        }
+
+        function clearSearch(index) {
+            if (panels[index].editor) {
+                // Clear any highlighting
+                 panels[index].editor.getAllMarks().forEach(mark => {
+                    if (mark.className === 'highlight-match' || mark.className === 'highlight-current') {
+                        mark.clear();
+                    }
+                });
+            }
+            delete searchState[index];
+            document.getElementById(`search-count-${index}`).textContent = '0/0';
+        }
+
+        function performSearch(index) {
+            const query = document.getElementById(`search-input-${index}`).value;
+            const editor = panels[index].editor;
+            
+            if (!editor) return;
+
+            // Clear previous marks
+            clearSearch(index);
+            searchState[index] = { matches: [], current: -1 };
+
+            if (!query) return;
+
+            const cursor = editor.getSearchCursor(query);
+            while (cursor.findNext()) {
+                const from = cursor.from();
+                const to = cursor.to();
+                
+                // Mark matches (yellow)
+                editor.markText(from, to, { className: 'highlight-match' });
+                
+                searchState[index].matches.push({ from, to });
+            }
+
+            const count = searchState[index].matches.length;
+            const current = 0;
+            
+            if (count > 0) {
+                searchState[index].current = 0;
+                highlightCurrent(index);
+            }
+            
+            document.getElementById(`search-count-${index}`).textContent = 
+                count > 0 ? `${searchState[index].current + 1}/${count}` : '0/0';
+        }
+
+        function highlightCurrent(index) {
+            const state = searchState[index];
+            if (!state || state.matches.length === 0) return;
+
+            const editor = panels[index].editor;
+            
+            // Clear previous current highlight (keep match highlights)
+            editor.getAllMarks().forEach(mark => {
+                if (mark.className === 'highlight-current') mark.clear();
+            });
+
+            const match = state.matches[state.current];
+            
+            // Highlight current match (orange/red)
+            editor.markText(match.from, match.to, { className: 'highlight-current' });
+            
+            // Scroll to view
+            editor.scrollIntoView(match.from, 100);
+
+            document.getElementById(`search-count-${index}`).textContent = 
+                `${state.current + 1}/${state.matches.length}`;
+        }
+
+        function findNext(index) {
+            const state = searchState[index];
+            if (!state || state.matches.length === 0) return;
+
+            state.current = (state.current + 1) % state.matches.length;
+            highlightCurrent(index);
+        }
+
+        function findPrev(index) {
+            const state = searchState[index];
+            if (!state || state.matches.length === 0) return;
+
+            state.current = (state.current - 1 + state.matches.length) % state.matches.length;
+            highlightCurrent(index);
+        }
+
+        // Initialize CodeMirror for a panel
+        function initPanelEditor(index) {
+            const textarea = document.getElementById('textarea-' + index);
+            if (!textarea) return;
+
+            const editor = CodeMirror.fromTextArea(textarea, {
+                mode: 'markdown',
+                theme: 'dracula',
+                lineNumbers: true,
+                lineWrapping: true,
+                extraKeys: {
+                    'Ctrl-S': () => savePanel(index),
+                    'Cmd-S': () => savePanel(index),
+                    'Ctrl-F': () => toggleSearch(index),
+                    'Cmd-F': () => toggleSearch(index)
+                }
+            });
+
+            editor.setValue(panels[index].content);
+            editor.on('change', () => {
+                panels[index].content = editor.getValue();
+                updatePanelPreview(index);
+                triggerAutoSave(index);
+            });
+
+            panels[index].editor = editor;
+            updatePanelPreview(index);
+        }
+
+        // Update preview for a panel
+        function updatePanelPreview(index) {
+            const content = document.getElementById('content-' + index);
+            if (content) {
+                content.innerHTML = marked.parse(panels[index].content);
+            }
+        }
+
+        // Set panel mode
+        function setPanelMode(index, mode) {
+            panels[index].mode = mode;
+
+            const editorPane = document.getElementById('editor-' + index);
+            const previewPane = document.getElementById('preview-' + index);
+
+            if (editorPane && previewPane) {
+                editorPane.classList.toggle('hidden', mode === 'preview');
+                previewPane.classList.toggle('hidden', mode === 'edit');
+
+                if (panels[index].editor) {
+                    panels[index].editor.refresh();
+                }
+            }
+
+            // Update buttons
+            const panel = document.getElementById('panel-' + index);
+            if (panel) {
+                panel.querySelectorAll('.panel-actions .panel-btn').forEach(btn => {
+                   // Only toggle mode buttons
+                   if (btn.querySelector('.fa-pen') || btn.querySelector('.fa-columns') || btn.querySelector('.fa-eye')) btn.classList.remove('active');
+                });
+                
+                // Set active class based on mode
+                const modeIcons = { 'edit': 'fa-pen', 'split': 'fa-columns', 'preview': 'fa-eye' };
+                const iconClass = modeIcons[mode];
+                
+                // Find button by icon class
+                const activeBtn = panel.querySelector(`.panel-actions .panel-btn .${iconClass}`)?.parentElement;
+                if (activeBtn) activeBtn.classList.add('active');
+            }
+            
+            saveSession();
+        }
+
+        // Set active panel
+        function setActivePanel(index) {
+            activePanel = index;
+            document.querySelectorAll('.panel').forEach((p, i) => {
+                p.classList.toggle('active', i === index);
+                p.style.outline = i === index ? '2px solid var(--primary)' : 'none';
+            });
+            updateActivePanelInfo();
+            saveSession();
+        }
+
+        function updateActivePanelInfo() {
+            const info = document.getElementById('active-panel-info');
+            const panel = panels[activePanel];
+            if (panel && panel.file) {
+                info.textContent = `Panel ${activePanel + 1}: ${panel.file.split('/').pop()}`;
+            } else {
+                info.textContent = `Panel activo: ${activePanel + 1}`;
+            }
+        }
+
+        // Close panel
+        function closePanel(index) {
+            panels[index] = { file: null, content: '', editor: null, mode: 'preview' };
+            renderPanels();
+            saveSession();
+        }
+
+        // Load file list
+        async function loadFileList() {
+            try {
+                const response = await fetch('/api/files', {
+                    headers: { 'Authorization': 'Bearer ' + authToken }
+                });
+                
+                if (response.status === 401) {
+                    document.getElementById('login-overlay').style.display = 'flex';
+                    localStorage.removeItem('authToken');
+                    return;
+                }
+                
+                files = await response.json();
+                renderFileTree(files);
+            } catch (error) {
+                console.error('Error loading files:', error);
+            }
+        }
+
+        // Render file tree
+        function renderFileTree(files) {
+            const tree = {};
+
+            files.forEach(file => {
+                const parts = file.split('/');
+                let current = tree;
+
+                for (let i = 0; i < parts.length - 1; i++) {
+                    if (!current[parts[i]]) {
+                        current[parts[i]] = { __files: [] };
+                    }
+                    current = current[parts[i]];
+                }
+
+                if (!current.__files) current.__files = [];
+                current.__files.push({ name: parts[parts.length - 1], path: file });
+            });
+
+            const container = document.getElementById('file-tree');
+            container.innerHTML = renderFolder(tree);
+
+            // Event listeners
+            container.querySelectorAll('.folder-name').forEach(el => {
+                el.onclick = () => {
+                   el.parentElement.classList.toggle('open');
+                   const icon = el.querySelector('.icon i');
+                   if (el.parentElement.classList.contains('open')) {
+                       icon.classList.remove('fa-folder');
+                       icon.classList.add('fa-folder-open');
+                   } else {
+                       icon.classList.add('fa-folder');
+                       icon.classList.remove('fa-folder-open');
+                   }
+                };
+            });
+
+            container.querySelectorAll('.file-item').forEach(el => {
+                el.onclick = () => loadFileToPanel(el.dataset.path, activePanel);
+            });
+        }
+
+        function renderFolder(obj) {
+            let html = '';
+
+            for (const key of Object.keys(obj).sort()) {
+                if (key === '__files') continue;
+                html += `
+                    <div class="folder">
+                        <div class="folder-name"><span class="icon"><i class="fas fa-folder"></i></span> ${key}</div>
+                        <div class="folder-contents">${renderFolder(obj[key])}</div>
+                    </div>
+                `;
+            }
+
+            if (obj.__files) {
+                obj.__files.sort((a, b) => a.name.localeCompare(b.name)).forEach(file => {
+                    html += `
+                        <div class="file-item" 
+                             data-path="${file.path}" 
+                             draggable="true" 
+                             ondragstart="event.dataTransfer.setData('text', '${file.path}')">
+                             <i class="fas fa-file-alt"></i> ${file.name.replace('.md', '')}
+                        </div>`;
+                });
+            }
+
+            return html;
+        }
+
+        // Load file to panel
+        async function loadFileToPanel(path, panelIndex, forceRefresh = false) {
+            try {
+                // Agregar timestamp para evitar cache si se fuerza recarga
+                const url = '/api/file?path=' + encodeURIComponent(path) + (forceRefresh ? '&t=' + Date.now() : '');
+                
+                const response = await fetch(url, {
+                    headers: { 'Authorization': 'Bearer ' + authToken }
+                });
+                
+                if (response.status === 401) {
+                    showToast('Sesión expirada');
+                    return;
+                }
+                
+                const data = await response.json();
+
+                // Mantener cursor o estado si ya existía editor y es refresh
+                const existingMode = panels[panelIndex].mode || 'preview';
+
+                panels[panelIndex] = {
+                    file: path,
+                    content: data.content,
+                    editor: null,
+                    mode: existingMode
+                };
+
+                renderPanels();
+                setActivePanel(panelIndex);
+                if (forceRefresh) showToast('Contenido recargado');
+                saveSession();
+
+            } catch (error) {
+                console.error('Error loading file:', error);
+                showToast('Error al cargar archivo');
+            }
+        }
+
+        // Refresh panel content
+        function refreshPanel(index) {
+            const panel = panels[index];
+            if (panel && panel.file) {
+                 loadFileToPanel(panel.file, index, true);
+            }
+        }
+
+        // Save panel
+        async function savePanel(index) {
+            const panel = panels[index];
+            if (!panel.file) return;
+
+            try {
+                const response = await fetch('/api/save', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + authToken
+                    },
+                    body: JSON.stringify({ path: panel.file, content: panel.content })
+                });
+
+                if (response.ok) {
+                    showToast('Guardado: ' + panel.file.split('/').pop());
+                } else {
+                    showToast('Error: ' + response.statusText);
+                }
+            } catch (error) {
+                showToast('Error al guardar');
+            }
+        }
+
+        function saveCurrentPanel() {
+            savePanel(activePanel);
+        }
+
+        // Download Markdown
+        function downloadMD(index) {
+            const panel = panels[index];
+            if (!panel.file) return;
+
+            const blob = new Blob([panel.content], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = panel.file.split('/').pop();
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Copy for docs
+        function copyForDocs(index) {
+            // Default to activePanel if index not provided (legacy call)
+            if (typeof index === 'undefined') index = activePanel;
+            
+            const panel = panels[index];
+            if (!panel.file) {
+                showToast('Selecciona un archivo primero');
+                return;
+            }
+            
+            // Generate temporary HTML for copying if not rendered
+            let contentElement = document.getElementById('content-' + index);
+            
+            // If in edit mode, the preview might not be fully up to date or visible
+            // But we update it on change so it should be fine.
+            // However, we need to ensure we are selecting the right element.
+            
+            if (!contentElement) {
+                // Should not happen with new structure unless very early
+                return; 
+            }
+
+            const range = document.createRange();
+            range.selectNode(contentElement);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                showToast('Copiado para Google Docs');
+            } catch (err) {
+                showToast('Error al copiar');
+            }
+            selection.removeAllRanges();
+        }
+
+        // Export PDF
+        function exportPDF(index) {
+             if (typeof index === 'undefined') index = activePanel;
+            
+            const panel = panels[index];
+            if (!panel.file) {
+                showToast('Selecciona un archivo primero');
+                return;
+            }
+
+            const element = document.getElementById('content-' + index);
+            if (!element) return;
+
+            const filename = panel.file.split('/').pop().replace('.md', '.pdf');
+
+            // Force show preview for PDF generation if needed, but html2pdf works on hidden elements too usually
+            // Better to clone or ensure visible. 
+            // html2pdf needs the element to be rendered.
+            
+            const opt = {
+                margin: [15, 20, 15, 20],
+                filename: filename,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            showToast('Generando PDF...');
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // Keyboard shortcuts
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    saveCurrentPanel();
+                }
+
+                // Switch panels with Ctrl+1,2,3,4
+                if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '4') {
+                    const index = parseInt(e.key) - 1;
+                    if (index < gridSize) {
+                        e.preventDefault();
+                        setActivePanel(index);
+                    }
+                }
+            });
+        }
+
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => {
+                        console.log('SW registered:', reg.scope);
+                    })
+                    .catch((err) => {
+                        console.log('SW registration failed:', err);
+                    });
+            });
+        }
+
+        // Handle PWA install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show install button in toolbar
+            const installBtn = document.createElement('button');
+            installBtn.className = 'btn btn-primary btn-sm';
+            installBtn.innerHTML = '📲 Instalar';
+            installBtn.onclick = async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        showToast('App instalada correctamente');
+                    }
+                    deferredPrompt = null;
+                    installBtn.remove();
+                }
+            };
+            document.querySelector('.top-toolbar').appendChild(installBtn);
+        });
+
+        // Fullscreen toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>

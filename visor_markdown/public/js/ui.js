@@ -331,3 +331,14 @@ function setupSidebarDragDrop() {
         }
     };
 }
+
+function collapseAllFolders() {
+    document.querySelectorAll('.file-tree .folder').forEach(folder => {
+        folder.classList.remove('open');
+        const icon = folder.querySelector('.folder-name .icon i');
+        if (icon) {
+            icon.classList.remove('fa-folder-open');
+            icon.classList.add('fa-folder');
+        }
+    });
+}
