@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor & Editor de Markdown - Griego</title>
+    <title>Visor Markdown - Griego Clásico</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- CodeMirror para el editor -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/markdown/markdown.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/continuelist.min.js"></script>
     <style>
         :root {
             --primary: #6366f1;
@@ -24,14 +22,10 @@
             --darker: #0f172a;
             --light: #f8fafc;
             --gray: #64748b;
-            --border: #e2e8f0;
+            --sidebar-width: 280px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
@@ -39,29 +33,63 @@
             height: 100vh;
             background: var(--darker);
             color: var(--light);
+            overflow: hidden;
         }
 
         /* Sidebar */
         .sidebar {
-            width: 280px;
+            width: var(--sidebar-width);
             background: var(--dark);
             display: flex;
             flex-direction: column;
             border-right: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 100;
+        }
+
+        .sidebar.collapsed {
+            width: 0;
+            min-width: 0;
+            overflow: hidden;
+            border-right: none;
         }
 
         .sidebar-header {
-            padding: 20px;
+            padding: 15px 20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             font-weight: 700;
-            font-size: 1.1em;
             display: flex;
             align-items: center;
             gap: 10px;
+            min-height: 56px;
         }
 
-        .sidebar-header span {
-            font-size: 1.4em;
+        .sidebar-toggle {
+            position: absolute;
+            right: -40px;
+            top: 8px;
+            width: 36px;
+            height: 36px;
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0 8px 8px 0;
+            color: var(--light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            transition: all 0.2s;
+            z-index: 101;
+        }
+
+        .sidebar.collapsed .sidebar-toggle {
+            right: -40px;
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--primary);
         }
 
         .file-tree {
@@ -70,18 +98,16 @@
             padding: 10px 0;
         }
 
-        .folder {
-            margin-bottom: 2px;
-        }
+        .folder { margin-bottom: 2px; }
 
         .folder-name {
-            padding: 10px 20px;
+            padding: 8px 15px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.85em;
+            font-size: 0.8em;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: var(--gray);
             transition: all 0.2s;
             text-transform: uppercase;
@@ -93,33 +119,29 @@
             background: rgba(255,255,255,0.05);
         }
 
-        .folder-name .icon {
-            transition: transform 0.2s;
-        }
-
-        .folder.open .folder-name .icon {
-            transform: rotate(90deg);
-        }
+        .folder-name .icon { transition: transform 0.2s; }
+        .folder.open .folder-name .icon { transform: rotate(90deg); }
 
         .folder-contents {
             display: none;
             padding-left: 10px;
         }
 
-        .folder.open .folder-contents {
-            display: block;
-        }
+        .folder.open .folder-contents { display: block; }
 
         .file-item {
-            padding: 10px 20px 10px 35px;
+            padding: 8px 15px 8px 25px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.85em;
             border-left: 3px solid transparent;
             color: #94a3b8;
             transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .file-item:hover {
@@ -134,609 +156,629 @@
             border-left-color: var(--primary);
         }
 
-        /* Main */
+        /* Main area */
         .main {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            min-width: 0;
         }
 
-        /* Toolbar */
-        .toolbar {
+        /* Top toolbar */
+        .top-toolbar {
             background: var(--dark);
-            padding: 12px 25px;
+            padding: 10px 20px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: center;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
         }
 
-        .toolbar-title {
-            flex: 1;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: var(--light);
+        .toolbar-section {
             display: flex;
+            gap: 6px;
             align-items: center;
-            gap: 10px;
         }
 
-        .status-indicator {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--success);
-            animation: pulse 2s infinite;
-        }
-
-        .status-indicator.saving {
-            background: var(--warning);
-        }
-
-        .status-indicator.error {
-            background: var(--danger);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .toolbar-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 8px;
         }
 
         .btn {
-            padding: 10px 18px;
+            padding: 8px 14px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.85em;
+            font-size: 0.8em;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.2s;
+            white-space: nowrap;
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #059669;
-        }
-
-        .btn-warning {
-            background: var(--warning);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: var(--light);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.2);
-        }
+        .btn-sm { padding: 6px 10px; font-size: 0.75em; }
 
         .btn-icon {
-            padding: 10px;
+            padding: 8px;
+            min-width: 34px;
+            justify-content: center;
+        }
+
+        .btn-default {
             background: rgba(255,255,255,0.1);
             color: var(--light);
         }
 
-        .btn-icon:hover {
-            background: rgba(255,255,255,0.2);
+        .btn-default:hover { background: rgba(255,255,255,0.2); }
+        .btn-default.active { background: var(--primary); }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+
+        .btn-success { background: var(--success); color: white; }
+        .btn-success:hover { background: #059669; }
+
+        .grid-selector {
+            display: flex;
+            gap: 4px;
+            background: rgba(0,0,0,0.3);
+            padding: 4px;
+            border-radius: 6px;
         }
 
-        .btn-icon.active {
-            background: var(--primary);
+        .grid-selector .btn {
+            padding: 6px 10px;
+            background: transparent;
         }
 
-        /* Editor area */
-        .editor-container {
+        .grid-selector .btn.active { background: var(--primary); }
+
+        /* Panels container */
+        .panels-container {
+            flex: 1;
+            display: grid;
+            gap: 2px;
+            background: rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .panels-container.grid-1 { grid-template-columns: 1fr; }
+        .panels-container.grid-2 { grid-template-columns: 1fr 1fr; }
+        .panels-container.grid-3 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+        .panels-container.grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+
+        /* Panel */
+        .panel {
+            background: var(--darker);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .panel.empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.9em;
+        }
+
+        .panel-header {
+            padding: 8px 12px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            min-height: 42px;
+        }
+
+        .panel-title {
+            flex: 1;
+            font-size: 0.85em;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .panel-mode-toggle {
+            display: flex;
+            gap: 2px;
+            background: rgba(0,0,0,0.3);
+            padding: 2px;
+            border-radius: 4px;
+        }
+
+        .panel-mode-toggle .btn {
+            padding: 4px 8px;
+            font-size: 0.7em;
+            background: transparent;
+        }
+
+        .panel-mode-toggle .btn.active { background: var(--primary); }
+
+        .panel-close {
+            padding: 4px 8px;
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .panel-close:hover { background: var(--danger); color: white; }
+
+        .panel-content {
             flex: 1;
             display: flex;
             overflow: hidden;
         }
 
+        /* Editor pane */
         .editor-pane {
             flex: 1;
             display: flex;
             flex-direction: column;
             background: #1a1a2e;
-            border-right: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
         }
 
-        .editor-pane.hidden {
-            display: none;
-        }
-
-        .pane-header {
-            padding: 10px 20px;
-            background: rgba(0,0,0,0.3);
-            font-size: 0.8em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .pane-header .users {
-            display: flex;
-            gap: -8px;
-        }
-
-        .user-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75em;
-            font-weight: 700;
-            border: 2px solid var(--dark);
-            margin-left: -8px;
-        }
-
-        .user-avatar:first-child {
-            margin-left: 0;
-        }
-
-        .user-avatar.you {
-            background: var(--success);
-        }
+        .editor-pane.hidden { display: none; }
 
         .CodeMirror {
             flex: 1;
-            height: auto !important;
+            height: 100% !important;
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .CodeMirror-scroll {
-            padding: 20px;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
         /* Preview pane */
         .preview-pane {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: var(--light);
-            overflow: hidden;
-        }
-
-        .preview-pane.hidden {
-            display: none;
-        }
-
-        .preview-pane .pane-header {
-            background: #e2e8f0;
-            color: var(--dark);
-        }
-
-        .preview-content {
-            flex: 1;
             overflow-y: auto;
-            padding: 50px 70px;
+            padding: 30px 40px;
+            background: var(--light);
         }
 
-        #markdown-content {
-            max-width: 850px;
+        .preview-pane.hidden { display: none; }
+
+        .markdown-content {
+            max-width: 800px;
             margin: 0 auto;
-            line-height: 1.9;
-            font-size: 16px;
+            line-height: 1.8;
+            font-size: 15px;
             color: #1e293b;
-            font-family: 'Georgia', 'Times New Roman', serif;
+            font-family: 'Georgia', serif;
         }
 
-        #markdown-content h1 {
+        .markdown-content h1 {
             font-family: 'Inter', sans-serif;
             color: #0f172a;
-            margin: 1.5em 0 0.8em;
-            font-size: 2.2em;
+            margin: 1.2em 0 0.6em;
+            font-size: 1.9em;
             font-weight: 800;
             border-bottom: 3px solid var(--primary);
-            padding-bottom: 0.4em;
+            padding-bottom: 0.3em;
         }
 
-        #markdown-content h2 {
+        .markdown-content h2 {
             font-family: 'Inter', sans-serif;
             color: #1e293b;
-            margin: 1.4em 0 0.6em;
-            font-size: 1.7em;
+            margin: 1.2em 0 0.5em;
+            font-size: 1.5em;
             font-weight: 700;
         }
 
-        #markdown-content h3 {
+        .markdown-content h3 {
             font-family: 'Inter', sans-serif;
             color: #334155;
-            margin: 1.3em 0 0.5em;
-            font-size: 1.4em;
+            margin: 1em 0 0.4em;
+            font-size: 1.25em;
             font-weight: 600;
         }
 
-        #markdown-content h1:first-child {
-            margin-top: 0;
+        .markdown-content h1:first-child { margin-top: 0; }
+
+        .markdown-content p { margin: 1em 0; text-align: justify; }
+
+        .markdown-content ul, .markdown-content ol {
+            margin: 1em 0;
+            padding-left: 1.8em;
         }
 
-        #markdown-content p {
-            margin: 1.3em 0;
-            text-align: justify;
-        }
+        .markdown-content li { margin: 0.4em 0; }
 
-        #markdown-content ul, #markdown-content ol {
-            margin: 1.3em 0;
-            padding-left: 2em;
-        }
-
-        #markdown-content li {
-            margin: 0.6em 0;
-        }
-
-        #markdown-content code {
+        .markdown-content code {
             background: #f1f5f9;
-            padding: 3px 8px;
-            border-radius: 6px;
+            padding: 2px 6px;
+            border-radius: 4px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #be185d;
         }
 
-        #markdown-content pre {
+        .markdown-content pre {
             background: var(--darker);
             color: #e2e8f0;
-            padding: 25px;
-            border-radius: 12px;
+            padding: 20px;
+            border-radius: 8px;
             overflow-x: auto;
-            margin: 1.8em 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            margin: 1.5em 0;
         }
 
-        #markdown-content pre code {
+        .markdown-content pre code {
             background: none;
             color: inherit;
             padding: 0;
         }
 
-        #markdown-content table {
+        .markdown-content table {
             border-collapse: collapse;
             width: 100%;
-            margin: 1.8em 0;
-            font-size: 0.95em;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin: 1.5em 0;
+            font-size: 0.9em;
         }
 
-        #markdown-content th, #markdown-content td {
+        .markdown-content th, .markdown-content td {
             border: 1px solid #e2e8f0;
-            padding: 14px 18px;
+            padding: 10px 14px;
             text-align: left;
         }
 
-        #markdown-content th {
+        .markdown-content th {
             background: var(--primary);
             color: white;
             font-weight: 600;
-            font-family: 'Inter', sans-serif;
         }
 
-        #markdown-content tr:nth-child(even) {
-            background: #f8fafc;
-        }
+        .markdown-content tr:nth-child(even) { background: #f8fafc; }
 
-        #markdown-content blockquote {
+        .markdown-content blockquote {
             border-left: 4px solid var(--primary);
-            padding: 20px 30px;
-            margin: 1.8em 0;
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            border-radius: 0 12px 12px 0;
+            padding: 15px 25px;
+            margin: 1.5em 0;
+            background: #f8fafc;
+            border-radius: 0 8px 8px 0;
             font-style: italic;
             color: #475569;
         }
 
-        #markdown-content hr {
+        .markdown-content hr {
             border: none;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
-            margin: 2.5em 0;
-            border-radius: 2px;
+            margin: 2em 0;
         }
 
-        #markdown-content a {
-            color: var(--primary);
-            text-decoration: none;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.2s;
-        }
-
-        #markdown-content a:hover {
-            border-bottom-color: var(--primary);
-        }
+        .markdown-content a { color: var(--primary); text-decoration: none; }
+        .markdown-content a:hover { text-decoration: underline; }
 
         /* Toast */
         .toast {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             background: var(--dark);
             color: white;
-            padding: 16px 28px;
-            border-radius: 12px;
+            padding: 12px 20px;
+            border-radius: 8px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
             transform: translateY(100px);
             opacity: 0;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            transition: all 0.3s;
             z-index: 1000;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast.success {
             border-left: 4px solid var(--success);
         }
 
-        .toast.error {
-            border-left: 4px solid var(--danger);
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* Empty state */
+        .empty-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--gray);
+            gap: 10px;
         }
 
-        /* Welcome */
-        .welcome {
-            text-align: center;
-            color: #64748b;
-            padding: 80px 40px;
+        .empty-panel-icon { font-size: 3em; opacity: 0.5; }
+        .empty-panel-text { font-size: 0.9em; }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+        .preview-pane::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); }
+
+        /* Status bar */
+        .status-bar {
+            background: var(--dark);
+            padding: 4px 15px;
+            font-size: 0.75em;
+            color: var(--gray);
+            display: flex;
+            gap: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        .welcome h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-            color: #334155;
-        }
-
-        .welcome p {
-            font-size: 1.1em;
-            margin: 10px 0;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
+        .status-item { display: flex; align-items: center; gap: 5px; }
+        .status-dot {
             width: 8px;
             height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255,255,255,0.3);
-        }
-
-        .preview-content::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.2);
-        }
-
-        /* View modes */
-        .view-toggle {
-            display: flex;
-            gap: 4px;
-            background: rgba(255,255,255,0.1);
-            padding: 4px;
-            border-radius: 8px;
-        }
-
-        .view-toggle .btn {
-            padding: 8px 14px;
-            background: transparent;
-        }
-
-        .view-toggle .btn.active {
-            background: var(--primary);
+            border-radius: 50%;
+            background: var(--success);
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <span>📚</span> Griego Clásico
         </div>
+        <button class="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar/Expandir">◀</button>
         <div class="file-tree" id="file-tree"></div>
     </div>
 
     <div class="main">
-        <div class="toolbar">
-            <div class="toolbar-title">
-                <div class="status-indicator" id="status"></div>
-                <span id="current-file">Selecciona un archivo</span>
+        <div class="top-toolbar">
+            <div class="toolbar-section">
+                <span style="color: var(--gray); font-size: 0.8em;">Grid:</span>
+                <div class="grid-selector">
+                    <button class="btn btn-sm active" onclick="setGrid(1)" data-grid="1" title="1 panel">▢</button>
+                    <button class="btn btn-sm" onclick="setGrid(2)" data-grid="2" title="2 paneles">▢▢</button>
+                    <button class="btn btn-sm" onclick="setGrid(4)" data-grid="4" title="4 paneles">⊞</button>
+                </div>
             </div>
 
-            <div class="view-toggle">
-                <button class="btn" id="btn-editor" onclick="setView('editor')" title="Solo editor">✏️</button>
-                <button class="btn active" id="btn-split" onclick="setView('split')" title="Editor + Vista previa">📖</button>
-                <button class="btn" id="btn-preview" onclick="setView('preview')" title="Solo vista previa">👁️</button>
+            <div class="toolbar-divider"></div>
+
+            <div class="toolbar-section">
+                <button class="btn btn-default btn-sm" onclick="copyForDocs()" title="Copiar para Google Docs">
+                    📋 Copiar
+                </button>
+                <button class="btn btn-success btn-sm" onclick="exportPDF()" title="Exportar PDF">
+                    📄 PDF
+                </button>
             </div>
 
-            <button class="btn btn-secondary" onclick="saveFile()" title="Guardar (Ctrl+S)">
-                💾 Guardar
-            </button>
-            <button class="btn btn-primary" onclick="copyForDocs()" title="Copiar para Google Docs">
-                📋 Copiar
-            </button>
-            <button class="btn btn-success" onclick="exportPDF()">
-                📄 PDF
-            </button>
+            <div class="toolbar-divider"></div>
+
+            <div class="toolbar-section">
+                <button class="btn btn-default btn-sm" onclick="saveCurrentPanel()" title="Guardar (Ctrl+S)">
+                    💾 Guardar
+                </button>
+            </div>
         </div>
 
-        <div class="editor-container">
-            <div class="editor-pane" id="editor-pane">
-                <div class="pane-header">
-                    <span>Editor Markdown</span>
-                    <div class="users" id="users">
-                        <div class="user-avatar you" title="Tú">TÚ</div>
-                    </div>
+        <div class="panels-container grid-1" id="panels-container">
+            <div class="panel" id="panel-0" data-index="0">
+                <div class="empty-panel">
+                    <div class="empty-panel-icon">📄</div>
+                    <div class="empty-panel-text">Selecciona un archivo del panel izquierdo</div>
                 </div>
-                <textarea id="editor"></textarea>
             </div>
+        </div>
 
-            <div class="preview-pane" id="preview-pane">
-                <div class="pane-header">
-                    <span>Vista Previa</span>
-                </div>
-                <div class="preview-content">
-                    <div id="markdown-content">
-                        <div class="welcome">
-                            <h2>Visor & Editor de Markdown</h2>
-                            <p>Selecciona un archivo del panel izquierdo</p>
-                            <p>Edita y visualiza en tiempo real</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-dot"></div>
+                <span>Conectado</span>
             </div>
+            <div class="status-item" id="active-panel-info">Panel activo: 1</div>
         </div>
     </div>
 
     <div class="toast" id="toast"></div>
 
     <script>
-        let editor;
-        let currentFile = null;
-        let saveTimeout = null;
-        let ws = null;
-        let clientId = Math.random().toString(36).substr(2, 9);
+        // State
+        let panels = [
+            { file: null, content: '', editor: null, mode: 'preview' }
+        ];
+        let activePanel = 0;
+        let gridSize = 1;
+        let files = [];
 
-        // Inicializar CodeMirror
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+            loadFileList();
+            setupKeyboardShortcuts();
+        });
+
+        // Sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+            const btn = sidebar.querySelector('.sidebar-toggle');
+            btn.textContent = sidebar.classList.contains('collapsed') ? '▶' : '◀';
+        }
+
+        // Grid management
+        function setGrid(size) {
+            gridSize = size;
+            const container = document.getElementById('panels-container');
+            container.className = 'panels-container grid-' + size;
+
+            // Update buttons
+            document.querySelectorAll('.grid-selector .btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.grid) === size);
+            });
+
+            // Ensure we have enough panels
+            while (panels.length < size) {
+                panels.push({ file: null, content: '', editor: null, mode: 'preview' });
+            }
+
+            renderPanels();
+        }
+
+        // Render all panels
+        function renderPanels() {
+            const container = document.getElementById('panels-container');
+            container.innerHTML = '';
+
+            for (let i = 0; i < gridSize; i++) {
+                const panel = panels[i];
+                const div = document.createElement('div');
+                div.className = 'panel' + (i === activePanel ? ' active' : '');
+                div.id = 'panel-' + i;
+                div.dataset.index = i;
+                div.onclick = (e) => {
+                    if (!e.target.closest('.panel-header button')) {
+                        setActivePanel(i);
+                    }
+                };
+
+                if (panel.file) {
+                    div.innerHTML = `
+                        <div class="panel-header">
+                            <span class="panel-title" title="${panel.file}">${panel.file.split('/').pop().replace('.md', '')}</span>
+                            <div class="panel-mode-toggle">
+                                <button class="btn ${panel.mode === 'edit' ? 'active' : ''}" onclick="setPanelMode(${i}, 'edit')">✏️</button>
+                                <button class="btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')">📖</button>
+                                <button class="btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')">👁️</button>
+                            </div>
+                            <button class="panel-close" onclick="closePanel(${i})" title="Cerrar">✕</button>
+                        </div>
+                        <div class="panel-content">
+                            <div class="editor-pane ${panel.mode === 'preview' ? 'hidden' : ''}" id="editor-${i}">
+                                <textarea id="textarea-${i}"></textarea>
+                            </div>
+                            <div class="preview-pane ${panel.mode === 'edit' ? 'hidden' : ''}" id="preview-${i}">
+                                <div class="markdown-content" id="content-${i}"></div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    div.innerHTML = `
+                        <div class="empty-panel">
+                            <div class="empty-panel-icon">📄</div>
+                            <div class="empty-panel-text">Panel ${i + 1} - Selecciona un archivo</div>
+                        </div>
+                    `;
+                }
+
+                container.appendChild(div);
+
+                // Initialize editor if file is loaded
+                if (panel.file) {
+                    initPanelEditor(i);
+                }
+            }
+
+            updateActivePanelInfo();
+        }
+
+        // Initialize CodeMirror for a panel
+        function initPanelEditor(index) {
+            const textarea = document.getElementById('textarea-' + index);
+            if (!textarea) return;
+
+            const editor = CodeMirror.fromTextArea(textarea, {
                 mode: 'markdown',
                 theme: 'dracula',
                 lineNumbers: true,
                 lineWrapping: true,
-                autofocus: true,
                 extraKeys: {
-                    'Enter': 'newlineAndIndentContinueMarkdownList',
-                    'Ctrl-S': function(cm) { saveFile(); },
-                    'Cmd-S': function(cm) { saveFile(); }
+                    'Ctrl-S': () => savePanel(index),
+                    'Cmd-S': () => savePanel(index)
                 }
             });
 
+            editor.setValue(panels[index].content);
             editor.on('change', () => {
-                updatePreview();
-                scheduleAutoSave();
-                broadcastChanges();
+                panels[index].content = editor.getValue();
+                updatePanelPreview(index);
             });
 
-            loadFileList();
-            connectWebSocket();
-        });
-
-        // WebSocket para colaboración
-        function connectWebSocket() {
-            ws = new WebSocket('ws://localhost:8889');
-
-            ws.onopen = () => {
-                console.log('WebSocket conectado');
-                setStatus('connected');
-            };
-
-            ws.onmessage = (event) => {
-                const data = JSON.parse(event.data);
-
-                if (data.type === 'update' && data.file === currentFile && data.clientId !== clientId) {
-                    // Actualización de otro usuario
-                    const cursor = editor.getCursor();
-                    editor.setValue(data.content);
-                    editor.setCursor(cursor);
-                    updatePreview();
-                    showToast('Documento actualizado por otro usuario', 'success');
-                }
-
-                if (data.type === 'users') {
-                    updateUsers(data.users);
-                }
-            };
-
-            ws.onclose = () => {
-                console.log('WebSocket desconectado, reconectando...');
-                setStatus('disconnected');
-                setTimeout(connectWebSocket, 3000);
-            };
-
-            ws.onerror = () => {
-                setStatus('error');
-            };
+            panels[index].editor = editor;
+            updatePanelPreview(index);
         }
 
-        function broadcastChanges() {
-            if (ws && ws.readyState === WebSocket.OPEN && currentFile) {
-                ws.send(JSON.stringify({
-                    type: 'update',
-                    file: currentFile,
-                    content: editor.getValue(),
-                    clientId: clientId
-                }));
+        // Update preview for a panel
+        function updatePanelPreview(index) {
+            const content = document.getElementById('content-' + index);
+            if (content) {
+                content.innerHTML = marked.parse(panels[index].content);
             }
         }
 
-        function updateUsers(users) {
-            const container = document.getElementById('users');
-            const colors = ['#6366f1', '#0ea5e9', '#10b981', '#f59e0b', '#ef4444'];
+        // Set panel mode
+        function setPanelMode(index, mode) {
+            panels[index].mode = mode;
 
-            container.innerHTML = users.map((user, i) => `
-                <div class="user-avatar ${user.id === clientId ? 'you' : ''}"
-                     style="background: ${colors[i % colors.length]}"
-                     title="${user.id === clientId ? 'Tú' : 'Usuario ' + (i+1)}">
-                    ${user.id === clientId ? 'TÚ' : 'U' + (i+1)}
-                </div>
-            `).join('');
+            const editorPane = document.getElementById('editor-' + index);
+            const previewPane = document.getElementById('preview-' + index);
+
+            if (editorPane && previewPane) {
+                editorPane.classList.toggle('hidden', mode === 'preview');
+                previewPane.classList.toggle('hidden', mode === 'edit');
+
+                if (panels[index].editor) {
+                    panels[index].editor.refresh();
+                }
+            }
+
+            // Update buttons
+            const panel = document.getElementById('panel-' + index);
+            panel.querySelectorAll('.panel-mode-toggle .btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
         }
 
-        function setStatus(status) {
-            const indicator = document.getElementById('status');
-            indicator.className = 'status-indicator';
-            if (status === 'saving') indicator.classList.add('saving');
-            if (status === 'error' || status === 'disconnected') indicator.classList.add('error');
+        // Set active panel
+        function setActivePanel(index) {
+            activePanel = index;
+            document.querySelectorAll('.panel').forEach((p, i) => {
+                p.classList.toggle('active', i === index);
+                p.style.outline = i === index ? '2px solid var(--primary)' : 'none';
+            });
+            updateActivePanelInfo();
         }
 
-        // Cargar lista de archivos
+        function updateActivePanelInfo() {
+            const info = document.getElementById('active-panel-info');
+            const panel = panels[activePanel];
+            if (panel && panel.file) {
+                info.textContent = `Panel ${activePanel + 1}: ${panel.file.split('/').pop()}`;
+            } else {
+                info.textContent = `Panel activo: ${activePanel + 1}`;
+            }
+        }
+
+        // Close panel
+        function closePanel(index) {
+            panels[index] = { file: null, content: '', editor: null, mode: 'preview' };
+            renderPanels();
+        }
+
+        // Load file list
         async function loadFileList() {
             try {
                 const response = await fetch('/api/files');
-                const files = await response.json();
+                files = await response.json();
                 renderFileTree(files);
             } catch (error) {
-                console.error('Error cargando archivos:', error);
+                console.error('Error loading files:', error);
             }
         }
 
+        // Render file tree
         function renderFileTree(files) {
             const tree = {};
 
@@ -752,154 +794,105 @@
                 }
 
                 if (!current.__files) current.__files = [];
-                current.__files.push({
-                    name: parts[parts.length - 1],
-                    path: file
-                });
+                current.__files.push({ name: parts[parts.length - 1], path: file });
             });
 
             const container = document.getElementById('file-tree');
-            container.innerHTML = renderFolder(tree, '');
+            container.innerHTML = renderFolder(tree);
 
-            document.querySelectorAll('.folder-name').forEach(el => {
-                el.addEventListener('click', () => {
-                    el.parentElement.classList.toggle('open');
-                });
+            // Event listeners
+            container.querySelectorAll('.folder-name').forEach(el => {
+                el.onclick = () => el.parentElement.classList.toggle('open');
             });
 
-            document.querySelectorAll('.file-item').forEach(el => {
-                el.addEventListener('click', () => loadFile(el.dataset.path));
+            container.querySelectorAll('.file-item').forEach(el => {
+                el.onclick = () => loadFileToPanel(el.dataset.path, activePanel);
             });
         }
 
-        function renderFolder(obj, prefix) {
+        function renderFolder(obj) {
             let html = '';
 
             for (const key of Object.keys(obj).sort()) {
                 if (key === '__files') continue;
                 html += `
                     <div class="folder">
-                        <div class="folder-name">
-                            <span class="icon">▶</span> ${key}
-                        </div>
-                        <div class="folder-contents">
-                            ${renderFolder(obj[key], prefix + key + '/')}
-                        </div>
+                        <div class="folder-name"><span class="icon">▶</span> ${key}</div>
+                        <div class="folder-contents">${renderFolder(obj[key])}</div>
                     </div>
                 `;
             }
 
             if (obj.__files) {
                 obj.__files.sort((a, b) => a.name.localeCompare(b.name)).forEach(file => {
-                    const displayName = file.name.replace('.md', '');
-                    html += `<div class="file-item" data-path="${file.path}">📄 ${displayName}</div>`;
+                    html += `<div class="file-item" data-path="${file.path}">📄 ${file.name.replace('.md', '')}</div>`;
                 });
             }
 
             return html;
         }
 
-        // Cargar archivo
-        async function loadFile(path) {
+        // Load file to panel
+        async function loadFileToPanel(path, panelIndex) {
             try {
                 const response = await fetch('/api/file?path=' + encodeURIComponent(path));
                 const data = await response.json();
 
-                currentFile = path;
-                editor.setValue(data.content);
-                updatePreview();
+                panels[panelIndex] = {
+                    file: path,
+                    content: data.content,
+                    editor: null,
+                    mode: panels[panelIndex].mode || 'preview'
+                };
 
-                document.getElementById('current-file').textContent = path.split('/').pop().replace('.md', '');
-
-                document.querySelectorAll('.file-item').forEach(el => {
-                    el.classList.toggle('active', el.dataset.path === path);
-                });
-
-                // Notificar al servidor
-                if (ws && ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({
-                        type: 'join',
-                        file: path,
-                        clientId: clientId
-                    }));
-                }
+                renderPanels();
+                setActivePanel(panelIndex);
+                showToast('Archivo cargado: ' + path.split('/').pop());
 
             } catch (error) {
-                console.error('Error cargando archivo:', error);
-                showToast('Error al cargar el archivo', 'error');
+                console.error('Error loading file:', error);
+                showToast('Error al cargar archivo');
             }
         }
 
-        function updatePreview() {
-            const content = editor.getValue();
-            document.getElementById('markdown-content').innerHTML = marked.parse(content);
-        }
-
-        function scheduleAutoSave() {
-            if (saveTimeout) clearTimeout(saveTimeout);
-            setStatus('saving');
-            saveTimeout = setTimeout(() => {
-                saveFile(true);
-            }, 2000);
-        }
-
-        async function saveFile(auto = false) {
-            if (!currentFile) {
-                if (!auto) showToast('Primero selecciona un archivo');
-                return;
-            }
+        // Save panel
+        async function savePanel(index) {
+            const panel = panels[index];
+            if (!panel.file) return;
 
             try {
-                setStatus('saving');
                 const response = await fetch('/api/save', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        path: currentFile,
-                        content: editor.getValue()
-                    })
+                    body: JSON.stringify({ path: panel.file, content: panel.content })
                 });
 
                 if (response.ok) {
-                    setStatus('connected');
-                    if (!auto) showToast('Archivo guardado', 'success');
-                } else {
-                    throw new Error('Error al guardar');
+                    showToast('Guardado: ' + panel.file.split('/').pop());
                 }
             } catch (error) {
-                setStatus('error');
-                showToast('Error al guardar el archivo', 'error');
+                showToast('Error al guardar');
             }
         }
 
-        function setView(mode) {
-            const editorPane = document.getElementById('editor-pane');
-            const previewPane = document.getElementById('preview-pane');
-
-            document.querySelectorAll('.view-toggle .btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('btn-' + mode).classList.add('active');
-
-            if (mode === 'editor') {
-                editorPane.classList.remove('hidden');
-                previewPane.classList.add('hidden');
-            } else if (mode === 'preview') {
-                editorPane.classList.add('hidden');
-                previewPane.classList.remove('hidden');
-            } else {
-                editorPane.classList.remove('hidden');
-                previewPane.classList.remove('hidden');
-            }
-
-            editor.refresh();
+        function saveCurrentPanel() {
+            savePanel(activePanel);
         }
 
+        // Copy for docs
         function copyForDocs() {
-            if (!currentFile) {
-                showToast('Primero selecciona un archivo');
+            const panel = panels[activePanel];
+            if (!panel.file) {
+                showToast('Selecciona un archivo primero');
                 return;
             }
 
-            const content = document.getElementById('markdown-content');
+            const content = document.getElementById('content-' + activePanel);
+            if (!content) {
+                showToast('Cambia a modo vista para copiar');
+                return;
+            }
+
             const range = document.createRange();
             range.selectNode(content);
             const selection = window.getSelection();
@@ -908,17 +901,24 @@
             document.execCommand('copy');
             selection.removeAllRanges();
 
-            showToast('Copiado para Google Docs', 'success');
+            showToast('Copiado para Google Docs');
         }
 
+        // Export PDF
         function exportPDF() {
-            if (!currentFile) {
-                showToast('Primero selecciona un archivo');
+            const panel = panels[activePanel];
+            if (!panel.file) {
+                showToast('Selecciona un archivo primero');
                 return;
             }
 
-            const element = document.getElementById('markdown-content');
-            const filename = currentFile.split('/').pop().replace('.md', '.pdf');
+            const element = document.getElementById('content-' + activePanel);
+            if (!element) {
+                showToast('Cambia a modo vista para exportar');
+                return;
+            }
+
+            const filename = panel.file.split('/').pop().replace('.md', '.pdf');
 
             html2pdf().set({
                 margin: [15, 20, 15, 20],
@@ -928,26 +928,35 @@
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             }).from(element).save();
 
-            showToast('Generando PDF...', 'success');
+            showToast('Generando PDF...');
         }
 
-        function showToast(message, type = 'info') {
+        // Keyboard shortcuts
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    saveCurrentPanel();
+                }
+
+                // Switch panels with Ctrl+1,2,3,4
+                if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '4') {
+                    const index = parseInt(e.key) - 1;
+                    if (index < gridSize) {
+                        e.preventDefault();
+                        setActivePanel(index);
+                    }
+                }
+            });
+        }
+
+        // Toast
+        function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
-            toast.className = 'toast show ' + type;
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
         }
-
-        // Atajos de teclado
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-                saveFile();
-            }
-        });
     </script>
 </body>
 </html>

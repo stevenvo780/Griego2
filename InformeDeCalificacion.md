@@ -33,9 +33,11 @@ Para otorgar la máxima calificación, el trabajo debe superar el umbral de "cor
 *   **Término *Mûthos*:** Se mantiene la distinción entre **"Mito"** (como trama/estructura) y la simple narración.
 *   **Término *Prâxis*:** Se traduce consistentemente como **"Acción"**, diferenciándola de los agentes (*práttontes*).
 
-### **C. Fidelidad al Texto Fuente**
-El cotejo con el **Análisis Morfológico** (`AnalisisMorfologico.md`) confirma:
-1.  **Interpolaciones:** Las adiciones necesarias para la comprensión en español (ej. *[obra]*, *[medios]*) están marcadas con corchetes, cumpliendo el rigor filológico.
+### **C. Fidelidad al Texto Fuente y Materiales del Curso**
+El cotejo con el **Análisis Morfológico** (`AnalisisMorfologico.md`) y los materiales de la cátedra confirma:
+1.  **Tablas de Gramática:** El análisis en `ApresiacionesDeTraduccion.md` cita correctamente las diapositivas del archivo `Clases/Tablas para el estudio del griego antiguo.md` (ej. Diapositiva 13 para temas en -ες, Diapositiva 21 para temas en -ι).
+2.  **Léxico:** Las traducciones clave (e.g., *mímesis* = imitación) coinciden con las definiciones del `Diccionarios/diccionario-vox-griego-clasico-espanol.md`.
+3.  **Interpolaciones:** Las adiciones necesarias para la comprensión en español (ej. *[obra]*, *[medios]*) están marcadas con corchetes, cumpliendo el rigor filológico.
 2.  **Genitivos Objetivos:** *mímesis práxeōs* -> "imitación de una acción" (Correcto).
 3.  **Voz Media:** *mimoûntai* -> "imitan" (Correcto uso transitivo en este contexto).
 
