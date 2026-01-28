@@ -30,7 +30,7 @@ Este documento detalla el proceso filológico intermedio entre el texto griego o
 
 ---
 
-## **Párrafo 2: Definición Esencial y Medios**
+## **Párrafo 2: Definición Esencial y Medios (Lenguaje)**
 
 ### **[2.1]**
 **Texto Griego:**
@@ -165,7 +165,7 @@ Este documento detalla el proceso filológico intermedio entre el texto griego o
 
 ---
 
-## **Párrafo 5: Primacía de la Trama**
+## **Párrafo 5: Primacía de la Trama (El Fin)**
 
 ### **[5.1]**
 **Texto Griego:**
@@ -214,7 +214,7 @@ Este documento detalla el proceso filológico intermedio entre el texto griego o
 
 ---
 
-## **Párrafo 6: Argumentos Adicionales**
+## **Párrafo 6: Argumentos Adicionales (Acción vs Carácter)**
 
 ### **[6.1]**
 **Texto Griego:**
@@ -277,7 +277,7 @@ Este documento detalla el proceso filológico intermedio entre el texto griego o
 
 ---
 
-## **Párrafo 7: Definiciones Finales**
+## **Párrafo 7: El Mito como Alma y Definición de las Partes Restantes**
 
 ### **[7.1]**
 **Texto Griego:**
