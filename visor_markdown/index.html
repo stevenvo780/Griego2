@@ -607,6 +607,11 @@
         let activePanel = 0;
         let gridSize = 1;
         let files = [];
+        let ws;
+        let clientId = Math.random().toString(36).substr(2, 9);
+        const WS_PORT = 8889;
+        let isRemoteUpdate = false; // Flag to prevent echo loops
+        let saveTimeouts = {}; // Per-panel autosave timers
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -618,7 +623,83 @@
 
             loadFileList();
             setupKeyboardShortcuts();
+            connectWebSocket();
         });
+
+        // WebSocket Connection
+        function connectWebSocket() {
+            ws = new WebSocket(`ws://${location.hostname}:${WS_PORT}`);
+
+            ws.onopen = () => {
+                console.log('WS Connected');
+                document.querySelector('.status-bar .status-item span').textContent = 'Conectado';
+                document.querySelector('.status-dot').style.background = 'var(--success)';
+                
+                // Re-join active files
+                panels.forEach(p => {
+                    if (p.file) {
+                        ws.send(JSON.stringify({ 
+                            type: 'join', 
+                            file: p.file,
+                            clientId: clientId
+                        }));
+                    }
+                });
+            };
+
+            ws.onclose = () => {
+                console.log('WS Disconnected');
+                document.querySelector('.status-bar .status-item span').textContent = 'Desconectado';
+                document.querySelector('.status-dot').style.background = 'var(--danger)';
+                setTimeout(connectWebSocket, 3000);
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'update') {
+                        if (data.clientId !== clientId) { // Ignore own updates if echoed
+                             handleRemoteUpdate(data);
+                        }
+                    } else if (data.type === 'users') {
+                        // Could update user count/list
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+            };
+        }
+
+        function handleRemoteUpdate(data) {
+            panels.forEach((panel, index) => {
+                if (panel.file === data.file) {
+                    // Prevent overwriting if content is identical (e.g. from own save loop)
+                    if (panel.content === data.content) return;
+
+                    isRemoteUpdate = true;
+                    panel.content = data.content;
+                    
+                    if (panel.editor) {
+                        const cursor = panel.editor.getCursor();
+                        panel.editor.setValue(data.content);
+                        panel.editor.setCursor(cursor);
+                    }
+                    
+                    updatePanelPreview(index);
+                    isRemoteUpdate = false;
+                    
+                    showToast('Actualizado desde ' + (data.source === 'server' ? 'disco' : 'remoto'));
+                }
+            });
+        }
+        
+        function triggerAutoSave(index) {
+            if (saveTimeouts[index]) clearTimeout(saveTimeouts[index]);
+            saveTimeouts[index] = setTimeout(() => {
+                savePanel(index);
+            }, 2000);
+        }
+
 
         // Sidebar toggle
         function toggleSidebar() {
@@ -724,8 +805,21 @@
 
             editor.setValue(panels[index].content);
             editor.on('change', () => {
+                if (isRemoteUpdate) return;
+                
                 panels[index].content = editor.getValue();
                 updatePanelPreview(index);
+
+                if (ws && ws.readyState === WebSocket.OPEN && panels[index].file) {
+                    ws.send(JSON.stringify({
+                        type: 'update',
+                        file: panels[index].file,
+                        content: panels[index].content,
+                        clientId: clientId
+                    }));
+                }
+                
+                triggerAutoSave(index);
             });
 
             panels[index].editor = editor;
@@ -867,6 +961,14 @@
                     editor: null,
                     mode: panels[panelIndex].mode || 'preview'
                 };
+
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ 
+                        type: 'join', 
+                        file: path,
+                        clientId: clientId
+                    }));
+                }
 
                 renderPanels();
                 setActivePanel(panelIndex);

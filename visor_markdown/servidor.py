@@ -15,6 +15,15 @@ import threading
 import http.server
 import socketserver
 
+try:
+    from watchdog.observers import Observer
+    from watchdog.events import FileSystemEventHandler
+except ImportError:
+    print("Instalando watchdog...")
+    os.system("pip install watchdog --quiet")
+    from watchdog.observers import Observer
+    from watchdog.events import FileSystemEventHandler
+
 PORT = 8888
 WS_PORT = 8889
 BASE_DIR = Path(__file__).parent.parent  # Directorio Griego2
@@ -199,6 +208,64 @@ async def broadcast_users(file_path):
                 pass
 
 
+class FileChangeHandler(FileSystemEventHandler):
+    def __init__(self, loop):
+        self.loop = loop
+        self.last_events = {}
+
+    def on_modified(self, event):
+        if event.is_directory:
+            return
+        if event.src_path.endswith('.md'):
+            # Debounce rapid firing events
+            import time
+            current_time = time.time()
+            if event.src_path in self.last_events:
+                if current_time - self.last_events[event.src_path] < 0.5:
+                    return
+            self.last_events[event.src_path] = current_time
+
+            try:
+                rel_path = str(Path(event.src_path).relative_to(BASE_DIR))
+                asyncio.run_coroutine_threadsafe(broadcast_file_change(rel_path), self.loop)
+            except Exception as e:
+                print(f"Error handling file change: {e}")
+
+async def broadcast_file_change(rel_path):
+    """Lee el archivo modificado y envía el contenido a los clientes"""
+    try:
+        if rel_path not in file_rooms:
+            return
+
+        full_path = BASE_DIR / rel_path
+        if not full_path.exists():
+            return
+
+        with open(full_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        await broadcast_update(rel_path, content, source='server')
+        print(f"Change detected and broadcasted: {rel_path}")
+
+    except Exception as e:
+        print(f"Error broadcasting file change: {e}")
+
+async def broadcast_update(file_path, content, source='client', exclude_client_id=None):
+    """Helper para enviar actualizaciones"""
+    message = json.dumps({
+        'type': 'update',
+        'file': file_path,
+        'content': content,
+        'source': source
+    })
+    
+    for cid in file_rooms.get(file_path, []):
+        if cid != exclude_client_id and cid in clients:
+            try:
+                await clients[cid]['ws'].send(message)
+            except:
+                pass
+
 class ReusableTCPServer(socketserver.TCPServer):
     allow_reuse_address = True
 
@@ -216,6 +283,13 @@ async def main():
         print("Instalando websockets...")
         os.system("pip install websockets --quiet")
         import websockets
+
+    # Start file observer
+    loop = asyncio.get_running_loop()
+    event_handler = FileChangeHandler(loop)
+    observer = Observer()
+    observer.schedule(event_handler, str(BASE_DIR), recursive=True)
+    observer.start()
 
     # Iniciar servidor HTTP en thread separado
     http_thread = threading.Thread(target=run_http_server, daemon=True)
