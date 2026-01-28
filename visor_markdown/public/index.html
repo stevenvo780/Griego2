@@ -760,11 +760,64 @@
 
             if (authToken) {
                 document.getElementById('login-overlay').style.display = 'none';
-                loadFileList();
+                loadFileList().then(() => {
+                    restoreSession();
+                });
             }
 
             setupKeyboardShortcuts();
         });
+
+        // Save session state
+        function saveSession() {
+            const session = {
+                gridSize,
+                activePanel,
+                panels: panels.map(p => ({
+                    file: p.file,
+                    mode: p.mode
+                }))
+            };
+            localStorage.setItem('editorSession', JSON.stringify(session));
+        }
+
+        // Restore session state
+        async function restoreSession() {
+            const saved = localStorage.getItem('editorSession');
+            if (!saved) return;
+
+            try {
+                const session = JSON.parse(saved);
+                
+                // Restore grid size
+                if (session.gridSize) {
+                    setGrid(session.gridSize);
+                }
+
+                // Restore panels
+                if (session.panels && Array.isArray(session.panels)) {
+                    for (let i = 0; i < session.panels.length; i++) {
+                        const p = session.panels[i];
+                        if (p.file) {
+                            // Load file content
+                            await loadFileToPanel(p.file, i);
+                            // Set mode after loading (as loadFile resets it mostly)
+                            if (p.mode) {
+                                setPanelMode(i, p.mode);
+                            }
+                        }
+                    }
+                }
+
+                // Restore active panel
+                if (typeof session.activePanel === 'number') {
+                    setActivePanel(session.activePanel);
+                }
+
+            } catch (e) {
+                console.error('Error restoring session:', e);
+            }
+        }
 
         async function login() {
             const password = document.getElementById('password-input').value;
@@ -823,6 +876,7 @@
             }
 
             renderPanels();
+            saveSession();
         }
 
         // Render all panels
@@ -960,10 +1014,23 @@
 
             // Update buttons
             const panel = document.getElementById('panel-' + index);
-            panel.querySelectorAll('.panel-mode-toggle .btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+            if (panel) {
+                panel.querySelectorAll('.panel-actions .panel-btn').forEach(btn => {
+                   // Only toggle mode buttons
+                   if (btn.innerText.match(/[✏️📖👁️]/)) btn.classList.remove('active');
+                });
+                
+                // Set active class based on mode
+                const modeIcons = { 'edit': '✏️', 'split': '📖', 'preview': '👁️' };
+                const icon = modeIcons[mode];
+                
+                // Find button by content matching icon
+                const buttons = Array.from(panel.querySelectorAll('.panel-actions .panel-btn'));
+                const activeBtn = buttons.find(b => b.innerText.includes(icon));
+                if (activeBtn) activeBtn.classList.add('active');
+            }
+            
+            saveSession();
         }
 
         // Set active panel
@@ -974,6 +1041,7 @@
                 p.style.outline = i === index ? '2px solid var(--primary)' : 'none';
             });
             updateActivePanelInfo();
+            saveSession();
         }
 
         function updateActivePanelInfo() {
@@ -990,6 +1058,7 @@
         function closePanel(index) {
             panels[index] = { file: null, content: '', editor: null, mode: 'preview' };
             renderPanels();
+            saveSession();
         }
 
         // Load file list
@@ -1102,6 +1171,7 @@
                 renderPanels();
                 setActivePanel(panelIndex);
                 if (forceRefresh) showToast('Contenido recargado');
+                saveSession();
 
             } catch (error) {
                 console.error('Error loading file:', error);
