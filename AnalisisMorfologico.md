@@ -14,99 +14,101 @@ Este documento presenta el análisis gramatical de **cada palabra** del texto gr
 
 ## **PÁRRAFO 1: Introducción y Contexto**
 
-1. **Περὶ (Perì):** Preposición que rige Genitivo (aquí). "Acerca de".  
-2. **μὲν (mèn):** Partícula correlativa (por una parte).  
-3. **οὖν (oûn):** Conjunción ilativa/conclusiva. "Pues/Así pues".  
-4. **τῆς (tês):** Artículo definido, Gen. Sg. Fem. (Ref. Diapositiva 2).  
-5. **ἐν (en):** Preposición que rige Dativo. "En".  
-6. **ἐξαμέτροις (examétrois):** Sustantivo, Dat. Pl. Masc/Neut. (2.ª Decl.). "Hexámetros". (Ref. Diapositiva 4).  
-7. **μιμητικῆς (mimētikês):** Sustantivo/Adjetivo sustantivado, Gen. Sg. Fem. (1.ª Decl.). "Arte imitativo/Imitación". (Ref. Diapositiva 3).  
-8. **καὶ (kaì):** Conjunción copulativa. "Y".  
-9. **περὶ (perì):** Preposición. "Acerca de".  
-10. **κωμωδίας (kōmōdías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). "Comedia". (Ref. Diapositiva 3).  
-11. **ὕστερον (hýsteron):** Adverbio (o Ac. Sg. Neut. usado adverbialmente). "Después/Luego".  
-12. **ἐροῦμεν (eroûmen):** Verbo, Futuro Ind. Act., 1.ª Pl. (De *légo/eíro*). "Hablaremos/Diremos".  
-13. **περὶ (perì):** Preposición. "Acerca de".  
-14. **δὲ (dè):** Partícula adversativa/copulativa. "Pero/Y".  
-15. **τραγωδίας (tragōdías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). "Tragedia". (Ref. Diapositiva 3).  
-16. **λέγωμεν (légōmen):** Verbo, Pres. Subj. Act., 1.ª Pl. "Hablemos". (Subjuntivo exhortativo). (Ref. Clase 2).  
-17. **ἀναλαβόντες (analabóntes):** Part. Aoristo 2 Act., Nom. Pl. Masc. (De *analambánō*). "Habiendo retomado". (Ref. Diapositiva 10 \- tema en *nt*).  
-18. **αὐτῆς (autês):** Pronombre personal/demostrativo, Gen. Sg. Fem. "De ella/Su". (Ref. Diapositiva 2 \- Artículo/Pronombres).  
-19. **ἐκ (ek):** Preposición que rige Genitivo. "Desde/A partir de".  
-20. **τῶν (tōn):** Artículo, Gen. Pl. Neut. (Ref. Diapositiva 2).  
-21. **εἰρημένων (eirēménōn):** Part. Perfecto Pasivo, Gen. Pl. Neut. (De *légo*). "Lo dicho/Las cosas dichas".  
-22. **τὸν (tòn):** Artículo, Ac. Sg. Masc. (Ref. Diapositiva 2).  
-23. **γινόμενον (ginómenon):** Part. Pres. Medio, Ac. Sg. Masc. (De *gígnomai*). "Que surge/Que deviene". (Ref. Diapositiva 4 \- terminación temática).  
-24. **ὅρον (hóron):** Sustantivo, Ac. Sg. Masc. (2.ª Decl.). "Definición/Límite". (Ref. Diapositiva 4).  
-25. **τῆς (tês):** Artículo, Gen. Sg. Fem.  
-26. **οὐσίας (ousías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). "Esencia/Sustancia". (Ref. Diapositiva 3).
+1. **Περὶ (Perì):** Preposición que rige Genitivo (aquí). **Traducción en Solución:** "acerca de". **Otras opciones:** "Sobre", "En torno a", "Con respecto a".
+2. **μὲν (mèn):** Partícula correlativa. **Traducción en Solución:** "Así" (Combinado con *oûn* como conector lógico inicial). **Otras opciones:** "Por una parte", "Ciertamente", "En verdad".
+3. **οὖν (oûn):** Conjunción ilativa/conclusiva. **Traducción en Solución:** "pues" (en "Así pues"). **Otras opciones:** "Por tanto", "En consecuencia", "Entonces".
+4. **τῆς (tês):** Artículo definido, Gen. Sg. Fem. **Traducción en Solución:** "la" (Determinando a *mimētikês*). **Otras opciones:** "De la" (si no hubiera hipérbaton).
+5. **ἐν (en):** Preposición que rige Dativo. **Traducción en Solución:** "en". **Otras opciones:** "Dentro de", "Entre".
+6. **ἐξαμέτροις (examétrois):** Sustantivo, Dat. Pl. Masc/Neut. (2.ª Decl.). **Traducción en Solución:** "hexámetros". **Otras opciones:** "Versos heroicos".
+7. **μιμητικῆς (mimētikês):** Sustantivo/Adjetivo sustantivado, Gen. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "imitación" (implícito "arte imitativo"). **Otras opciones:** "Mimética", "Arte de imitar".
+8. **καὶ (kaì):** Conjunción copulativa. **Traducción en Solución:** "y". **Otras opciones:** "También", "Incluso".
+9. **περὶ (perì):** Preposición. **Traducción en Solución:** "de" (Variación estilística de "acerca de"). **Otras opciones:** "Sobre", "Acerca de".
+10. **κωμωδίας (kōmōdías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "la comedia". **Otras opciones:** -
+11. **ὕστερον (hýsteron):** Adverbio. **Traducción en Solución:** "luego". **Otras opciones:** "Después", "Posteriormente", "Más tarde".
+12. **ἐροῦμεν (eroûmen):** Verbo, Futuro Ind. Act., 1.ª Pl. **Traducción en Solución:** "hablaremos". **Otras opciones:** "Diremos", "Trataremos".
+13. **περὶ (perì):** Preposición. **Traducción en Solución:** "sobre". **Otras opciones:** "Acerca de", "En relación con".
+14. **δὲ (dè):** Partícula adversativa/copulativa. **Traducción en Solución:** (Omitida/Implícita en el cambio de cláusula "hablemos ahora"). **Otras opciones:** "Pero", "Y", "Por otra parte".
+15. **τραγωδίας (tragōdías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "la tragedia". **Otras opciones:** -
+16. **λέγωμεν (légōmen):** Verbo, Pres. Subj. Act., 1.ª Pl. **Traducción en Solución:** "hablemos" (ahora). **Otras opciones:** "Digamos".
+17. **ἀναλαβόντες (analabóntes):** Part. Aoristo 2 Act., Nom. Pl. Masc. **Traducción en Solución:** "retomando". **Otras opciones:** "Habiendo recuperado", "Recogiendo".
+18. **αὐτῆς (autês):** Pronombre personal, Gen. Sg. Fem. **Traducción en Solución:** "su" (posesivo antepuesto a *ousías* en "su esencia"). **Otras opciones:** "De ella", "De la misma".
+19. **ἐκ (ek):** Preposición. **Traducción en Solución:** "de". **Otras opciones:** "Desde", "A partir de", "Saliendo de".
+20. **τῶν (tōn):** Artículo, Gen. Pl. Neut. **Traducción en Solución:** "lo" (Sustantivando a *eirēménōn*). **Otras opciones:** "Las cosas", "Los".
+21. **εἰρημένων (eirēménōn):** Part. Perfecto Pasivo, Gen. Pl. Neut. **Traducción en Solución:** "dicho". **Otras opciones:** "Lo que se ha dicho", "Las cosas mencionadas".
+22. **τὸν (tòn):** Artículo, Ac. Sg. Masc. **Traducción en Solución:** "la" (por concordancia con definición). **Otras opciones:** "El".
+23. **γινόμενον (ginómenon):** Part. Pres. Medio, Ac. Sg. Masc. **Traducción en Solución:** "que surge". **Otras opciones:** "Que resulta", "Que deviene", "Resultante".
+24. **ὅρον (hóron):** Sustantivo, Ac. Sg. Masc. (2.ª Decl.). **Traducción en Solución:** "definición". **Otras opciones:** "Límite", "Término", "Frontera".
+25. **τῆς (tês):** Artículo, Gen. Sg. Fem. **Traducción en Solución:** (Integrado en "su esencia"). **Otras opciones:** "De la".
+26. **οὐσίας (ousías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "esencia". **Otras opciones:** "Sustancia", "Entidad", "Ser".
 
 ## **PÁRRAFO 2: La Definición Esencial**
 
-27. **Ἔστιν (Éstin):** Verbo copulativo, 3.ª Sg. Pres. Ind. "Es". (Ref. Clase 3).  
-28. **οὖν (oûn):** Conjunción. "Pues".  
-29. **τραγωδία (tragōdía):** Sustantivo, Nom. Sg. Fem. (1.ª Decl.). "Tragedia". (Ref. Diapositiva 3).  
-30. **μίμησις (mímesis):** Sustantivo, Nom. Sg. Fem. (3.ª Decl.). "Imitación". (Ref. Diapositiva 21).  
-31. **πράξεως (práxeōs):** Sustantivo, Gen. Sg. Fem. (3.ª Decl.). "De una acción". (Ref. Diapositiva 21).  
-32. **σπουδαίας (spoudaías):** Adjetivo, Gen. Sg. Fem. (1.ª Decl.). "Noble/Seria". (Ref. Diapositiva 3).  
-33. **καὶ (kaì):** Conjunción. "Y".  
-34. **τελείας (teleías):** Adjetivo, Gen. Sg. Fem. (1.ª Decl.). "Completa/Perfecta". (Ref. Diapositiva 3).  
-35. **μέγεθος (mégethos):** Sustantivo, Ac. Sg. Neut. (3.ª Decl.). "Magnitud". (Ref. Diapositiva 13).  
-36. **ἐχούσης (echousēs):** Part. Pres. Act., Gen. Sg. Fem. (De *échō*). "Que tiene". (Ref. Diapositiva 10/3).  
-37. **ἡδυσμένῳ (hēdysménō):** Part. Perf. Pasivo, Dat. Sg. Masc. (De *hēdýnō*). "Sazonado/Endulzado". (Ref. Diapositiva 4).  
-38. **λόγῳ (lógō):** Sustantivo, Dat. Sg. Masc. (2.ª Decl.). "Lenguaje/Palabra". (Ref. Diapositiva 4).  
-39. **χωρὶς (chōrìs):** Adverbio. "Separadamente/Aparte".  
-40. **ἑκάστῳ (hekástō):** Adjetivo, Dat. Sg. Neut. (2.ª Decl.). "A cada uno". (Ref. Diapositiva 4).  
-41. **τῶν (tōn):** Artículo, Gen. Pl. Neut.  
-42. **εἰδῶν (eidōn):** Sustantivo, Gen. Pl. Neut. (3.ª Decl. \- *eídos*). "Especies/Formas". (Ref. Diapositiva 13).  
-43. **ἐν (en):** Preposición. "En".  
-44. **τοῖς (toîs):** Artículo, Dat. Pl. Neut.  
-45. **μορίοις (moríois):** Sustantivo, Dat. Pl. Neut. (2.ª Decl.). "Partes". (Ref. Diapositiva 4).  
-46. **δρώντων (dróntōn):** Part. Pres. Act., Gen. Pl. Masc. (De *dráō*). "De actuantes". (Ref. Diapositiva 10).  
-47. **καὶ (kaì):** Conjunción. "Y".  
-48. **οὐ (ou):** Adverbio de negación. "No".  
-49. **δι᾿ (di'):** Preposición. "A través de/Mediante".  
-50. **ἀπαγγελίας (apangelías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). "Relato/Narración". (Ref. Diapositiva 3).  
-51. **δι᾽ (di'):** Preposición. "A través de".  
-52. **ἐλέου (eléou):** Sustantivo, Gen. Sg. Masc. (2.ª Decl.). "Compasión/Piedad". (Ref. Diapositiva 4).  
-53. **καὶ (kaì):** Conjunción. "Y".  
-54. **φόβου (phóbou):** Sustantivo, Gen. Sg. Masc. (2.ª Decl.). "Temor". (Ref. Diapositiva 4).  
-55. **περαίνουσα (peraínousa):** Part. Pres. Act., Nom. Sg. Fem. (De *peraínō*). "Llevando a cabo/Realizando". (Ref. Diapositiva 3 \- fem. del part.).  
-56. **τὴν (tēn):** Artículo, Ac. Sg. Fem.  
-57. **τῶν (tōn):** Artículo, Gen. Pl. Neut.  
-58. **τοιούτων (toioútōn):** Adjetivo demostrativo, Gen. Pl. Neut. "Tales". (Ref. Diapositiva 4).  
-59. **παθημάτων (pathemátōn):** Sustantivo, Gen. Pl. Neut. (3.ª Decl.). "Afecciones/Pasiones". (Ref. Diapositiva 8).  
-60. **κάθαρσιν (kátharsin):** Sustantivo, Ac. Sg. Fem. (3.ª Decl.). "Purificación/Catarsis". (Ref. Diapositiva 21).
+27. **Ἔστιν (Éstin):** Verbo copulativo, 3.ª Sg. Pres. Ind. **Traducción en Solución:** "Es". **Otras opciones:** "Existe", "Hay".
+28. **οὖν (oûn):** Conjunción. **Traducción en Solución:** "pues". **Otras opciones:** "Por consiguiente", "Así pues".
+29. **τραγωδία (tragōdía):** Sustantivo, Nom. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "la tragedia". **Otras opciones:** -
+30. **μίμησις (mímesis):** Sustantivo, Nom. Sg. Fem. (3.ª Decl.). **Traducción en Solución:** "imitación". **Otras opciones:** "Representación".
+31. **πράξεως (práxeōs):** Sustantivo, Gen. Sg. Fem. (3.ª Decl.). **Traducción en Solución:** "de una acción" (Genitivo objetivo). **Otras opciones:** "De la práctica".
+32. **σπουδαίας (spoudaías):** Adjetivo, Gen. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "noble". **Otras opciones:** "Seria", "Virtuosa", "Importante".
+33. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+34. **τελείας (teleías):** Adjetivo, Gen. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "completa". **Otras opciones:** "Perfecta", "Acabada".
+35. **μέγεθος (mégethos):** Sustantivo, Ac. Sg. Neut. (3.ª Decl.). **Traducción en Solución:** "magnitud". **Otras opciones:** "Grandeza", "Tamaño".
+36. **ἐχούσης (echousēs):** Part. Pres. Act., Gen. Sg. Fem. **Traducción en Solución:** "que tiene" (Oración de relativo explicativa). **Otras opciones:** "Teniendo".
+37. **ἡδυσμένῳ (hēdysménō):** Part. Perf. Pasivo, Dat. Sg. Masc. **Traducción en Solución:** "adornado" (Modificando a *lógō*). **Otras opciones:** "Sazonado", "Endulzado", "Placentero".
+38. **λόγῳ (lógō):** Sustantivo, Dat. Sg. Masc. (2.ª Decl.). **Traducción en Solución:** "con lenguaje" (Dativo instrumental). **Otras opciones:** "Con la palabra", "Con discurso".
+39. **χωρὶς (chōrìs):** Adverbio. **Traducción en Solución:** "por separado" / "separado". **Otras opciones:** "Aparte", "Sin".
+40. **ἑκάστῳ (hekástō):** Adjetivo, Dat. Sg. Neut. (2.ª Decl.). **Traducción en Solución:** "cada una". **Otras opciones:** "Cada uno".
+41. **τῶν (tōn):** Artículo, Gen. Pl. Neut. **Traducción en Solución:** "de las" (Determinando a *eidōn*). **Otras opciones:** -
+42. **εἰδῶν (eidōn):** Sustantivo, Gen. Pl. Neut. (3.ª Decl.). **Traducción en Solución:** "especies". **Otras opciones:** "Formas", "Tipos".
+43. **ἐν (en):** Preposición. **Traducción en Solución:** "en". **Otras opciones:** -
+44. **τοῖς (toîs):** Artículo, Dat. Pl. Neut. **Traducción en Solución:** "las". **Otras opciones:** -
+45. **μορίοις (moríois):** Sustantivo, Dat. Pl. Neut. (2.ª Decl.). **Traducción en Solución:** "partes". **Otras opciones:** "Segmentos", "Partículas".
+46. **δρώντων (dróntōn):** Part. Pres. Act., Gen. Pl. Masc. **Traducción en Solución:** "de quienes actúan" (Genitivo de agente). **Otras opciones:** "De agentes", "De personas actuando".
+47. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+48. **οὐ (ou):** Adverbio de negación. **Traducción en Solución:** "no". **Otras opciones:** -
+49. **δι᾿ (di'):** Preposición. **Traducción en Solución:** "mediante". **Otras opciones:** "A través de", "Por".
+50. **ἀπαγγελίας (apangelías):** Sustantivo, Gen. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "relato". **Otras opciones:** "Narración", "Reporte".
+51. **δι᾽ (di'):** Preposición. **Traducción en Solución:** "a través de". **Otras opciones:** "Por medio de".
+52. **ἐλέου (eléou):** Sustantivo, Gen. Sg. Masc. (2.ª Decl.). **Traducción en Solución:** "la compasión" (con elisión de artículo en español por estilo). **Otras opciones:** "Piedad", "Misericordia".
+53. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+54. **φόβου (phóbou):** Sustantivo, Gen. Sg. Masc. (2.ª Decl.). **Traducción en Solución:** "el temor". **Otras opciones:** "Miedo", "Terror".
+55. **περαίνουσα (peraínousa):** Part. Pres. Act., Nom. Sg. Fem. **Traducción en Solución:** "lleva a cabo" (Verbo conjugado en oración relativa "que... lleva a cabo"). **Otras opciones:** "Logrando", "Realizando", "Completando".
+56. **τὴν (tēn):** Artículo, Ac. Sg. Fem. **Traducción en Solución:** "la" (Determinando a *kátharsin*). **Otras opciones:** -
+57. **τῶν (tōn):** Artículo, Gen. Pl. Neut. **Traducción en Solución:** "de" (Genitivo de las pasiones). **Otras opciones:** "De las".
+58. **τοιούτων (toioútōn):** Adjetivo demostrativo, Gen. Pl. Neut. **Traducción en Solución:** "tales". **Otras opciones:** "De esta clase", "Semejantes".
+59. **παθημάτων (pathemátōn):** Sustantivo, Gen. Pl. Neut. (3.ª Decl.). **Traducción en Solución:** "pasiones". **Otras opciones:** "Afecciones", "Sufrimientos", "Emociones".
+60. **κάθαρσιν (kátharsin):** Sustantivo, Ac. Sg. Fem. (3.ª Decl.). **Traducción en Solución:** "purificación (catarsis)". **Otras opciones:** "Purgación", "Clarificación".
 
 ## **PÁRRAFO 2 (Continuación): Explicación de los Medios**
 
-61. **Λέγω (Légō):** Verbo, 1.ª Sg. Pres. Ind. Act. "Digo/Llamo". (Ref. Clase 2).  
-62. **δὲ (dè):** Partícula. "Y/Pero".  
-63. **ἡδυσμένον (hēdysménon):** Part. Perf. Pas., Ac. Sg. Masc. "Sazonado".  
-64. **μὲν (mèn):** Partícula.  
-65. **λόγον (lógon):** Sustantivo, Ac. Sg. Masc. (2.ª Decl.). "Lenguaje". (Ref. Diapositiva 4).  
-66. **τὸν (tòn):** Artículo, Ac. Sg. Masc.  
-67. **ἔχοντα (échonta):** Part. Pres. Act., Ac. Sg. Masc. (De *échō*). "Que tiene". (Ref. Diapositiva 10).  
-68. **ῥυθμὸν (rhythmòn):** Sustantivo, Ac. Sg. Masc. (2.ª Decl.). "Ritmo". (Ref. Diapositiva 4).  
-69. **καὶ (kaì):** Conjunción. "Y".  
-70. **ἁρμονίαν (harmonían):** Sustantivo, Ac. Sg. Fem. (1.ª Decl.). "Armonía". (Ref. Diapositiva 3).  
-71. **\[καὶ μέλος\] (kaì mélos):** "Y canto" (A veces omitido o entre corchetes). *Mélos*: Neutro, 3.ª Decl. (Ref. Diapositiva 13).  
-72. **τὸ (tò):** Artículo, Ac. Sg. Neut. (Sustantivando la frase siguiente).  
-73. **δὲ (dè):** Partícula.  
-74. **χωρὶς (chōrìs):** Adverbio. "Separadamente".  
-75. **τοῖς (toîs):** Artículo, Dat. Pl. Neut.  
-76. **εἴδεσι (eídesi):** Sustantivo, Dat. Pl. Neut. (3.ª Decl.). "Especies/Formas". (Ref. Diapositiva 13).  
-77. **τὸ (tò):** Artículo.  
-78. **διὰ (dià):** Preposición. "Por medio de".  
-79. **μέτρων (métrōn):** Sustantivo, Gen. Pl. Neut. (2.ª Decl.). "Metros/Versos". (Ref. Diapositiva 4).  
-80. **ἔνια (énia):** Adjetivo/Pronombre, Ac. Pl. Neut. "Algunas cosas".  
-81. **μόνον (mónon):** Adverbio. "Solamente".  
-82. **περαίνεσθαι (peraínesthai):** Verbo, Infinitivo Pres. Med/Pas. "Llevarse a cabo". (Ref. Clase 2).  
-83. **καὶ (kaì):** Conjunción. "Y".  
-84. **πάλιν (pálin):** Adverbio. "De nuevo/A su vez".  
-85. **ἕτερα (hétera):** Adjetivo, Ac. Pl. Neut. "Otras". (Ref. Diapositiva 4).  
-86. **διὰ (dià):** Preposición. "Por medio de".  
-87. **μέλους (mélous):** Sustantivo, Gen. Sg. Neut. (3.ª Decl.). "Canto/Melodía". (Ref. Diapositiva 13).
+## **PÁRRAFO 2 (Continuación): Explicación de los Medios**
+
+61. **Λέγω (Légō):** Verbo, 1.ª Sg. Pres. Ind. Act. **Traducción en Solución:** "Llamo". **Otras opciones:** "Digo", "Entiendo por", "Defino como".
+62. **δὲ (dè):** Partícula. **Traducción en Solución:** (Omitida/Valor de transición). **Otras opciones:** "Y", "Pero", "Por otra parte".
+63. **ἡδυσμένον (hēdysménon):** Part. Perf. Pas., Ac. Sg. Masc. **Traducción en Solución:** "sazonado". **Otras opciones:** "Adornado", "Endulzado".
+64. **μὲν (mèn):** Partícula. **Traducción en Solución:** (Omitida - correlación con *dè* posterior). **Otras opciones:** "Por un lado", "Ciertamente".
+65. **λόγον (lógon):** Sustantivo, Ac. Sg. Masc. (2.ª Decl.). **Traducción en Solución:** "lenguaje". **Otras opciones:** "Discurso", "Palabra".
+66. **τὸν (tòn):** Artículo, Ac. Sg. Masc. **Traducción en Solución:** "al" (Fusión con preposición, introduce relativo "al que tiene"). **Otras opciones:** "El".
+67. **ἔχοντα (échonta):** Part. Pres. Act., Ac. Sg. Masc. **Traducción en Solución:** "que tiene". **Otras opciones:** "Teniendo".
+68. **ῥυθμὸν (rhythmòn):** Sustantivo, Ac. Sg. Masc. (2.ª Decl.). **Traducción en Solución:** "ritmo". **Otras opciones:** -
+69. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+70. **ἁρμονίαν (harmonían):** Sustantivo, Ac. Sg. Fem. (1.ª Decl.). **Traducción en Solución:** "armonía". **Otras opciones:** -
+71. **\[καὶ μέλος\] (kaì mélos):** **Traducción en Solución:** "y canto". **Otras opciones:** "Y melodía".
+72. **τὸ (tò):** Artículo, Ac. Sg. Neut. **Traducción en Solución:** (Introduce la definición "y [llamo] 'por separado...'"). **Otras opciones:** "Lo".
+73. **δὲ (dè):** Partícula. **Traducción en Solución:** "y". **Otras opciones:** "Por otro lado".
+74. **χωρὶς (chōrìs):** Adverbio. **Traducción en Solución:** "'por separado'". **Otras opciones:** "Aparte".
+75. **τοῖς (toîs):** Artículo, Dat. Pl. Neut. **Traducción en Solución:** (Integrado en "con las especies"). **Otras opciones:** -
+76. **εἴδεσι (eídesi):** Sustantivo, Dat. Pl. Neut. (3.ª Decl.). **Traducción en Solución:** "las especies". **Otras opciones:** "Formas".
+77. **τὸ (tò):** Artículo. **Traducción en Solución:** "al hecho de que". (Sustantiva el infinitivo *peraínesthai*). **Otras opciones:** "Lo que es".
+78. **διὰ (dià):** Preposición. **Traducción en Solución:** "mediante". **Otras opciones:** "A través de".
+79. **μέτρων (métrōn):** Sustantivo, Gen. Pl. Neut. (2.ª Decl.). **Traducción en Solución:** "versos". **Otras opciones:** "Metros".
+80. **ἔνια (énia):** Adjetivo/Pronombre, Ac. Pl. Neut. **Traducción en Solución:** "algunas cosas". **Otras opciones:** "Algunos".
+81. **μόνον (mónon):** Adverbio. **Traducción en Solución:** "solo". **Otras opciones:** "Solamente".
+82. **περαίνεσθαι (peraínesthai):** Verbo, Infinitivo Pres. Med/Pas. **Traducción en Solución:** "se llevan a cabo". **Otras opciones:** "Realizarse", "Efectuarse".
+83. **καὶ (kaì):** Conjunción. **Traducción en Solución:** "y". **Otras opciones:** -
+84. **πάλιν (pálin):** Adverbio. **Traducción en Solución:** "a su vez". **Otras opciones:** "De nuevo", "Otra vez".
+85. **ἕτερα (hétera):** Adjetivo, Ac. Pl. Neut. **Traducción en Solución:** "otras". **Otras opciones:** "Otras cosas".
+86. **διὰ (dià):** Preposición. **Traducción en Solución:** "mediante". **Otras opciones:** "Por medio de".
+87. **μέλους (mélous):** Sustantivo, Gen. Sg. Neut. (3.ª Decl.). **Traducción en Solución:** "el canto". **Otras opciones:** "Melodía".
 
 ## **PÁRRAFO 3: Actuación y Espectáculo**
 

@@ -2,7 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Griego MD">
+    <meta name="description" content="Sistema colaborativo para estudio de griego clásico">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="apple-touch-icon" href="/icon.svg">
+
     <title>Visor Markdown - Griego Clásico</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -359,12 +369,14 @@
         .preview-pane.hidden { display: none; }
 
         .markdown-content {
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
-            font-size: 15px;
+            max-width: none;
+            margin: 0;
+            padding-bottom: 50px;
+            line-height: 1.6;
+            font-size: 16px;
             color: #1e293b;
             font-family: 'Georgia', serif;
+            overflow-wrap: break-word;
         }
 
         .markdown-content h1 {
@@ -395,7 +407,7 @@
 
         .markdown-content h1:first-child { margin-top: 0; }
 
-        .markdown-content p { margin: 1em 0; text-align: justify; }
+        .markdown-content p { margin: 0 0 1em; text-align: left; line-height: 1.7; }
 
         .markdown-content ul, .markdown-content ol {
             margin: 1em 0;
@@ -537,6 +549,29 @@
             border-radius: 50%;
             background: var(--success);
         }
+
+        /* Responsive Improvements */
+        @media (max-width: 768px) {
+            .preview-pane {
+                padding: 15px 20px;
+            }
+            .markdown-content {
+                font-size: 16px; /* Mejor lectura en móvil */
+            }
+            .sidebar {
+                position: absolute;
+                height: 100%;
+                box-shadow: 10px 0 20px rgba(0,0,0,0.5);
+            }
+            .sidebar.collapsed {
+                transform: translateX(-100%);
+                width: var(--sidebar-width);
+            }
+            .top-toolbar {
+                padding: 10px 15px;
+                overflow-x: auto; /* Permitir scroll en toolbar */
+            }
+        }
     </style>
 </head>
 <body>
@@ -575,6 +610,14 @@
             <div class="toolbar-section">
                 <button class="btn btn-default btn-sm" onclick="saveCurrentPanel()" title="Guardar (Ctrl+S)">
                     💾 Guardar
+                </button>
+            </div>
+
+            <div class="toolbar-divider"></div>
+
+            <div class="toolbar-section">
+                <button class="btn btn-default btn-sm" onclick="toggleFullscreen()" title="Pantalla completa (F11)">
+                    ⛶ Fullscreen
                 </button>
             </div>
         </div>
@@ -1081,6 +1124,51 @@
             toast.textContent = message;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => {
+                        console.log('SW registered:', reg.scope);
+                    })
+                    .catch((err) => {
+                        console.log('SW registration failed:', err);
+                    });
+            });
+        }
+
+        // Handle PWA install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show install button in toolbar
+            const installBtn = document.createElement('button');
+            installBtn.className = 'btn btn-primary btn-sm';
+            installBtn.innerHTML = '📲 Instalar';
+            installBtn.onclick = async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        showToast('App instalada correctamente');
+                    }
+                    deferredPrompt = null;
+                    installBtn.remove();
+                }
+            };
+            document.querySelector('.top-toolbar').appendChild(installBtn);
+        });
+
+        // Fullscreen toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
         }
     </script>
 </body>

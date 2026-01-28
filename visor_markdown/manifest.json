@@ -1,0 +1,27 @@
+{
+  "name": "Visor Markdown - Griego Clásico",
+  "short_name": "Griego MD",
+  "description": "Sistema colaborativo para estudio de griego clásico",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "lang": "es",
+  "dir": "ltr"
+}
