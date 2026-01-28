@@ -14,7 +14,8 @@
     <link rel="apple-touch-icon" href="/icon.svg">
 
     <title>Visor Markdown - Griego Clásico</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></link>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
@@ -639,6 +640,108 @@
         ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
         .preview-pane::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); }
 
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal {
+            background: var(--dark);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.2s ease;
+        }
+
+        .modal.open {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        
+        .modal-close:hover { color: white; }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .download-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .download-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--light);
+            text-align: left;
+            width: 100%;
+        }
+
+        .download-option:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .download-option i {
+            font-size: 1.5em;
+            width: 30px;
+            text-align: center;
+        }
+
+        .download-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .download-label { font-weight: 600; }
+        .download-desc { font-size: 0.8em; opacity: 0.7; }
+
         /* Status bar */
         .status-bar {
             background: var(--dark);
@@ -685,16 +788,16 @@
 <body>
     <div id="login-overlay">
         <div class="login-box">
-            <h2>🔐 Acceso Requerido</h2>
+            <h2><i class="fas fa-lock"></i> Acceso Requerido</h2>
             <input type="password" id="password-input" class="login-input" placeholder="Contraseña de acceso">
             <button class="login-btn" onclick="login()">Entrar</button>
         </div>
     </div>
 
-    <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar/Expandir">◀</button>
+    <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar/Expandir"><i class="fas fa-chevron-left"></i></button>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <span>📚</span> Griego Clásico
+            <span><i class="fas fa-book"></i></span> Griego Clásico
         </div>
         <div class="file-tree" id="file-tree"></div>
     </div>
@@ -714,7 +817,7 @@
 
             <div class="toolbar-section">
                 <button class="btn btn-default btn-sm" onclick="toggleFullscreen()" title="Pantalla completa (F11)">
-                    ⛶ Fullscreen
+                    <i class="fas fa-expand"></i> Fullscreen
                 </button>
             </div>
         </div>
@@ -737,7 +840,40 @@
         </div>
     </div>
 
-    <div class="toast" id="toast"></div>
+    <!-- Download Modal -->
+    <div id="download-modal-overlay" class="modal-overlay" onclick="closeDownloadModal(event)">
+        <div class="modal" id="download-modal">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-download"></i> Descargar Documento</div>
+                <button class="modal-close" onclick="closeDownloadModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="download-options">
+                    <button class="download-option" onclick="executeDownload('md')">
+                        <i class="fab fa-markdown"></i>
+                        <div class="download-info">
+                            <span class="download-label">Markdown</span>
+                            <span class="download-desc">Archivo fuente original (.md)</span>
+                        </div>
+                    </button>
+                    <button class="download-option" onclick="executeDownload('pdf')">
+                        <i class="fas fa-file-pdf"></i>
+                        <div class="download-info">
+                            <span class="download-label">PDF Document</span>
+                            <span class="download-desc">Formato portable listo para imprimir</span>
+                        </div>
+                    </button>
+                    <button class="download-option" onclick="executeDownload('copy')">
+                        <i class="fas fa-copy"></i>
+                        <div class="download-info">
+                            <span class="download-label">Copiar al Portapapeles</span>
+                            <span class="download-desc">Para pegar en Word o Google Docs</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // State
@@ -749,6 +885,46 @@
         let files = [];
         let authToken = localStorage.getItem('authToken');
         let saveTimeouts = {};
+        let panelForDownload = null;
+
+        // Modal Functions
+        function openDownloadModal(index) {
+            panelForDownload = index;
+            const overlay = document.getElementById('download-modal-overlay');
+            const modal = document.getElementById('download-modal');
+            overlay.style.display = 'flex';
+            setTimeout(() => modal.classList.add('open'), 10);
+        }
+
+        function closeDownloadModal(e) {
+            if (e && e.target.id !== 'download-modal-overlay' && !e.target.closest('.modal-close')) return;
+            
+            const overlay = document.getElementById('download-modal-overlay');
+            const modal = document.getElementById('download-modal');
+            
+            modal.classList.remove('open');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                panelForDownload = null;
+            }, 200);
+        }
+
+        function executeDownload(type) {
+            if (panelForDownload === null) return;
+            
+            switch(type) {
+                case 'md':
+                    downloadMD(panelForDownload);
+                    break;
+                case 'pdf':
+                    exportPDF(panelForDownload);
+                    break;
+                case 'copy':
+                    copyForDocs(panelForDownload);
+                    break;
+            }
+            closeDownloadModal({ target: { id: 'download-modal-overlay' } });
+        }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -855,7 +1031,7 @@
             const btn = document.getElementById('sidebar-toggle');
             sidebar.classList.toggle('collapsed');
             const isCollapsed = sidebar.classList.contains('collapsed');
-            btn.textContent = isCollapsed ? '▶' : '◀';
+            btn.innerHTML = isCollapsed ? '<i class="fas fa-chevron-right"></i>' : '<i class="fas fa-chevron-left"></i>';
             btn.style.left = isCollapsed ? '0' : 'calc(var(--sidebar-width) - 4px)';
         }
 
@@ -915,22 +1091,20 @@
                 if (panel.file) {
                     div.innerHTML = `
                         <div class="panel-header">
-                            <span class="panel-title" title="${panel.file}">${panel.file.split('/').pop().replace('.md', '')}</span>
+                            <span class="panel-title" title="${panel.file}"><i class="fas fa-file-alt"></i> ${panel.file.split('/').pop().replace('.md', '')}</span>
                             
                             <div class="panel-actions">
-                                <button class="panel-btn" onclick="savePanel(${i})" title="Guardar (Ctrl+S)">💾</button>
-                                <button class="panel-btn" onclick="refreshPanel(${i})" title="Recargar contenido">🔄</button>
+                                <button class="panel-btn" onclick="savePanel(${i})" title="Guardar (Ctrl+S)"><i class="fas fa-save"></i></button>
+                                <button class="panel-btn" onclick="refreshPanel(${i})" title="Recargar contenido"><i class="fas fa-sync-alt"></i></button>
                                 <div class="separator"></div>
-                                <button class="panel-btn" onclick="downloadMD(${i})" title="Descargar Markdown">⬇️</button>
-                                <button class="panel-btn" onclick="copyForDocs(${i})" title="Copiar para Docs">📋</button>
-                                <button class="panel-btn" onclick="exportPDF(${i})" title="Exportar PDF">📄</button>
+                                <button class="panel-btn" onclick="openDownloadModal(${i})" title="Descargar / Exportar"><i class="fas fa-download"></i></button>
                                 <div class="separator"></div>
-                                <button class="panel-btn ${panel.mode === 'edit' ? 'active' : ''}" onclick="setPanelMode(${i}, 'edit')" title="Editar">✏️</button>
-                                <button class="panel-btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')" title="Dividir">📖</button>
-                                <button class="panel-btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')" title="Vista previa">👁️</button>
+                                <button class="panel-btn ${panel.mode === 'edit' ? 'active' : ''}" onclick="setPanelMode(${i}, 'edit')" title="Editar"><i class="fas fa-pen"></i></button>
+                                <button class="panel-btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')" title="Dividir"><i class="fas fa-columns"></i></button>
+                                <button class="panel-btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')" title="Vista previa"><i class="fas fa-eye"></i></button>
                             </div>
                             
-                            <button class="panel-close" onclick="closePanel(${i})" title="Cerrar">✕</button>
+                            <button class="panel-close" onclick="closePanel(${i})" title="Cerrar"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="panel-content">
                             <div class="editor-pane ${panel.mode === 'preview' ? 'hidden' : ''}" id="editor-${i}">
@@ -944,7 +1118,7 @@
                 } else {
                     div.innerHTML = `
                         <div class="empty-panel">
-                            <div class="empty-panel-icon">📄</div>
+                            <div class="empty-panel-icon"><i class="far fa-file-alt"></i></div>
                             <div class="empty-panel-text">Arrastra un archivo aquí</div>
                         </div>
                     `;
@@ -1017,16 +1191,15 @@
             if (panel) {
                 panel.querySelectorAll('.panel-actions .panel-btn').forEach(btn => {
                    // Only toggle mode buttons
-                   if (btn.innerText.match(/[✏️📖👁️]/)) btn.classList.remove('active');
+                   if (btn.querySelector('.fa-pen') || btn.querySelector('.fa-columns') || btn.querySelector('.fa-eye')) btn.classList.remove('active');
                 });
                 
                 // Set active class based on mode
-                const modeIcons = { 'edit': '✏️', 'split': '📖', 'preview': '👁️' };
-                const icon = modeIcons[mode];
+                const modeIcons = { 'edit': 'fa-pen', 'split': 'fa-columns', 'preview': 'fa-eye' };
+                const iconClass = modeIcons[mode];
                 
-                // Find button by content matching icon
-                const buttons = Array.from(panel.querySelectorAll('.panel-actions .panel-btn'));
-                const activeBtn = buttons.find(b => b.innerText.includes(icon));
+                // Find button by icon class
+                const activeBtn = panel.querySelector(`.panel-actions .panel-btn .${iconClass}`)?.parentElement;
                 if (activeBtn) activeBtn.classList.add('active');
             }
             
@@ -1105,7 +1278,17 @@
 
             // Event listeners
             container.querySelectorAll('.folder-name').forEach(el => {
-                el.onclick = () => el.parentElement.classList.toggle('open');
+                el.onclick = () => {
+                   el.parentElement.classList.toggle('open');
+                   const icon = el.querySelector('.icon i');
+                   if (el.parentElement.classList.contains('open')) {
+                       icon.classList.remove('fa-folder');
+                       icon.classList.add('fa-folder-open');
+                   } else {
+                       icon.classList.add('fa-folder');
+                       icon.classList.remove('fa-folder-open');
+                   }
+                };
             });
 
             container.querySelectorAll('.file-item').forEach(el => {
@@ -1120,7 +1303,7 @@
                 if (key === '__files') continue;
                 html += `
                     <div class="folder">
-                        <div class="folder-name"><span class="icon">▶</span> ${key}</div>
+                        <div class="folder-name"><span class="icon"><i class="fas fa-folder"></i></span> ${key}</div>
                         <div class="folder-contents">${renderFolder(obj[key])}</div>
                     </div>
                 `;
@@ -1133,7 +1316,7 @@
                              data-path="${file.path}" 
                              draggable="true" 
                              ondragstart="event.dataTransfer.setData('text', '${file.path}')">
-                             📄 ${file.name.replace('.md', '')}
+                             <i class="fas fa-file-alt"></i> ${file.name.replace('.md', '')}
                         </div>`;
                 });
             }
