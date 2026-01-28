@@ -388,6 +388,59 @@
 
         .panel-close:hover { background: var(--danger); color: white; }
 
+        .panel-actions {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-right: 4px;
+        }
+
+        .panel-actions .separator {
+            width: 1px;
+            height: 16px;
+            background: rgba(255,255,255,0.1);
+            margin: 0 4px;
+        }
+
+        .panel-btn {
+            padding: 4px 6px;
+            font-size: 14px;
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel-btn:hover {
+            color: var(--light);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .panel-btn.active {
+            color: white;
+            background: var(--primary);
+        }
+
+        .panel.drag-over {
+            border: 2px dashed var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .panel.drag-over::after {
+            content: 'Soltar aquí';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            color: var(--primary);
+            pointer-events: none;
+        }
+
         .panel-content {
             flex: 1;
             display: flex;
@@ -657,26 +710,7 @@
                 </div>
             </div>
 
-            <div class="toolbar-divider"></div>
-
-            <div class="toolbar-section">
-                <button class="btn btn-default btn-sm" onclick="copyForDocs()" title="Copiar para Google Docs">
-                    📋 Copiar
-                </button>
-                <button class="btn btn-success btn-sm" onclick="exportPDF()" title="Exportar PDF">
-                    📄 PDF
-                </button>
-            </div>
-
-            <div class="toolbar-divider"></div>
-
-            <div class="toolbar-section">
-                <button class="btn btn-default btn-sm" onclick="saveCurrentPanel()" title="Guardar (Ctrl+S)">
-                    💾 Guardar
-                </button>
-            </div>
-
-            <div class="toolbar-divider"></div>
+            <div style="flex: 1"></div>
 
             <div class="toolbar-section">
                 <button class="btn btn-default btn-sm" onclick="toggleFullscreen()" title="Pantalla completa (F11)">
@@ -802,6 +836,22 @@
                 div.className = 'panel' + (i === activePanel ? ' active' : '');
                 div.id = 'panel-' + i;
                 div.dataset.index = i;
+                
+                // Drag and Drop events
+                div.ondragover = (e) => {
+                    e.preventDefault();
+                    div.classList.add('drag-over');
+                };
+                div.ondragleave = (e) => {
+                    div.classList.remove('drag-over');
+                };
+                div.ondrop = (e) => {
+                    e.preventDefault();
+                    div.classList.remove('drag-over');
+                    const path = e.dataTransfer.getData('text');
+                    if (path) loadFileToPanel(path, i);
+                };
+                
                 div.onclick = (e) => {
                     if (!e.target.closest('.panel-header button')) {
                         setActivePanel(i);
@@ -812,13 +862,20 @@
                     div.innerHTML = `
                         <div class="panel-header">
                             <span class="panel-title" title="${panel.file}">${panel.file.split('/').pop().replace('.md', '')}</span>
-                            <div class="panel-mode-toggle">
-                                <button class="btn" onclick="refreshPanel(${i})" title="Recargar contenido">🔄</button>
-                                <div class="separator" style="width:1px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
-                                <button class="btn ${panel.mode === 'edit' ? 'active' : ''}" onclick="setPanelMode(${i}, 'edit')">✏️</button>
-                                <button class="btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')">📖</button>
-                                <button class="btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')">👁️</button>
+                            
+                            <div class="panel-actions">
+                                <button class="panel-btn" onclick="savePanel(${i})" title="Guardar (Ctrl+S)">💾</button>
+                                <button class="panel-btn" onclick="refreshPanel(${i})" title="Recargar contenido">🔄</button>
+                                <div class="separator"></div>
+                                <button class="panel-btn" onclick="downloadMD(${i})" title="Descargar Markdown">⬇️</button>
+                                <button class="panel-btn" onclick="copyForDocs(${i})" title="Copiar para Docs">📋</button>
+                                <button class="panel-btn" onclick="exportPDF(${i})" title="Exportar PDF">📄</button>
+                                <div class="separator"></div>
+                                <button class="panel-btn ${panel.mode === 'edit' ? 'active' : ''}" onclick="setPanelMode(${i}, 'edit')" title="Editar">✏️</button>
+                                <button class="panel-btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')" title="Dividir">📖</button>
+                                <button class="panel-btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')" title="Vista previa">👁️</button>
                             </div>
+                            
                             <button class="panel-close" onclick="closePanel(${i})" title="Cerrar">✕</button>
                         </div>
                         <div class="panel-content">
@@ -834,7 +891,7 @@
                     div.innerHTML = `
                         <div class="empty-panel">
                             <div class="empty-panel-icon">📄</div>
-                            <div class="empty-panel-text">Panel ${i + 1} - Selecciona un archivo</div>
+                            <div class="empty-panel-text">Arrastra un archivo aquí</div>
                         </div>
                     `;
                 }
@@ -1002,7 +1059,13 @@
 
             if (obj.__files) {
                 obj.__files.sort((a, b) => a.name.localeCompare(b.name)).forEach(file => {
-                    html += `<div class="file-item" data-path="${file.path}">📄 ${file.name.replace('.md', '')}</div>`;
+                    html += `
+                        <div class="file-item" 
+                             data-path="${file.path}" 
+                             draggable="true" 
+                             ondragstart="event.dataTransfer.setData('text', '${file.path}')">
+                             📄 ${file.name.replace('.md', '')}
+                        </div>`;
                 });
             }
 
@@ -1083,56 +1146,88 @@
             savePanel(activePanel);
         }
 
+        // Download Markdown
+        function downloadMD(index) {
+            const panel = panels[index];
+            if (!panel.file) return;
+
+            const blob = new Blob([panel.content], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = panel.file.split('/').pop();
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
         // Copy for docs
-        function copyForDocs() {
-            const panel = panels[activePanel];
+        function copyForDocs(index) {
+            // Default to activePanel if index not provided (legacy call)
+            if (typeof index === 'undefined') index = activePanel;
+            
+            const panel = panels[index];
             if (!panel.file) {
                 showToast('Selecciona un archivo primero');
                 return;
             }
-
-            const content = document.getElementById('content-' + activePanel);
-            if (!content) {
-                showToast('Cambia a modo vista para copiar');
-                return;
+            
+            // Generate temporary HTML for copying if not rendered
+            let contentElement = document.getElementById('content-' + index);
+            
+            // If in edit mode, the preview might not be fully up to date or visible
+            // But we update it on change so it should be fine.
+            // However, we need to ensure we are selecting the right element.
+            
+            if (!contentElement) {
+                // Should not happen with new structure unless very early
+                return; 
             }
 
             const range = document.createRange();
-            range.selectNode(content);
+            range.selectNode(contentElement);
             const selection = window.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);
-            document.execCommand('copy');
+            try {
+                document.execCommand('copy');
+                showToast('Copiado para Google Docs');
+            } catch (err) {
+                showToast('Error al copiar');
+            }
             selection.removeAllRanges();
-
-            showToast('Copiado para Google Docs');
         }
 
         // Export PDF
-        function exportPDF() {
-            const panel = panels[activePanel];
+        function exportPDF(index) {
+             if (typeof index === 'undefined') index = activePanel;
+            
+            const panel = panels[index];
             if (!panel.file) {
                 showToast('Selecciona un archivo primero');
                 return;
             }
 
-            const element = document.getElementById('content-' + activePanel);
-            if (!element) {
-                showToast('Cambia a modo vista para exportar');
-                return;
-            }
+            const element = document.getElementById('content-' + index);
+            if (!element) return;
 
             const filename = panel.file.split('/').pop().replace('.md', '.pdf');
 
-            html2pdf().set({
+            // Force show preview for PDF generation if needed, but html2pdf works on hidden elements too usually
+            // Better to clone or ensure visible. 
+            // html2pdf needs the element to be rendered.
+            
+            const opt = {
                 margin: [15, 20, 15, 20],
                 filename: filename,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).from(element).save();
+            };
 
             showToast('Generando PDF...');
+            html2pdf().set(opt).from(element).save();
         }
 
         // Keyboard shortcuts
