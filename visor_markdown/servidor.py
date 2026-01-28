@@ -41,20 +41,38 @@ async def handle_static(request):
 
 
 async def handle_api_files(request):
-    """Lista archivos markdown"""
-    md_files = []
+    """Lista archivos del usuario"""
+    user_files = []
+    allowed_exts = {'.md', '.txt', '.pdf', '.html', '.css', '.js', '.py'}
 
     for root, dirs, files in os.walk(BASE_DIR):
         dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'visor_markdown']
 
         for file in files:
-            if file.endswith('.md'):
+            ext = os.path.splitext(file)[1].lower()
+            if ext in allowed_exts:
                 full_path = Path(root) / file
                 rel_path = full_path.relative_to(BASE_DIR)
-                md_files.append(str(rel_path))
+                user_files.append(str(rel_path))
 
-    md_files.sort()
-    return web.json_response(md_files)
+    user_files.sort()
+    return web.json_response(user_files)
+
+
+async def handle_raw_file(request):
+    """Sirve archivos crudos del usuario (PDFs, imágenes, etc)"""
+    rel_path = request.match_info.get('path', '')
+    if not rel_path:
+        return web.Response(status=404)
+
+    full_path = (BASE_DIR / rel_path).resolve()
+    if not str(full_path).startswith(str(BASE_DIR.resolve())):
+        return web.Response(status=403)
+
+    if not full_path.exists():
+        return web.Response(status=404)
+
+    return web.FileResponse(full_path)
 
 
 async def handle_api_file(request):
@@ -103,6 +121,40 @@ async def handle_api_save(request):
     except Exception as e:
         return web.json_response({'error': str(e)}, status=500)
 
+async def handle_api_upload(request):
+    """Sube archivos"""
+    try:
+        reader = await request.multipart()
+    except Exception:
+        return web.json_response({'error': 'No multipart'}, status=400)
+
+    count = 0
+    upload_dir = BASE_DIR / "documentos" # Default upload directory
+    if not upload_dir.exists():
+        upload_dir.mkdir()
+
+    while True:
+        part = await reader.next()
+        if part is None:
+            break
+        
+        if part.name == 'files':
+            filename = part.filename 
+            if not filename: continue
+            
+            # Simple sanitization
+            filename = os.path.basename(filename)
+            filepath = upload_dir / filename
+            
+            with open(filepath, 'wb') as f:
+                while True:
+                    chunk = await part.read_chunk()
+                    if not chunk:
+                        break
+                    f.write(chunk)
+            count += 1
+    
+    return web.json_response({'count': count})
 
 async def handle_websocket(request):
     """Maneja conexiones WebSocket"""
@@ -188,6 +240,8 @@ def create_app():
     app.router.add_get('/api/files', handle_api_files)
     app.router.add_get('/api/file', handle_api_file)
     app.router.add_post('/api/save', handle_api_save)
+    app.router.add_post('/api/upload', handle_api_upload)
+    app.router.add_get('/raw/{path:.*}', handle_raw_file)
     app.router.add_get('/{filename:.*}', handle_static)
 
     return app

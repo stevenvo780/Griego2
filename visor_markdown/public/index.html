@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/search/searchcursor.min.js"></script>
     <style>
         :root {
             --primary: #6366f1;
@@ -388,6 +389,50 @@
         }
 
         .panel-close:hover { background: var(--danger); color: white; }
+
+        .panel-search-bar {
+            position: absolute;
+            top: 42px; /* Just below header */
+            left: 0;
+            width: 100%;
+            background: var(--dark);
+            padding: 8px 12px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            z-index: 10;
+        }
+
+        .panel-search-bar.visible { display: flex; }
+
+        .search-input {
+            flex: 1;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .search-count {
+            font-size: 12px;
+            color: var(--gray);
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* Highlight classes */
+        .highlight-match {
+            background-color: rgba(255, 165, 0, 0.5);
+            border-radius: 2px;
+        }
+        
+        .highlight-current {
+            background-color: rgba(255, 69, 0, 0.8);
+            color: white;
+        }
 
         .panel-actions {
             display: flex;
@@ -1096,6 +1141,7 @@
                             <div class="panel-actions">
                                 <button class="panel-btn" onclick="savePanel(${i})" title="Guardar (Ctrl+S)"><i class="fas fa-save"></i></button>
                                 <button class="panel-btn" onclick="refreshPanel(${i})" title="Recargar contenido"><i class="fas fa-sync-alt"></i></button>
+                                <button class="panel-btn" onclick="toggleSearch(${i})" title="Buscar en documento"><i class="fas fa-search"></i></button>
                                 <div class="separator"></div>
                                 <button class="panel-btn" onclick="openDownloadModal(${i})" title="Descargar / Exportar"><i class="fas fa-download"></i></button>
                                 <div class="separator"></div>
@@ -1103,6 +1149,21 @@
                                 <button class="panel-btn ${panel.mode === 'split' ? 'active' : ''}" onclick="setPanelMode(${i}, 'split')" title="Dividir"><i class="fas fa-columns"></i></button>
                                 <button class="panel-btn ${panel.mode === 'preview' ? 'active' : ''}" onclick="setPanelMode(${i}, 'preview')" title="Vista previa"><i class="fas fa-eye"></i></button>
                             </div>
+                            
+                            <!-- Search Bar -->
+                            <div class="panel-search-bar" id="search-bar-${i}">
+                                <input type="text" 
+                                    class="search-input" 
+                                    id="search-input-${i}" 
+                                    placeholder="Buscar..." 
+                                    onkeydown="if(event.key === 'Enter') { event.shiftKey ? findPrev(${i}) : findNext(${i}) }"
+                                    oninput="performSearch(${i})">
+                                <span class="search-count" id="search-count-${i}">0/0</span>
+                                <button class="panel-btn" onclick="findPrev(${i})" title="Anterior (Shift+Enter)"><i class="fas fa-chevron-up"></i></button>
+                                <button class="panel-btn" onclick="findNext(${i})" title="Siguiente (Enter)"><i class="fas fa-chevron-down"></i></button>
+                                <button class="panel-btn" onclick="toggleSearch(${i})" title="Cerrar"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
                             
                             <button class="panel-close" onclick="closePanel(${i})" title="Cerrar"><i class="fas fa-times"></i></button>
                         </div>
@@ -1135,6 +1196,116 @@
             updateActivePanelInfo();
         }
 
+        // Search functionality
+        const searchState = {};
+
+        function toggleSearch(index) {
+            const searchBar = document.getElementById(`search-bar-${index}`);
+            const isVisible = searchBar.classList.contains('visible');
+            
+            if (isVisible) {
+                searchBar.classList.remove('visible');
+                clearSearch(index);
+                // Return focus to editor
+                if (panels[index].editor) panels[index].editor.focus();
+            } else {
+                searchBar.classList.add('visible');
+                setTimeout(() => {
+                    const input = document.getElementById(`search-input-${index}`);
+                    input.focus();
+                    input.select();
+                    if (input.value) performSearch(index);
+                }, 10);
+            }
+        }
+
+        function clearSearch(index) {
+            if (panels[index].editor) {
+                // Clear any highlighting
+                 panels[index].editor.getAllMarks().forEach(mark => {
+                    if (mark.className === 'highlight-match' || mark.className === 'highlight-current') {
+                        mark.clear();
+                    }
+                });
+            }
+            delete searchState[index];
+            document.getElementById(`search-count-${index}`).textContent = '0/0';
+        }
+
+        function performSearch(index) {
+            const query = document.getElementById(`search-input-${index}`).value;
+            const editor = panels[index].editor;
+            
+            if (!editor) return;
+
+            // Clear previous marks
+            clearSearch(index);
+            searchState[index] = { matches: [], current: -1 };
+
+            if (!query) return;
+
+            const cursor = editor.getSearchCursor(query);
+            while (cursor.findNext()) {
+                const from = cursor.from();
+                const to = cursor.to();
+                
+                // Mark matches (yellow)
+                editor.markText(from, to, { className: 'highlight-match' });
+                
+                searchState[index].matches.push({ from, to });
+            }
+
+            const count = searchState[index].matches.length;
+            const current = 0;
+            
+            if (count > 0) {
+                searchState[index].current = 0;
+                highlightCurrent(index);
+            }
+            
+            document.getElementById(`search-count-${index}`).textContent = 
+                count > 0 ? `${searchState[index].current + 1}/${count}` : '0/0';
+        }
+
+        function highlightCurrent(index) {
+            const state = searchState[index];
+            if (!state || state.matches.length === 0) return;
+
+            const editor = panels[index].editor;
+            
+            // Clear previous current highlight (keep match highlights)
+            editor.getAllMarks().forEach(mark => {
+                if (mark.className === 'highlight-current') mark.clear();
+            });
+
+            const match = state.matches[state.current];
+            
+            // Highlight current match (orange/red)
+            editor.markText(match.from, match.to, { className: 'highlight-current' });
+            
+            // Scroll to view
+            editor.scrollIntoView(match.from, 100);
+
+            document.getElementById(`search-count-${index}`).textContent = 
+                `${state.current + 1}/${state.matches.length}`;
+        }
+
+        function findNext(index) {
+            const state = searchState[index];
+            if (!state || state.matches.length === 0) return;
+
+            state.current = (state.current + 1) % state.matches.length;
+            highlightCurrent(index);
+        }
+
+        function findPrev(index) {
+            const state = searchState[index];
+            if (!state || state.matches.length === 0) return;
+
+            state.current = (state.current - 1 + state.matches.length) % state.matches.length;
+            highlightCurrent(index);
+        }
+
         // Initialize CodeMirror for a panel
         function initPanelEditor(index) {
             const textarea = document.getElementById('textarea-' + index);
@@ -1147,7 +1318,9 @@
                 lineWrapping: true,
                 extraKeys: {
                     'Ctrl-S': () => savePanel(index),
-                    'Cmd-S': () => savePanel(index)
+                    'Cmd-S': () => savePanel(index),
+                    'Ctrl-F': () => toggleSearch(index),
+                    'Cmd-F': () => toggleSearch(index)
                 }
             });
 
