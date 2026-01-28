@@ -34,7 +34,7 @@
 
 **\[3.2\]** Λέγω δὲ λέξιν μὲν αὐτὴν τὴν τῶν μέτρων σύνθεσιν, μελοποιίαν δὲ ὃ τὴν δύναμιν φανερὰν ἔχει πᾶσαν.
 
-"Llamo,pues, elocución a la composición misma de los versos, y melopeya a lo que tiene su potencia totalmente manifiesta."
+"Llamo,pues, elocución, por un lado a la composición misma de los versos; y melopeya,por otro, a lo que tiene su potencia totalmente manifiesta."
 
 ### **Párrafo 4: Deducción de las 6 Partes**
 

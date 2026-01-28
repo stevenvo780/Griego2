@@ -105,6 +105,12 @@ function highlightCurrent(index) {
     if (!state || state.matches.length === 0) return;
 
     const editor = panels[index].editor;
+    const panelMode = panels[index].mode;
+
+    if (panelMode === 'preview') {
+        // Ensure the editor is visible so scrolling to a match is meaningful.
+        setPanelMode(index, 'split');
+    }
     
     editor.getAllMarks().forEach(mark => {
         if (mark.className === 'highlight-current') mark.clear();
@@ -112,7 +118,8 @@ function highlightCurrent(index) {
 
     const match = state.matches[state.current];
     editor.markText(match.from, match.to, { className: 'highlight-current' });
-    editor.scrollIntoView(match.from, 100);
+    editor.setSelection(match.from, match.to);
+    editor.scrollIntoView(match.from, 200);
 
     document.getElementById(`search-count-${index}`).textContent = 
         `${state.current + 1}/${state.matches.length}`;

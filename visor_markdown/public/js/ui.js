@@ -332,6 +332,14 @@ function setupSidebarDragDrop() {
     };
 }
 
+function toggleToolbar() {
+    const toolbar = document.querySelector('.top-toolbar');
+    const btn = document.getElementById('toolbar-toggle');
+    toolbar.classList.toggle('collapsed');
+    const isCollapsed = toolbar.classList.contains('collapsed');
+    btn.innerHTML = isCollapsed ? '<i class="fas fa-chevron-down"></i>' : '<i class="fas fa-chevron-up"></i>';
+}
+
 function collapseAllFolders() {
     document.querySelectorAll('.file-tree .folder').forEach(folder => {
         folder.classList.remove('open');

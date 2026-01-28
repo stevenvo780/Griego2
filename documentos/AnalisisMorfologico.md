@@ -19,42 +19,42 @@
 ### περί (perí)
 *   **Categoría:** Preposición
 *   **Análisis:** Rige Genitivo (tema), Acusativo (alrededor)
-*   **Traducción:** acerca de, sobre
+*   **Traducción:** acerca de, sobre, en torno a, respecto a, concerniente a
 
 ### ἐν (en)
 *   **Categoría:** Preposición
 *   **Análisis:** Rige Dativo
-*   **Traducción:** en, dentro de
+*   **Traducción:** en, dentro de, entre, durante, por medio de
 
 ### ἐκ / ἐξ (ek / ex)
 *   **Categoría:** Preposición
 *   **Análisis:** Rige Genitivo
-*   **Traducción:** de, desde, por
+*   **Traducción:** de, desde, fuera de, por causa de, a partir de
 
 ### διά (diá)
 *   **Categoría:** Preposición
 *   **Análisis:** Gen (a través), Ac (a causa de)
-*   **Traducción:** mediante, a través de, por medio de
+*   **Traducción:** mediante, a través de, por medio de, a causa de, gracias a
 
 ### ὑπό (hypó)
 *   **Categoría:** Preposición
 *   **Análisis:** Gen (agente), Ac (debajo)
-*   **Traducción:** por, bajo
+*   **Traducción:** por (agente), bajo, debajo de, al pie de, a manos de
 
 ### κατά (katá)
 *   **Categoría:** Preposición
 *   **Análisis:** Gen (contra), Ac (según)
-*   **Traducción:** según, conforme a
+*   **Traducción:** según, conforme a, de acuerdo con, contra, hacia abajo, a lo largo de
 
 ### παρά (pará)
 *   **Categoría:** Preposición
 *   **Análisis:** Gen (de parte de), Ac (junto a)
-*   **Traducción:** aparte de, junto a
+*   **Traducción:** aparte de, junto a, de parte de, al lado de, en comparación con, más allá de
 
 ### πρός (prós)
 *   **Categoría:** Preposición
 *   **Análisis:** Ac (hacia), Dat (junto a)
-*   **Traducción:** hacia, frente a
+*   **Traducción:** hacia, frente a, ante, en relación con, respecto a, además de
 
 ---
 
@@ -63,48 +63,48 @@
 ### μέν (mén)
 *   **Categoría:** Partícula correlativa
 *   **Análisis:** Marca contraste (con δέ)
-*   **Traducción:** por una parte, ciertamente
+*   **Traducción:** por una parte, ciertamente, en efecto, así pues, (a menudo sin traducción directa)
 
 ### δέ (dé)
 *   **Categoría:** Partícula conectiva
 *   **Análisis:** Conecta, contrasta
-*   **Traducción:** y, pero, (omitida)
+*   **Traducción:** y, pero, mas, sin embargo, por otra parte, (a menudo omitida)
 
 ### οὖν (oûn)
 *   **Categoría:** Conjunción ilativa
-*   **Traducción:** pues, por tanto
+*   **Traducción:** pues, por tanto, así pues, en consecuencia, por consiguiente, entonces
 
 ### γάρ (gár)
 *   **Categoría:** Conjunción causal
-*   **Traducción:** pues, porque
+*   **Traducción:** pues, porque, ya que, en efecto, puesto que, dado que
 
 ### καί (kaí)
 *   **Categoría:** Conjunción copulativa
-*   **Traducción:** y, también, incluso
+*   **Traducción:** y, también, incluso, aun, tanto...como, además
 
 ### τε (te)
 *   **Categoría:** Partícula enclítica
-*   **Traducción:** y (correlativa)
+*   **Traducción:** y (correlativa), tanto...como, así como, a la vez que
 
 ### ἀλλά (allá)
 *   **Categoría:** Conjunción adversativa
-*   **Traducción:** sino, pero
+*   **Traducción:** sino, pero, sin embargo, mas, al contrario, en cambio
 
 ### ἤ (ḗ)
 *   **Categoría:** Conjunción disyuntiva
-*   **Traducción:** o
+*   **Traducción:** o, o bien, ya sea...ya sea, que, (comparativo) que
 
 ### ὡς (hōs)
 *   **Categoría:** Adv/Conj relativo
-*   **Traducción:** como, que
+*   **Traducción:** como, que, de tal modo que, así como, cuando, puesto que, para que
 
 ### ὅτι (hóti)
 *   **Categoría:** Conjunción
-*   **Traducción:** que, porque
+*   **Traducción:** que (completivo), porque, el hecho de que, ya que, puesto que
 
 ### ἵνα (hína)
 *   **Categoría:** Conjunción final
-*   **Traducción:** para que
+*   **Traducción:** para que, a fin de que, de modo que, donde
 
 ---
 
@@ -115,32 +115,32 @@
 *   **Declinación:** 1.ª/2.ª
 *   **Formas:** αὐτῆς, αὐτήν, αὐτοῦ, αὐτῶν
 *   **Referencia:** Ver Diapositiva 2
-*   **Traducción:** él mismo, ella misma
+*   **Traducción:** él mismo, ella misma, el propio, en persona, él/ella/ello (3.ª persona)
 
 ### οὗτος (hoûtos)
 *   **Categoría:** Pronombre demostrativo
 *   **Declinación:** 1.ª/2.ª irregular
 *   **Formas:** τοῦτο, ταῦτα, τούτων, τούτοις
-*   **Traducción:** este, esta, esto
+*   **Traducción:** este, esta, esto, tal, dicho, el siguiente, el mencionado
 
 ### ὅς, ἥ, ὅ (hós, hḗ, hó)
 *   **Categoría:** Pronombre relativo
 *   **Declinación:** 1.ª/2.ª
 *   **Formas:** ὅν, οὓς, ἅ, ὅσοις
-*   **Traducción:** que, el cual, lo cual
+*   **Traducción:** que, el cual, la cual, lo cual, quien, cuyo
 
 ### τις, τι (tis, ti)
 *   **Categoría:** Pronombre indefinido
 *   **Declinación:** 3.ª irregular
 *   **Formas:** τινῶν, τινας, τινες
 *   **Referencia:** Ver Diapositiva 14
-*   **Traducción:** alguno, cierto, uno
+*   **Traducción:** alguno, cierto, uno, alguien, algo, cualquiera, cierto tipo de
 
 ### ποῖος (poîos)
 *   **Categoría:** Adj/Pron indefinido
 *   **Declinación:** 2.ª/1.ª
 *   **Formas:** ποιούς, ποιάς, ποιά
-*   **Traducción:** de qué clase, de cierta cualidad
+*   **Traducción:** de qué clase, de cierta cualidad, de tal tipo, de qué naturaleza, cuál
 
 ---
 
@@ -178,49 +178,49 @@
 *   **Conjugación:** -ω
 *   **Referencia:** Ver Diapositiva 23
 *   **Formas:** λέγω, λέγωμεν, λέγοντες
-*   **Traducción:** digo, llamo, hablo
+*   **Traducción:** digo, llamo, hablo, nombro, declaro, designo, menciono, afirmo
 
 ### ἔχω (échō)
 *   **Categoría:** Verbo temático
 *   **Formas:** ἔχει, ἐχούσης, ἔχοντα
-*   **Traducción:** tiene, que tiene
+*   **Traducción:** tiene, posee, sostiene, mantiene, conserva, guarda, sujeta
 
 ### ποιέω (poiéō) - Contracto
 *   **Categoría:** Verbo contracto (-έω)
 *   **Referencia:** Ver Diapositiva 23
 *   **Formas:** ποιοῦνται, ποιήσει
-*   **Traducción:** hacen, realizan
+*   **Traducción:** hacen, realizan, producen, fabrican, crean, componen, ejecutan
 
 ### μιμέομαι (miméomai)
 *   **Categoría:** Verbo medio deponente
 *   **Formas:** μιμοῦνται, μιμήσωνται
-*   **Traducción:** imitan, representan
+*   **Traducción:** imitan, representan, reproducen, copian, emulan, simulan
 
 ### γίγνομαι (gígnomai)
 *   **Categoría:** Verbo deponente
 *   **Formas:** γινόμενον, γένοιτο
-*   **Traducción:** llegar a ser, surgir
+*   **Traducción:** llegar a ser, surgir, nacer, suceder, ocurrir, resultar, acontecer, devenir
 
 ### πράττω (práttō)
 *   **Categoría:** Verbo gutural (-ττω)
 *   **Referencia:** Ver Diapositiva 23
 *   **Formas:** πράττοντες, πράττεται, πραττόντων
-*   **Traducción:** actuar, hacer
+*   **Traducción:** actuar, hacer, obrar, realizar, ejecutar, practicar, emprender
 
 ### τυγχάνω / ἀποτυγχάνω
 *   **Categoría:** Verbos temáticos
 *   **Formas:** τυγχάνουσι, ἀποτυγχάνουσι
-*   **Traducción:** tienen éxito, fracasan
+*   **Traducción:** tienen éxito, alcanzan, logran, obtienen / fracasan, yerran, fallan, malogran
 
 ### περαίνω (peraínō)
 *   **Categoría:** Verbo nasal
 *   **Formas:** περαίνουσα, περαίνεσθαι
-*   **Traducción:** llevar a cabo, completar
+*   **Traducción:** llevar a cabo, completar, terminar, concluir, realizar, ejecutar, consumar
 
 ### ἀποδείκνυμι (apodeíknymi)
 *   **Categoría:** Verbo atemático (-μι)
 *   **Formas:** ἀποδεικνύασιν
-*   **Traducción:** demuestran
+*   **Traducción:** demuestran, prueban, muestran, evidencian, manifiestan, ponen de manifiesto
 
 ---
 
@@ -231,36 +231,36 @@
 *   **Tema:** -α
 *   **Referencia:** Ver Diapositiva 3
 *   **Formas:** τραγῳδία, τραγῳδίας
-*   **Traducción:** tragedia
+*   **Traducción:** tragedia, drama trágico, representación trágica, género trágico
 
 ### κωμῳδία (kōmōidía)
 *   **Declinación:** 1.ª (Fem. -α)
-*   **Traducción:** comedia
+*   **Traducción:** comedia, drama cómico, representación cómica, género cómico
 
 ### μελοποιία (melopoiía)
 *   **Declinación:** 1.ª (Fem. -α)
-*   **Traducción:** melopeya
+*   **Traducción:** melopeya, composición de cantos, música, melodía, canto, arte del canto
 
 ### ἀνάγκη (anánkē)
 *   **Declinación:** 1.ª (Fem. -η)
 *   **Referencia:** Ver Diapositiva 3
-*   **Traducción:** necesidad
+*   **Traducción:** necesidad, forzosidad, coacción, obligación, inevitabilidad, lo inevitable
 
 ### διάνοια (diánoia)
 *   **Declinación:** 1.ª (Fem. -α)
-*   **Traducción:** pensamiento
+*   **Traducción:** pensamiento, reflexión, razonamiento, intención, propósito, inteligencia, noción
 
 ### ἁρμονία (harmonía)
 *   **Declinación:** 1.ª (Fem. -α)
-*   **Traducción:** armonía
+*   **Traducción:** armonía, acorde, proporción, consonancia, concordia, ajuste
 
 ### οὐσία (ousía)
 *   **Declinación:** 1.ª (Fem. -α)
-*   **Traducción:** esencia
+*   **Traducción:** esencia, ser, sustancia, naturaleza, entidad, realidad, existencia
 
 ### γνώμη (gnṓmē)
 *   **Declinación:** 1.ª (Fem. -η)
-*   **Traducción:** opinión
+*   **Traducción:** opinión, parecer, juicio, sentencia, máxima, pensamiento, razonamiento
 
 ---
 
@@ -270,45 +270,45 @@
 *   **Declinación:** 2.ª (Masc. -ος)
 *   **Tema:** -o
 *   **Referencia:** Ver Diapositiva 4
-*   **Traducción:** mito, trama
+*   **Traducción:** mito, trama, argumento, fábula, relato, narración, historia, cuento
 
 ### λόγος (lógos)
 *   **Declinación:** 2.ª (Masc. -ος)
-*   **Traducción:** palabra, lenguaje, discurso
+*   **Traducción:** palabra, lenguaje, discurso, razón, argumento, cuenta, relato, expresión
 
 ### κόσμος (kósmos)
 *   **Declinación:** 2.ª (Masc. -ος)
-*   **Traducción:** orden, decoración
+*   **Traducción:** orden, decoración, ornamento, adorno, mundo, universo, disposición
 
 ### ὅρος (hóros)
 *   **Declinación:** 2.ª (Masc. -ος)
-*   **Traducción:** definición, límite
+*   **Traducción:** definición, límite, término, frontera, marca, mojón, delimitación
 
 ### ῥυθμός (rhythmós)
 *   **Declinación:** 2.ª (Masc. -ος)
-*   **Traducción:** ritmo
+*   **Traducción:** ritmo, cadencia, movimiento rítmico, compás, medida, proporción
 
 ### βίος (bíos)
 *   **Declinación:** 2.ª (Masc. -ος)
-*   **Traducción:** vida
+*   **Traducción:** vida, modo de vida, existencia, sustento, medio de vida, carácter
 
 ### ἄνθρωπος (ánthrōpos)
 *   **Declinación:** 2.ª (Masc. -ος)
-*   **Traducción:** hombre, ser humano
+*   **Traducción:** hombre, ser humano, persona, mortal, individuo, género humano
 
 ### μόριον (mórion)
 *   **Declinación:** 2.ª (Neut. -ον)
-*   **Traducción:** parte, elemento
+*   **Traducción:** parte, elemento, componente, porción, sección, miembro
 
 ### μέτρον (métron)
 *   **Declinación:** 2.ª (Neut. -ον)
-*   **Traducción:** metro, verso
+*   **Traducción:** metro, verso, medida, dimensión, límite, proporción
 
 ### πρᾶγμα (prâgma)
 *   **Declinación:** 3.ª (Neut. -ματ-)
 *   **Referencia:** Ver Diapositiva 8
 *   **Formas:** πραγμάτων
-*   **Traducción:** hecho, asunto
+*   **Traducción:** hecho, asunto, cosa, acción, evento, circunstancia, negocio, acontecimiento
 
 ---
 
@@ -319,84 +319,84 @@
 *   **Tema:** vocal -ι
 *   **Referencia:** Ver Diapositiva 21
 *   **Formas:** μίμησις, μίμησιν
-*   **Traducción:** imitación, representación
+*   **Traducción:** imitación, representación, reproducción, copia, simulación, réplica, emulación
 
 ### πρᾶξις (prâxis)
 *   **Declinación:** 3.ª (Fem. -ις/-εως)
 *   **Formas:** πράξεως, πράξεων, πράξεις
-*   **Traducción:** acción
+*   **Traducción:** acción, acto, hecho, obra, práctica, actividad, gestión, empresa
 
 ### λέξις (léxis)
 *   **Declinación:** 3.ª (Fem. -ις/-εως)
 *   **Formas:** λέξις, λέξιν
-*   **Traducción:** elocución, dicción
+*   **Traducción:** elocución, dicción, estilo, expresión verbal, forma de hablar, lenguaje, palabra
 
 ### ὄψις (ópsis)
 *   **Declinación:** 3.ª (Fem. -ις/-εως)
 *   **Formas:** ὄψεως, ὄψις
-*   **Traducción:** espectáculo, vista
+*   **Traducción:** espectáculo, vista, aspecto, apariencia, visión, escena, puesta en escena
 
 ### δύναμις (dýnamis)
 *   **Declinación:** 3.ª (Fem. -ις/-εως)
 *   **Formas:** δύναμιν
-*   **Traducción:** fuerza, potencia
+*   **Traducción:** fuerza, potencia, poder, capacidad, facultad, virtud, eficacia, posibilidad
 
 ### σύνθεσις (sýnthesis)
 *   **Declinación:** 3.ª (Fem. -ις/-εως)
 *   **Formas:** σύνθεσιν
-*   **Traducción:** composición
+*   **Traducción:** composición, unión, combinación, estructura, ensamblaje, organización
 
 ### σύστασις (sýstasis)
 *   **Declinación:** 3.ª (Fem. -ις/-εως)
-*   **Traducción:** estructuración
+*   **Traducción:** estructuración, composición, constitución, organización, arreglo, disposición
 
 ### κάθαρσις (kátharsis)
 *   **Declinación:** 3.ª (Fem. -ις/-εως)
-*   **Traducción:** purificación, catarsis
+*   **Traducción:** purificación, catarsis, purgación, limpieza, clarificación, depuración
 
 ### ἦθος (êthos)
 *   **Declinación:** 3.ª (Neut. -εσ-)
 *   **Tema:** silbante
 *   **Referencia:** Ver Diapositiva 13
 *   **Formas:** ἦθος, ἤθη, ἠθῶν
-*   **Traducción:** carácter
+*   **Traducción:** carácter, costumbre, índole, naturaleza, disposición, modo de ser, moral, hábito
 
 ### μέγεθος (mégethos)
 *   **Declinación:** 3.ª (Neut. -εσ-)
-*   **Traducción:** magnitud
+*   **Traducción:** magnitud, tamaño, grandeza, extensión, dimensión, envergadura
 
 ### μέλος (mélos)
 *   **Declinación:** 3.ª (Neut. -εσ-)
 *   **Formas:** μέλος, μέλους
-*   **Traducción:** canto, melodía
+*   **Traducción:** canto, melodía, música, tonada, estrofa, canción, pieza musical
 
 ### πάθος (páthos)
 *   **Declinación:** 3.ª (Neut. -εσ-)
 *   **Formas:** παθημάτων
-*   **Traducción:** pasión, afección
+*   **Traducción:** pasión, afección, emoción, padecimiento, sufrimiento, sentimiento, experiencia
 
 ### τέλος (télos)
 *   **Declinación:** 3.ª (Neut. -εσ-)
-*   **Traducción:** fin
+*   **Traducción:** fin, meta, objetivo, propósito, término, conclusión, resultado, cumplimiento
 
 ### εἶδος (eîdos)
 *   **Declinación:** 3.ª (Neut. -εσ-)
 *   **Formas:** εἰδῶν, εἴδεσι
-*   **Traducción:** especie, forma
+*   **Traducción:** especie, forma, clase, tipo, aspecto, apariencia, género, idea
 
 ### μέρος (méros)
 *   **Declinación:** 3.ª (Neut. -εσ-)
 *   **Formas:** μέρη, μέρος
-*   **Traducción:** parte
+*   **Traducción:** parte, porción, sección, división, fragmento, lote, destino
 
 ### ἔλεος (éleos)
 *   **Declinación:** 3.ª (Neut./Masc.)
 *   **Formas:** ἐλέου
-*   **Traducción:** compasión
+*   **Traducción:** compasión, piedad, lástima, misericordia, conmiseración, condolencia
 
 ### φόβος (phóbos)
 *   **Declinación:** 2.ª (Masc. -ος)
-*   **Traducción:** temor
+*   **Traducción:** temor, miedo, terror, espanto, pavor, alarma, aprensivo
 
 ---
 
@@ -426,25 +426,25 @@
 
 ### σπουδαῖος (spoudaîos)
 *   **Declinación:** 2.ª/1.ª
-*   **Traducción:** noble, serio
+*   **Traducción:** noble, serio, digno, excelente, valioso, bueno, admirable, elevado
 
 ### τέλειος (téleios)
 *   **Declinación:** 2.ª/1.ª
-*   **Traducción:** completo, perfecto
+*   **Traducción:** completo, perfecto, acabado, pleno, íntegro, total, consumado
 
 ### μέγιστος (mégistos)
 *   **Declinación:** 2.ª/1.ª (Superlativo)
-*   **Traducción:** el más grande
+*   **Traducción:** el más grande, el mayor, el más importante, principal, supremo, máximo
 
 ### πᾶς, πᾶσα, πᾶν (pâs)
 *   **Declinación:** 3.ª/1.ª mixta
 *   **Tema:** nasal (-ντ-)
 *   **Referencia:** Ver Diapositiva 10
-*   **Traducción:** todo, toda
+*   **Traducción:** todo, toda, cada, entero, cualquier, cada uno, universal, total
 
 ### φανερός (phanerós)
 *   **Declinación:** 2.ª/1.ª
-*   **Traducción:** manifiesto, evidente
+*   **Traducción:** manifiesto, evidente, claro, patente, visible, obvio, notorio, aparente
 
 ---
 
@@ -467,29 +467,29 @@
 ## Adverbios
 
 ### ὕστερον (hýsteron)
-*   **Traducción:** después, luego
+*   **Traducción:** después, luego, más tarde, posteriormente, a continuación, en segundo lugar
 
 ### πρῶτον (prôton)
-*   **Traducción:** primero
+*   **Traducción:** primero, en primer lugar, ante todo, primeramente, al principio
 
 ### εἶτα (eîta)
-*   **Traducción:** luego, después
+*   **Traducción:** luego, después, entonces, a continuación, seguidamente, en seguida
 
 ### πάλιν (pálin)
-*   **Traducción:** de nuevo, a su vez
+*   **Traducción:** de nuevo, otra vez, a su vez, en cambio, por el contrario, nuevamente
 
 ### μόνον (mónon)
-*   **Traducción:** solo
+*   **Traducción:** solo, solamente, únicamente, exclusivamente, meramente, nada más que
 
 ### χωρίς (chōrís)
-*   **Traducción:** por separado
+*   **Traducción:** por separado, aparte, separadamente, independientemente, distintamente
 
 ### οὐ / οὐκ / οὐχ (ou)
 *   **Categoría:** Adverbio negativo
-*   **Traducción:** no
+*   **Traducción:** no, en absoluto, de ninguna manera, nada, nunca (con verbos)
 
 ### ὡσαύτως (hōsaútōs)
-*   **Traducción:** de igual modo
+*   **Traducción:** de igual modo, del mismo modo, igualmente, así mismo, de la misma manera
 
 ---
 
