@@ -1,17 +1,15 @@
-version: '3.8'
-
 services:
   griego-md:
     build:
       context: ..
       dockerfile: visor_markdown/Dockerfile
     container_name: griego-markdown
+    user: "${UID:-1000}:${GID:-1000}"
     ports:
       - "8888:8888"
-      - "8889:8889"
     volumes:
-      # Mount the entire Griego2 folder for live editing
-      - ../:/app/:rw
+      - ../:/app/:z
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
+    working_dir: /app/visor_markdown

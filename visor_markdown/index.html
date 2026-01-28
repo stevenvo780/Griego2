@@ -652,9 +652,8 @@
         let files = [];
         let ws;
         let clientId = Math.random().toString(36).substr(2, 9);
-        const WS_PORT = 8889;
-        let isRemoteUpdate = false; // Flag to prevent echo loops
-        let saveTimeouts = {}; // Per-panel autosave timers
+        let isRemoteUpdate = false;
+        let saveTimeouts = {};
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -669,9 +668,10 @@
             connectWebSocket();
         });
 
-        // WebSocket Connection
+        // WebSocket Connection (mismo puerto que HTTP)
         function connectWebSocket() {
-            ws = new WebSocket(`ws://${location.hostname}:${WS_PORT}`);
+            const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            ws = new WebSocket(`${protocol}//${location.host}/ws`);
 
             ws.onopen = () => {
                 console.log('WS Connected');

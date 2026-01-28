@@ -1,186 +1,157 @@
 #!/usr/bin/env python3
 """
-Servidor web con WebSockets para edición colaborativa de Markdown
-Ejecutar: python3 servidor.py
-Abrir: http://localhost:8888
+Servidor unificado HTTP + WebSocket en el mismo puerto
+Compatible con ngrok y túneles
 """
 
 import asyncio
 import json
 import os
-import urllib.parse
+import mimetypes
 from pathlib import Path
-from http.server import SimpleHTTPRequestHandler
-import threading
-import http.server
-import socketserver
-
-try:
-    from watchdog.observers import Observer
-    from watchdog.events import FileSystemEventHandler
-except ImportError:
-    print("Instalando watchdog...")
-    os.system("pip install watchdog --quiet")
-    from watchdog.observers import Observer
-    from watchdog.events import FileSystemEventHandler
+from aiohttp import web, WSMsgType
 
 PORT = 8888
-WS_PORT = 8889
-BASE_DIR = Path(__file__).parent.parent  # Directorio Griego2
+BASE_DIR = Path(__file__).parent.parent
+STATIC_DIR = Path(__file__).parent
 
-# Clientes WebSocket conectados
+# Estado global
 clients = {}
-file_rooms = {}  # {file_path: [client_ids]}
+file_rooms = {}
 
-class MarkdownHandler(SimpleHTTPRequestHandler):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, directory=str(Path(__file__).parent), **kwargs)
-
-    def do_GET(self):
-        parsed = urllib.parse.urlparse(self.path)
-
-        if parsed.path == '/api/files':
-            self.send_file_list()
-        elif parsed.path == '/api/file':
-            query = urllib.parse.parse_qs(parsed.query)
-            if 'path' in query:
-                self.send_file_content(query['path'][0])
-            else:
-                self.send_error(400, 'Falta parámetro path')
-        else:
-            super().do_GET()
-
-    def do_POST(self):
-        parsed = urllib.parse.urlparse(self.path)
-
-        if parsed.path == '/api/save':
-            self.save_file()
-        else:
-            self.send_error(404, 'Not found')
-
-    def send_file_list(self):
-        md_files = []
-
-        for root, dirs, files in os.walk(BASE_DIR):
-            dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'visor_markdown']
-
-            for file in files:
-                if file.endswith('.md'):
-                    full_path = Path(root) / file
-                    rel_path = full_path.relative_to(BASE_DIR)
-                    md_files.append(str(rel_path))
-
-        md_files.sort()
-
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.end_headers()
-        self.wfile.write(json.dumps(md_files).encode())
-
-    def send_file_content(self, rel_path):
-        try:
-            full_path = (BASE_DIR / rel_path).resolve()
-            if not str(full_path).startswith(str(BASE_DIR)):
-                self.send_error(403, 'Acceso denegado')
-                return
-
-            if not full_path.exists():
-                self.send_error(404, 'Archivo no encontrado')
-                return
-
-            with open(full_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.end_headers()
-            self.wfile.write(json.dumps({'content': content}).encode())
-
-        except Exception as e:
-            self.send_error(500, str(e))
-
-    def save_file(self):
-        try:
-            content_length = int(self.headers['Content-Length'])
-            post_data = self.rfile.read(content_length)
-            data = json.loads(post_data.decode('utf-8'))
-
-            rel_path = data.get('path')
-            content = data.get('content')
-
-            if not rel_path or content is None:
-                self.send_error(400, 'Faltan parámetros')
-                return
-
-            full_path = (BASE_DIR / rel_path).resolve()
-            if not str(full_path).startswith(str(BASE_DIR)):
-                self.send_error(403, 'Acceso denegado')
-                return
-
-            with open(full_path, 'w', encoding='utf-8') as f:
-                f.write(content)
-
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': True}).encode())
-
-        except Exception as e:
-            self.send_error(500, str(e))
-
-    def log_message(self, format, *args):
-        pass  # Silenciar logs
+# Tipos MIME adicionales
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('application/json', '.json')
+mimetypes.add_type('image/svg+xml', '.svg')
 
 
-# WebSocket server usando asyncio
-async def ws_handler(websocket, path=None):
-    client_id = id(websocket)
-    clients[client_id] = {'ws': websocket, 'file': None}
+async def handle_index(request):
+    """Sirve index.html"""
+    return web.FileResponse(STATIC_DIR / 'index.html')
+
+
+async def handle_static(request):
+    """Sirve archivos estáticos"""
+    filename = request.match_info.get('filename', '')
+    filepath = STATIC_DIR / filename
+
+    if filepath.exists() and filepath.is_file():
+        return web.FileResponse(filepath)
+    return web.Response(status=404, text='Not found')
+
+
+async def handle_api_files(request):
+    """Lista archivos markdown"""
+    md_files = []
+
+    for root, dirs, files in os.walk(BASE_DIR):
+        dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'visor_markdown']
+
+        for file in files:
+            if file.endswith('.md'):
+                full_path = Path(root) / file
+                rel_path = full_path.relative_to(BASE_DIR)
+                md_files.append(str(rel_path))
+
+    md_files.sort()
+    return web.json_response(md_files)
+
+
+async def handle_api_file(request):
+    """Lee contenido de un archivo"""
+    rel_path = request.query.get('path', '')
+
+    if not rel_path:
+        return web.json_response({'error': 'Falta path'}, status=400)
 
     try:
-        async for message in websocket:
-            try:
-                data = json.loads(message)
+        full_path = (BASE_DIR / rel_path).resolve()
+        if not str(full_path).startswith(str(BASE_DIR.resolve())):
+            return web.json_response({'error': 'Acceso denegado'}, status=403)
 
-                if data['type'] == 'join':
-                    # Cliente se une a un archivo
-                    file_path = data['file']
-                    clients[client_id]['file'] = file_path
+        if not full_path.exists():
+            return web.json_response({'error': 'No encontrado'}, status=404)
 
-                    if file_path not in file_rooms:
-                        file_rooms[file_path] = []
-                    if client_id not in file_rooms[file_path]:
-                        file_rooms[file_path].append(client_id)
+        with open(full_path, 'r', encoding='utf-8') as f:
+            content = f.read()
 
-                    # Notificar a todos los usuarios del archivo
-                    await broadcast_users(file_path)
-
-                elif data['type'] == 'update':
-                    # Broadcast de cambios a otros clientes del mismo archivo
-                    file_path = data['file']
-
-                    for cid in file_rooms.get(file_path, []):
-                        if cid != client_id and cid in clients:
-                            try:
-                                await clients[cid]['ws'].send(json.dumps({
-                                    'type': 'update',
-                                    'file': file_path,
-                                    'content': data['content'],
-                                    'clientId': data.get('clientId')
-                                }))
-                            except:
-                                pass
-
-            except json.JSONDecodeError:
-                pass
+        return web.json_response({'content': content})
 
     except Exception as e:
-        pass
+        return web.json_response({'error': str(e)}, status=500)
+
+
+async def handle_api_save(request):
+    """Guarda un archivo"""
+    try:
+        data = await request.json()
+        rel_path = data.get('path')
+        content = data.get('content')
+
+        if not rel_path or content is None:
+            return web.json_response({'error': 'Faltan parámetros'}, status=400)
+
+        full_path = (BASE_DIR / rel_path).resolve()
+        if not str(full_path).startswith(str(BASE_DIR.resolve())):
+            return web.json_response({'error': 'Acceso denegado'}, status=403)
+
+        with open(full_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+        return web.json_response({'success': True})
+
+    except Exception as e:
+        return web.json_response({'error': str(e)}, status=500)
+
+
+async def handle_websocket(request):
+    """Maneja conexiones WebSocket"""
+    ws = web.WebSocketResponse()
+    await ws.prepare(request)
+
+    client_id = id(ws)
+    clients[client_id] = {'ws': ws, 'file': None}
+    print(f'Cliente conectado: {client_id}')
+
+    try:
+        async for msg in ws:
+            if msg.type == WSMsgType.TEXT:
+                try:
+                    data = json.loads(msg.data)
+
+                    if data['type'] == 'join':
+                        file_path = data['file']
+                        clients[client_id]['file'] = file_path
+
+                        if file_path not in file_rooms:
+                            file_rooms[file_path] = []
+                        if client_id not in file_rooms[file_path]:
+                            file_rooms[file_path].append(client_id)
+
+                        await broadcast_users(file_path)
+
+                    elif data['type'] == 'update':
+                        file_path = data['file']
+
+                        for cid in file_rooms.get(file_path, []):
+                            if cid != client_id and cid in clients:
+                                try:
+                                    await clients[cid]['ws'].send_json({
+                                        'type': 'update',
+                                        'file': file_path,
+                                        'content': data['content'],
+                                        'clientId': data.get('clientId')
+                                    })
+                                except:
+                                    pass
+
+                except json.JSONDecodeError:
+                    pass
+
+            elif msg.type == WSMsgType.ERROR:
+                print(f'Error WebSocket: {ws.exception()}')
+
     finally:
-        # Limpiar al desconectar
         file_path = clients.get(client_id, {}).get('file')
         if file_path and file_path in file_rooms:
             if client_id in file_rooms[file_path]:
@@ -189,135 +160,58 @@ async def ws_handler(websocket, path=None):
 
         if client_id in clients:
             del clients[client_id]
+        print(f'Cliente desconectado: {client_id}')
+
+    return ws
 
 
 async def broadcast_users(file_path):
-    """Envía lista de usuarios a todos los del archivo"""
-    users = []
-    for cid in file_rooms.get(file_path, []):
-        if cid in clients:
-            users.append({'id': str(cid)})
-
-    message = json.dumps({'type': 'users', 'users': users})
+    """Envía lista de usuarios"""
+    users = [{'id': str(cid)} for cid in file_rooms.get(file_path, []) if cid in clients]
+    message = {'type': 'users', 'users': users}
 
     for cid in file_rooms.get(file_path, []):
         if cid in clients:
             try:
-                await clients[cid]['ws'].send(message)
+                await clients[cid]['ws'].send_json(message)
             except:
                 pass
 
 
-class FileChangeHandler(FileSystemEventHandler):
-    def __init__(self, loop):
-        self.loop = loop
-        self.last_events = {}
+def create_app():
+    """Crea la aplicación"""
+    app = web.Application()
 
-    def on_modified(self, event):
-        if event.is_directory:
-            return
-        if event.src_path.endswith('.md'):
-            # Debounce rapid firing events
-            import time
-            current_time = time.time()
-            if event.src_path in self.last_events:
-                if current_time - self.last_events[event.src_path] < 0.5:
-                    return
-            self.last_events[event.src_path] = current_time
+    # Rutas
+    app.router.add_get('/', handle_index)
+    app.router.add_get('/ws', handle_websocket)
+    app.router.add_get('/api/files', handle_api_files)
+    app.router.add_get('/api/file', handle_api_file)
+    app.router.add_post('/api/save', handle_api_save)
+    app.router.add_get('/{filename:.*}', handle_static)
 
-            try:
-                rel_path = str(Path(event.src_path).relative_to(BASE_DIR))
-                asyncio.run_coroutine_threadsafe(broadcast_file_change(rel_path), self.loop)
-            except Exception as e:
-                print(f"Error handling file change: {e}")
-
-async def broadcast_file_change(rel_path):
-    """Lee el archivo modificado y envía el contenido a los clientes"""
-    try:
-        if rel_path not in file_rooms:
-            return
-
-        full_path = BASE_DIR / rel_path
-        if not full_path.exists():
-            return
-
-        with open(full_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-
-        await broadcast_update(rel_path, content, source='server')
-        print(f"Change detected and broadcasted: {rel_path}")
-
-    except Exception as e:
-        print(f"Error broadcasting file change: {e}")
-
-async def broadcast_update(file_path, content, source='client', exclude_client_id=None):
-    """Helper para enviar actualizaciones"""
-    message = json.dumps({
-        'type': 'update',
-        'file': file_path,
-        'content': content,
-        'source': source
-    })
-    
-    for cid in file_rooms.get(file_path, []):
-        if cid != exclude_client_id and cid in clients:
-            try:
-                await clients[cid]['ws'].send(message)
-            except:
-                pass
-
-class ReusableTCPServer(socketserver.TCPServer):
-    allow_reuse_address = True
-
-def run_http_server():
-    """Ejecuta el servidor HTTP en un thread separado"""
-    with ReusableTCPServer(("", PORT), MarkdownHandler) as httpd:
-        httpd.serve_forever()
+    return app
 
 
-async def main():
-    # Importar websockets aquí
-    try:
-        import websockets
-    except ImportError:
-        print("Instalando websockets...")
-        os.system("pip install websockets --quiet")
-        import websockets
-
-    # Start file observer
-    loop = asyncio.get_running_loop()
-    event_handler = FileChangeHandler(loop)
-    observer = Observer()
-    observer.schedule(event_handler, str(BASE_DIR), recursive=True)
-    observer.start()
-
-    # Iniciar servidor HTTP en thread separado
-    http_thread = threading.Thread(target=run_http_server, daemon=True)
-    http_thread.start()
-
+def main():
     print(f"""
 ╔════════════════════════════════════════════════════════════════╗
 ║      Visor & Editor Colaborativo de Markdown                   ║
 ╠════════════════════════════════════════════════════════════════╣
 ║                                                                ║
-║   🌐 Abre en tu navegador:  http://localhost:{PORT}              ║
-║   🔌 WebSocket:             ws://localhost:{WS_PORT}              ║
+║   🌐 HTTP + WebSocket:  http://localhost:{PORT}                  ║
 ║                                                                ║
+║   ✅ Compatible con ngrok (mismo puerto)                       ║
 ║   ✏️  Edita archivos en tiempo real                            ║
 ║   👥 Colabora con otros usuarios                               ║
-║   💾 Autoguardado cada 2 segundos                              ║
 ║                                                                ║
 ║   Presiona Ctrl+C para detener                                 ║
 ╚════════════════════════════════════════════════════════════════╝
     """)
 
-    # Iniciar servidor WebSocket
-    async with websockets.serve(ws_handler, "localhost", WS_PORT):
-        await asyncio.Future()  # Correr indefinidamente
+    app = create_app()
+    web.run_app(app, host='0.0.0.0', port=PORT, print=None)
 
 
-if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("\n¡Servidor detenido!")
+if __name__ == '__main__':
+    main()
